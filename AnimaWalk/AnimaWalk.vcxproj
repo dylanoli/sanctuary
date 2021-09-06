@@ -22,8 +22,9 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{8626C743-235C-4B7A-B7FA-1FB282486DF2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>AnimaWalk</RootNamespace>
+    <RootNamespace>Sanctuary</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Sanctuary</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
