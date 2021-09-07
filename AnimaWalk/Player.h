@@ -4,9 +4,10 @@
 #include "Types.h" 
 #include "Object.h"     
 #include "Animation.h"      
+#include "Gun.h"  
+#include "Constants.h"
 
 enum PlayerState { STILL, WALK };
-enum PlayerLookDirection { RIGHT, LEFT };
 enum PlayerAnimState { STILL_RIGHT, STILL_LEFT, WALK_LEFT, WALK_RIGHT };
 
 
@@ -14,14 +15,15 @@ class Player : public Object
 {
 private:
     TileSet* walking;              
-    Animation* anim;                   
+    Animation* anim;  
+    Gun* gun;
     float speed;
     void HandleAnimState();
 
 public:
     PlayerAnimState animState;
     PlayerState state;
-    PlayerLookDirection lookDirection;
+    Direction lookDirection;
 
     Player();                             
     ~Player();                            
@@ -32,6 +34,7 @@ public:
 
 inline void Player::Draw()
 {
+    gun->Draw();
     anim->Draw(x, y, z);
 }
 

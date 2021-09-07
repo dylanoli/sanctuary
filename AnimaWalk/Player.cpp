@@ -1,9 +1,11 @@
 #include "Player.h"
+#include "BlasterPistol.h"
 
 Player::Player()
 {
     walking = new TileSet("Resources/Walking.png", 55, 95, 8, 40);
     anim    = new Animation(walking, 0.060f, true);
+    gun = new BlasterPistol();
 
     uint SeqLeft[8]  = { 0, 1, 2, 3, 4, 5, 6, 7 };
     uint SeqRight[8] = { 15, 14, 13, 12, 11, 10, 9, 8 };
@@ -24,6 +26,7 @@ Player::~Player()
 {
     delete anim;
     delete walking;
+    delete gun;
 }
 
 void Player::Update()
@@ -47,6 +50,7 @@ void Player::Update()
     {
         state = WALK;
         lookDirection = LEFT;
+        gun->SetDirection(LEFT);
         Translate(-speed * gameTime, 0);
     }
 
@@ -55,6 +59,7 @@ void Player::Update()
     {
         state = WALK;
         lookDirection = RIGHT;
+        gun->SetDirection(RIGHT);
         Translate(speed * gameTime, 0);
     }
 
@@ -65,6 +70,9 @@ void Player::Update()
     }    
 
     HandleAnimState();
+
+    gun->MoveTo(x, y);
+    gun->Update();
 
     // mantém personagem dentro da tela
     if (x + walking->TileWidth() / 2.0f > window->Width())
