@@ -170,6 +170,7 @@
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Level1.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Sanctuary.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Game.cpp" />

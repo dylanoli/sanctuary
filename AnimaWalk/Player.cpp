@@ -1,11 +1,12 @@
 #include "Player.h"
 #include "BlasterPistol.h"
 
-Player::Player()
+Player::Player(Scene* scene)
 {
     walking = new TileSet("Resources/Walking.png", 55, 95, 8, 40);
     anim    = new Animation(walking, 0.060f, true);
     gun = new BlasterPistol();
+    Player::scene = scene;
 
     uint SeqLeft[8]  = { 0, 1, 2, 3, 4, 5, 6, 7 };
     uint SeqRight[8] = { 15, 14, 13, 12, 11, 10, 9, 8 };

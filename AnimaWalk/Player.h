@@ -5,6 +5,7 @@
 #include "Object.h"     
 #include "Animation.h"      
 #include "Gun.h"  
+#include "Scene.h"  
 #include "Constants.h"
 
 enum PlayerState { STILL, WALK };
@@ -15,7 +16,8 @@ class Player : public Object
 {
 private:
     TileSet* walking;              
-    Animation* anim;  
+    Animation* anim;
+    Scene* scene;
     Gun* gun;
     float speed;
     void HandleAnimState();
@@ -25,7 +27,7 @@ public:
     PlayerState state;
     Direction lookDirection;
 
-    Player();                             
+    Player(Scene * scene);                             
     ~Player();                            
 
     void Update();                     
