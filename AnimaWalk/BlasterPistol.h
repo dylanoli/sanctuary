@@ -5,6 +5,6 @@ class BlasterPistol : public Gun
 {
 private:
 public:
-	BlasterPistol();
+	BlasterPistol(Scene* scene);
 	~BlasterPistol();
 };

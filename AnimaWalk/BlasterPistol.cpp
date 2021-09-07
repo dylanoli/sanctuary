@@ -1,12 +1,26 @@
 #include "BlasterPistol.h"
 #include "Bullet.h"
 
-string fileNameSpriteRight = "Resources/BlasterPistolRight.png";
-string fileNameSpriteLeft = "Resources/BlasterPistolLeft.png";
-uint compensationDirection = 20;
+string FileNameSpriteRight = "Resources/BlasterPistolRight.png";
+string FileNameSpriteLeft = "Resources/BlasterPistolLeft.png";
+string FileBulletNameSpriteRight = "Resources/BulletRight.png";
+string FileBulletNameSpriteLeft = "Resources/BulletLeft.png";
+uint CompensationDirection = 20;
+float BulletVelocity = 500;
+float FireRate = 0.3f;
 
 
-BlasterPistol::BlasterPistol():Gun(fileNameSpriteRight, fileNameSpriteLeft, compensationDirection) {
+BlasterPistol::BlasterPistol(Scene* scene):Gun(
+	scene,
+	FileNameSpriteRight,
+	FileNameSpriteLeft,
+	CompensationDirection,
+	FileBulletNameSpriteRight,
+	FileBulletNameSpriteLeft,
+	BulletVelocity,
+	FireRate,
+	SINGLE
+) {
 }
 
 BlasterPistol::~BlasterPistol() {

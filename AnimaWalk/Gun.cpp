@@ -2,52 +2,65 @@
 #include "Image.h";
 #include "Bullet.h";
 
-Image* image = new Image("Resources/Bullet.png");
-Gun::Gun(string fileNameSpriteRight, string fileNameSpriteLeft, uint compensationDirection)
+Gun::Gun(
+	Scene* scene,
+	string fileNameSpriteRight,
+	string fileNameSpriteLeft,
+	uint compensationDirection,
+	string fileBulletNameSpriteRight,
+	string fileBulletNameSpriteLeft,
+	float bulletVelocity,
+	float fireRate,
+	GunMode gunMode
+)
 {
-	_spriteRight = new Sprite(fileNameSpriteRight);
-	_spriteLeft = new Sprite(fileNameSpriteLeft);
-	_compensationDirection = compensationDirection;
+	Gun::spriteRight = new Sprite(fileNameSpriteRight);
+	Gun::spriteLeft = new Sprite(fileNameSpriteLeft);
+	Gun::compensationDirection = compensationDirection;
+	Gun::scene = scene;
+	Gun::bulletImageLeft = new Image(fileBulletNameSpriteLeft);
+	Gun::bulletImageRight = new Image(fileBulletNameSpriteRight);
+	Gun::bulletVelocity = bulletVelocity;
+	Gun::fireRate = fireRate;
+	Gun::gunMode = gunMode;
 }
 
 Gun::~Gun()
 {
-	delete _spriteRight;
-	delete _spriteLeft;
+	delete spriteRight;
+	delete spriteLeft;
 }
 
 void Gun::Shot() 
 {
-	if (_canShot) {
-
+	if (canShot) {
+		scene->Add(new Bullet(x, y, lookDirection, bulletVelocity, bulletImageRight, bulletImageLeft, scene), MOVING);
+		canShot = false;
 	}
 }
 
 void Gun::Update() {
-	if (window->KeyDown(VK_SPACE) && _canShot)
+	//controle de quando e possivel ativar novamente
+	if (!canShot)
 	{
-		bullets.push_back(new Bullet(x, y, lookDirection, 500, image));
-		_canShot = false;
+		currentFireRateTime += gameTime;
 	}
-	if (window->KeyUp(VK_SPACE) && !_canShot)
+	if ((window->KeyUp(VK_SPACE) || gunMode == AUTOMATIC) && !canShot && currentFireRateTime >= fireRate)
 	{
-		_canShot = true;
+		canShot = true;
+		currentFireRateTime = 0;
 	}
 
-	for (auto i : bullets)
+	//atirando
+	if (window->KeyDown(VK_SPACE))
 	{
-		i->Update();
+		Shot();
 	}
 }
 
 void Gun::Draw() {
 	if(lookDirection == RIGHT)
-		_spriteRight->Draw(x, y, Layer::UPPER);
+		spriteRight->Draw(x, y, Layer::UPPER);
 	else
-		_spriteLeft->Draw(x, y, Layer::UPPER);
-
-	for (auto i : bullets)
-	{
-		i->Draw();
-	}
+		spriteLeft->Draw(x, y, Layer::UPPER);
 }

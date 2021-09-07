@@ -36,7 +36,6 @@ public:
 
 inline void Player::Draw()
 {
-    gun->Draw();
     anim->Draw(x, y, z);
 }
 

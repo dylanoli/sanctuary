@@ -2,21 +2,38 @@
 #include "Object.h"
 #include "Sprite.h"
 #include "Constants.h"
-#include "Bullet.h"
-
+#include "Scene.h"
+enum GunMode { SINGLE, AUTOMATIC };
 class Gun : public Object
 {
 private:
-	bool _canShot = true;
-	Sprite* _spriteRight;
-	Sprite* _spriteLeft;
-	uint _compensationDirection;
-	list<Bullet*> bullets;
+	bool canShot = true;
+	Sprite* spriteRight;
+	Sprite* spriteLeft;
+	uint compensationDirection;
+	Scene* scene;
+	Image* bulletImageLeft;
+	Image * bulletImageRight;
+	float bulletVelocity;
+	float fireRate;
+	float currentFireRateTime = 0;
+	GunMode gunMode;
+
 protected:
 	Direction lookDirection;
 
 public:
-	Gun(string fileNameSpriteRight, string fileNameSpriteLeft, uint compensationDirection);
+	Gun(
+		Scene* scene,
+		string fileNameSpriteRight,
+		string fileNameSpriteLeft,
+		uint compensationDirection,
+		string fileBulletNameSpriteRight,
+		string fileBulletNameSpriteLeft,
+		float bulletVelocity,
+		float fireRate,
+		GunMode gunMode
+	);
 	~Gun();
 
 	void::Object::Update();
@@ -31,9 +48,8 @@ public:
 	inline void MoveTo(float px, float py) 
 	{
 		if(lookDirection == RIGHT)
-			Object::MoveTo(px + _compensationDirection, py);
+			Object::MoveTo(px + compensationDirection, py);
 		else
-			Object::MoveTo(px - _compensationDirection, py);
-
+			Object::MoveTo(px - compensationDirection, py);
 	}
 };
