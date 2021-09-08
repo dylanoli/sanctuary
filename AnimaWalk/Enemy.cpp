@@ -1,8 +1,9 @@
 #include "Enemy.h"
 #include "BlasterPistol.h"
 
-Enemy::Enemy()
+Enemy::Enemy(Player * player)
 {
+    Enemy::player = player;
     tileSet = new TileSet("Resources/Lince.png", 110, 90, 6, 30);
     anim = new Animation(tileSet, 0.10f, true);
 
@@ -20,11 +21,18 @@ Enemy::Enemy()
 
 Enemy::~Enemy()
 {
+    delete tileSet;
     delete anim;
 }
 
 void Enemy::Update()
 {
+    const float posXPlayer = player->X();
+    if ((posXPlayer - x) > 0)
+        lookDirection = LEFT;
+    else
+        lookDirection = RIGHT;
+
     HandleAnimState();
 
     // mantém personagem dentro da tela
