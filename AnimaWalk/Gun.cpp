@@ -36,7 +36,11 @@ Gun::~Gun()
 void Gun::Shot() 
 {
 	if (canShot) {
-		scene->Add(new Bullet(x, y, lookDirection, bulletVelocity, bulletDamage, bulletImageRight, bulletImageLeft, scene), MOVING);
+		if (lookDirection == RIGHT)
+			scene->Add(new Bullet(x + 20, y, lookDirection, bulletVelocity, bulletDamage, bulletImageRight, bulletImageLeft, scene), MOVING);			
+		else
+			scene->Add(new Bullet(x - 20, y, lookDirection, bulletVelocity, bulletDamage, bulletImageRight, bulletImageLeft, scene), MOVING);
+		
 		canShot = false;
 	}
 }

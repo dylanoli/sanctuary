@@ -6,8 +6,9 @@
 Player::Player(Scene* scene) : Actor(scene)
 {
     type    = T_PLAYER;
-    BBox(new Rect(-50, -13, 50, 43));
     tileSet = new TileSet("Resources/Walking.png", 55, 95, 8, 40);
+    BBox(new Rect(-1.0f * tileSet->TileWidth() / 2, -1.0f * tileSet->TileHeight() / 4,
+        1.0f * tileSet->TileWidth() / 2, 1.0f * tileSet->TileHeight() / 3));
     anim    = new Animation(tileSet, 0.060f, true);
     gun     = new BlasterPistol(scene);
     
