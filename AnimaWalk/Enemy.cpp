@@ -27,7 +27,7 @@ Enemy::Enemy(Player* player, Scene* scene) : Actor(scene)
 
     state = ENEMY_WALK;    
     lookDirection = LEFT;
-    speed = 00.0f;
+    speed = 200.0f;
     life = 10;
     damage = 1;
     MoveTo(window->Width(), window->CenterY());
