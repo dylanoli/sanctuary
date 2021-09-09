@@ -5,8 +5,8 @@
 #include "Gun.h"
 #include "Player.h"
 
-enum EnemyState { ATACK, ENEMY_WALK };
-enum EnemyAnimState { ENEMY_WALK_LEFT, ENEMY_WALK_RIGHT };
+enum EnemyState { ENEMY_ATACK, ENEMY_WALK };
+enum EnemyAnimState { ENEMY_WALK_LEFT, ENEMY_WALK_RIGHT, ENEMY_ATACK_RIGHT, ENEMY_ATACK_LEFT};
 
 class Enemy : public Object
 {

@@ -12,12 +12,17 @@ Enemy::Enemy(Player * player, Scene* scene)
     anim = new Animation(tileSet, 0.10f, true);
 
     uint SeqLeft[5] = { 1, 2, 3, 4, 5 };
-    uint SeqRight[5] = {6, 7, 8, 9, 10 };
+    uint SeqRight[5] = { 6, 7, 8, 9, 10 };
+    uint SeqAtkRight[3] = { 20, 21, 22 };
+    uint SeqAtkLeft[3] = { 16, 17 , 18 };
 
     anim->Add(ENEMY_WALK_LEFT, SeqLeft, 5);
     anim->Add(ENEMY_WALK_RIGHT, SeqRight, 5);
+    anim->Add(ENEMY_ATACK_RIGHT, SeqAtkRight, 3);
+    anim->Add(ENEMY_ATACK_LEFT, SeqAtkLeft, 3);
 
-    state = ENEMY_WALK; 
+    //state = ENEMY_WALK;
+    state = ENEMY_ATACK;
     lookDirection = LEFT;
     speed = 200.0f;
     life = 10;
@@ -60,11 +65,17 @@ void Enemy::Update()
 }
 
 void Enemy::HandleAnimState() {
-    // atualiza animação
+    // movimento
     if (state == ENEMY_WALK && lookDirection == RIGHT)
         animState = ENEMY_WALK_RIGHT;
     if (state == ENEMY_WALK && lookDirection == LEFT)
         animState = ENEMY_WALK_LEFT;
+
+    // ataque
+    if (state == ENEMY_ATACK && lookDirection == RIGHT)
+        animState = ENEMY_ATACK_RIGHT;
+    if (state == ENEMY_ATACK && lookDirection == LEFT)
+        animState = ENEMY_ATACK_LEFT;
 
     anim->Select(animState);
     anim->NextFrame();
