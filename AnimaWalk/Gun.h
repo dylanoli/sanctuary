@@ -15,6 +15,7 @@ private:
 	Image* bulletImageLeft;
 	Image * bulletImageRight;
 	float bulletVelocity;
+	int bulletDamage;
 	float fireRate;
 	float currentFireRateTime = 0;
 	GunMode gunMode;
@@ -31,6 +32,7 @@ public:
 		string fileBulletNameSpriteRight,
 		string fileBulletNameSpriteLeft,
 		float bulletVelocity,
+		int bulletDamage,
 		float fireRate,
 		GunMode gunMode
 	);

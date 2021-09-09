@@ -1,10 +1,13 @@
 #include "Bullet.h"
 
-Bullet::Bullet(int posX, int posY, Direction direction, float velocity, Image* imageRigh, Image* imageLeft, Scene* scene)
+Bullet::Bullet(int posX, int posY, Direction direction, float velocity, int damage, Image* imageRigh, Image* imageLeft, Scene* scene)
 {
+	type = T_BULLET;
+	BBox(new Rect(-12, -5, 12, 5));
 	MoveTo(posX, posY);
 	Bullet::direction = direction;
 	Bullet::velocity = velocity;
+	Bullet::damage = damage;
 	Bullet::scene = scene;
 	direction == RIGHT
 		? Bullet::sprite = new Sprite(imageRigh)
@@ -39,4 +42,10 @@ void Bullet::Update()
 void Bullet::Draw()
 {
 	sprite->Draw(x,y);
+}
+
+void Bullet::OnCollision(Object* obj)
+{
+	if (obj->Type() != T_BULLET)
+		scene->Delete(this, MOVING);
 }

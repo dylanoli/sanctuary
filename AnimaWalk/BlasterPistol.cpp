@@ -7,6 +7,7 @@ string FileBulletNameSpriteRight = "Resources/BulletRight.png";
 string FileBulletNameSpriteLeft = "Resources/BulletLeft.png";
 uint CompensationDirection = 20;
 float BulletVelocity = 500;
+int BulleDamage = 3;
 float FireRate = 0.3f;
 
 
@@ -18,6 +19,7 @@ BlasterPistol::BlasterPistol(Scene* scene):Gun(
 	FileBulletNameSpriteRight,
 	FileBulletNameSpriteLeft,
 	BulletVelocity,
+	BulleDamage,
 	FireRate,
 	SINGLE
 ) {

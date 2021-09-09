@@ -3,6 +3,7 @@
 
 Player::Player(Scene* scene)
 {
+    type = T_PLAYER;
     walking = new TileSet("Resources/Walking.png", 55, 95, 8, 40);
     anim    = new Animation(walking, 0.060f, true);
     gun = new BlasterPistol(scene);

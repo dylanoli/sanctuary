@@ -10,6 +10,7 @@ Gun::Gun(
 	string fileBulletNameSpriteRight,
 	string fileBulletNameSpriteLeft,
 	float bulletVelocity,
+	int bulletDamage,
 	float fireRate,
 	GunMode gunMode
 )
@@ -21,6 +22,7 @@ Gun::Gun(
 	Gun::bulletImageLeft = new Image(fileBulletNameSpriteLeft);
 	Gun::bulletImageRight = new Image(fileBulletNameSpriteRight);
 	Gun::bulletVelocity = bulletVelocity;
+	Gun::bulletDamage = bulletDamage;
 	Gun::fireRate = fireRate;
 	Gun::gunMode = gunMode;
 }
@@ -34,7 +36,7 @@ Gun::~Gun()
 void Gun::Shot() 
 {
 	if (canShot) {
-		scene->Add(new Bullet(x, y, lookDirection, bulletVelocity, bulletImageRight, bulletImageLeft, scene), MOVING);
+		scene->Add(new Bullet(x, y, lookDirection, bulletVelocity, bulletDamage, bulletImageRight, bulletImageLeft, scene), MOVING);
 		canShot = false;
 	}
 }

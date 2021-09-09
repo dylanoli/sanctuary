@@ -14,7 +14,9 @@ private:
     TileSet* tileSet;
     Animation* anim;
     Player* player;
+    Scene* scene;
     float speed;
+    int life;
     void HandleAnimState();
 
 public:
@@ -22,11 +24,12 @@ public:
     EnemyState state;
     Direction lookDirection;
 
-    Enemy(Player* player);
+    Enemy(Player* player, Scene* scene);
     ~Enemy();
 
     void Update();
     void Draw();
+    void OnCollision(Object* obj);
 };
 
 inline void Enemy::Draw()

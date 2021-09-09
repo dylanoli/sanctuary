@@ -11,9 +11,16 @@ private:
 	float velocity;
 	Sprite* sprite;
 	Scene* scene;
+	int damage;
 public:
-	Bullet(int posX, int posY, Direction direction, float velocity, Image* imageRigh, Image* imageLeft, Scene* scene);
+	Bullet(int posX, int posY, Direction direction, float velocity, int damage, Image* imageRigh, Image* imageLeft, Scene* scene);
 	~Bullet();
-	void Object::Update();
-	void Object::Draw();
+	void Update();
+	void Draw();
+	void OnCollision(Object* obj);
+
+	int GetDamage();
 };
+
+inline int Bullet::GetDamage()
+{ return damage; }
