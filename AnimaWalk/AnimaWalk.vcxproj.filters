@@ -182,6 +182,12 @@
     <ClInclude Include="Enemy.h">
       <Filter>Game\Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Game\Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game\Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Pixel.hlsl">

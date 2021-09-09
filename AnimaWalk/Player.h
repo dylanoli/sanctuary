@@ -2,7 +2,7 @@
 #define _ANIMAWALK_LADY_H_
 
 #include "Types.h" 
-#include "Object.h"     
+#include "Actor.h"     
 #include "Animation.h"      
 #include "Gun.h"  
 #include "Scene.h"  
@@ -12,14 +12,10 @@ enum PlayerState { STILL, WALK };
 enum PlayerAnimState { STILL_RIGHT, STILL_LEFT, WALK_LEFT, WALK_RIGHT };
 
 
-class Player : public Object
+class Player : public Actor
 {
 private:
-    TileSet* walking;              
-    Animation* anim;
-    Scene* scene;
     Gun* gun;
-    float speed;
     void HandleAnimState();
 
 public:

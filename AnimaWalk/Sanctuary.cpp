@@ -10,7 +10,7 @@
 **********************************************************************************/
 
 #include "Engine.h"
-#include "GameOver.h"
+#include "Home.h"
 #include "Resources.h"
 
 // ------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     //engine->graphics->VSync(true);
     
     // inicia o jogo
-    int status = engine->Start(new GameOver());
+    int status = engine->Start(new Home());
 
     delete engine;
     return status;

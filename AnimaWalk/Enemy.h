@@ -1,5 +1,5 @@
 #pragma once
-#include "Object.h"
+#include "Actor.h"
 #include "TileSet.h"
 #include "Animation.h"
 #include "Gun.h"
@@ -8,15 +8,10 @@
 enum EnemyState { ENEMY_ATACK, ENEMY_WALK };
 enum EnemyAnimState { ENEMY_WALK_LEFT, ENEMY_WALK_RIGHT, ENEMY_ATACK_RIGHT, ENEMY_ATACK_LEFT};
 
-class Enemy : public Object
+class Enemy : public Actor
 {
 private:
-    TileSet* tileSet;
-    Animation* anim;
-    Player* player;
-    Scene* scene;
-    float speed;
-    int life;
+    Player* player;    
     void HandleAnimState();
 
 public:

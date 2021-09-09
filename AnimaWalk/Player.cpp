@@ -1,13 +1,14 @@
+#include "Actor.h"
 #include "Player.h"
 #include "BlasterPistol.h"
 
-Player::Player(Scene* scene)
+Player::Player(Scene* scene) : Actor(scene)
 {
-    type = T_PLAYER;
-    walking = new TileSet("Resources/Walking.png", 55, 95, 8, 40);
-    anim    = new Animation(walking, 0.060f, true);
-    gun = new BlasterPistol(scene);
-    Player::scene = scene;
+    type    = T_PLAYER;
+    tileSet = new TileSet("Resources/Walking.png", 55, 95, 8, 40);
+    anim    = new Animation(tileSet, 0.060f, true);
+    gun     = new BlasterPistol(scene);
+    
     Player::scene->Add(gun, STATIC);
 
     uint SeqLeft[8]  = { 0, 1, 2, 3, 4, 5, 6, 7 };
@@ -27,8 +28,6 @@ Player::Player(Scene* scene)
 
 Player::~Player()
 {
-    delete anim;
-    delete walking;
     delete gun;
 }
 
@@ -77,17 +76,17 @@ void Player::Update()
     gun->MoveTo(x, y);
 
     // mantém personagem dentro da tela
-    if (x + walking->TileWidth() / 2.0f > window->Width())
-        MoveTo(window->Width() - walking->TileWidth() / 2.0f, y);
+    if (x + tileSet->TileWidth() / 2.0f > window->Width())
+        MoveTo(window->Width() - tileSet->TileWidth() / 2.0f, y);
 
-    if (x - walking->TileWidth() / 2.0f < 0)
-        MoveTo(walking->TileWidth() / 2.0f, y);
+    if (x - tileSet->TileWidth() / 2.0f < 0)
+        MoveTo(tileSet->TileWidth() / 2.0f, y);
 
-    if (y + walking->TileHeight() / 2.0f > window->Height())
-        MoveTo(x, window->Height() - walking->TileHeight() / 2.0f);
+    if (y + tileSet->TileHeight() / 2.0f > window->Height())
+        MoveTo(x, window->Height() - tileSet->TileHeight() / 2.0f);
 
-    if (y - walking->TileHeight() / 2.0f < 0)
-        MoveTo(x, walking->TileHeight() / 2.0f);
+    if (y - tileSet->TileHeight() / 2.0f < 0)
+        MoveTo(x, tileSet->TileHeight() / 2.0f);
 }
 
 void Player::HandleAnimState() {

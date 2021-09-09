@@ -1,8 +1,9 @@
 #include "Enemy.h"
+#include "Actor.h"
 #include "BlasterPistol.h"
 #include "Bullet.h"
 
-Enemy::Enemy(Player * player, Scene* scene)
+Enemy::Enemy(Player* player, Scene* scene) : Actor(scene)
 {
     type = T_ENEMY;
     BBox(new Rect(-50, -13, 50, 43));
@@ -31,8 +32,6 @@ Enemy::Enemy(Player * player, Scene* scene)
 
 Enemy::~Enemy()
 {
-    delete tileSet;
-    delete anim;
 }
 
 void Enemy::Update()
