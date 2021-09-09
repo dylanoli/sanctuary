@@ -55,6 +55,15 @@ void Enemy::Update()
         Translate(speed * gameTime, 0);
     }
    
+    const float posYPlayer = player->Y();
+    const float playerHeight = player->getTileSet()->TileHeight() / 8.0f;
+    if (y > posYPlayer + playerHeight) {
+        Translate(0, -speed * gameTime);
+    }
+
+    if (y < posYPlayer - playerHeight) {
+        Translate(0, speed * gameTime);
+    }
 
     //controle a vida do enemy
     if(life <= 0)
