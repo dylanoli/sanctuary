@@ -23,13 +23,18 @@ public:
     Enemy(Player* player, Scene* scene);
     ~Enemy();
 
+    void OnCollision(Object* obj);
     void Update();
     void Draw();
-    void OnCollision(Object* obj);
+
     int GetDamage();
 };
 
 inline void Enemy::Draw()
 {
     anim->Draw(x, y, z);
+}
+
+inline int Enemy::GetDamage() {
+    return damage;
 }

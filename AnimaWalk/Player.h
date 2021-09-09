@@ -16,6 +16,7 @@ class Player : public Actor
 private:
     Gun* gun;
     void HandleAnimState();
+    bool receivingDamage;
 
 public:
     PlayerAnimState animState;
@@ -28,11 +29,16 @@ public:
     void Update();                     
     void Draw();            
     void OnCollision(Object* obj);
+    bool IsDied();
 };
 
 inline void Player::Draw()
 {
     anim->Draw(x, y, z);
+}
+
+inline bool Player::IsDied() {
+    return life <= 0;
 }
 
 #endif

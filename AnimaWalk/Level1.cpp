@@ -2,6 +2,7 @@
 #include "Engine.h"
 #include "Home.h"
 #include "Enemy.h"
+#include "GameOver.h"
 
 // ------------------------------------------------------------------------------
 
@@ -22,6 +23,9 @@ void Level1::Update()
 {
 	scene->Update();
 	scene->CollisionDetection();
+
+	if (player->IsDied())
+		Engine::Next<GameOver>();
 
     if (window->KeyDown(VK_ESCAPE))
 		Engine::Next<Home>();    

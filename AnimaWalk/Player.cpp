@@ -5,6 +5,7 @@
 
 Player::Player(Scene* scene) : Actor(scene)
 {
+    receivingDamage = false;
     type    = T_PLAYER;
     tileSet = new TileSet("Resources/Walking.png", 55, 95, 8, 40);
     BBox(new Rect(-1.0f * tileSet->TileWidth() / 2, -1.0f * tileSet->TileHeight() / 4,
@@ -26,6 +27,7 @@ Player::Player(Scene* scene) : Actor(scene)
 
     state = STILL;
     speed = 300.0f;
+    life  = 200;
     MoveTo(window->CenterX(), window->CenterY());
 }
 
@@ -111,6 +113,10 @@ void Player::HandleAnimState() {
 void Player::OnCollision(Object* obj)
 {
     if (obj->Type() == T_ENEMY) {
-        life -= ((Enemy*)obj)->GetDamage();
+        if (!receivingDamage) {
+            life -= ((Enemy*)obj)->GetDamage();
+            receivingDamage = true;
+        } else
+            receivingDamage = !receivingDamage;        
     }
 }

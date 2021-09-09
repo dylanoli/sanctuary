@@ -27,7 +27,7 @@ Enemy::Enemy(Player* player, Scene* scene) : Actor(scene)
 
     state = ENEMY_WALK;    
     lookDirection = LEFT;
-    speed = 200.0f;
+    speed = 170.0f;
     life = 10;
     damage = 1;
     MoveTo(window->Width(), window->CenterY());
@@ -83,11 +83,6 @@ void Enemy::Update()
 
     if (y - tileSet->TileHeight() / 2.0f < 0)
         MoveTo(x, tileSet->TileHeight() / 2.0f);
-}
-
-int Enemy::GetDamage()
-{
-    return damage;
 }
 
 void Enemy::HandleAnimState() {

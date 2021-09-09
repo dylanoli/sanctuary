@@ -15,10 +15,10 @@ private:
 public:
 	Bullet(int posX, int posY, Direction direction, float velocity, int damage, Image* imageRigh, Image* imageLeft, Scene* scene);
 	~Bullet();
+
 	void Update();
 	void Draw();
 	void OnCollision(Object* obj);
-
 	int GetDamage();
 };
 
