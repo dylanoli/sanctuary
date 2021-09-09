@@ -2,6 +2,9 @@
 #include "Actor.h"
 #include "BlasterPistol.h"
 #include "Bullet.h"
+#include <sstream>
+
+using namespace std;
 
 Enemy::Enemy(Player* player, Scene* scene) : Actor(scene)
 {
@@ -22,12 +25,12 @@ Enemy::Enemy(Player* player, Scene* scene) : Actor(scene)
     anim->Add(ENEMY_ATACK_RIGHT, SeqAtkRight, 3);
     anim->Add(ENEMY_ATACK_LEFT, SeqAtkLeft, 3);
 
-    //state = ENEMY_WALK;
-    state = ENEMY_ATACK;
+    state = ENEMY_WALK;    
     lookDirection = LEFT;
     speed = 200.0f;
     life = 10;
-    MoveTo(window->CenterX()-100, window->CenterY());
+    damage = 1;
+    MoveTo(window->Width(), window->CenterY());
 }
 
 Enemy::~Enemy()
@@ -38,10 +41,20 @@ void Enemy::Update()
 {
     // controla a direcao do enemy
     const float posXPlayer = player->X();
-    if ((posXPlayer - x) > 0)
-        lookDirection = LEFT;
-    else
+    const float playerWidth = player->getTileSet()->TileWidth();
+    
+    if (x > posXPlayer + playerWidth) {
         lookDirection = RIGHT;
+        state = ENEMY_WALK;
+        Translate(-speed * gameTime, 0);
+    }
+
+    if (x < posXPlayer - playerWidth) {
+        lookDirection = LEFT;
+        state = ENEMY_WALK;
+        Translate(speed * gameTime, 0);
+    }
+   
 
     //controle a vida do enemy
     if(life <= 0)
@@ -63,6 +76,11 @@ void Enemy::Update()
         MoveTo(x, tileSet->TileHeight() / 2.0f);
 }
 
+int Enemy::GetDamage()
+{
+    return damage;
+}
+
 void Enemy::HandleAnimState() {
     // movimento
     if (state == ENEMY_WALK && lookDirection == RIGHT)
@@ -82,6 +100,10 @@ void Enemy::HandleAnimState() {
 
 void Enemy::OnCollision(Object* obj)
 {
+    if (obj->Type() == T_PLAYER) {
+        state = ENEMY_ATACK;
+    }
+
     if (obj->Type() == T_BULLET)
         life -= ((Bullet*)obj)->GetDamage();
 }

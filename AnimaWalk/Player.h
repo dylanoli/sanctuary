@@ -11,7 +11,6 @@
 enum PlayerState { STILL, WALK };
 enum PlayerAnimState { STILL_RIGHT, STILL_LEFT, WALK_LEFT, WALK_RIGHT };
 
-
 class Player : public Actor
 {
 private:
@@ -27,7 +26,8 @@ public:
     ~Player();                            
 
     void Update();                     
-    void Draw();                       
+    void Draw();            
+    void OnCollision(Object* obj);
 };
 
 inline void Player::Draw()

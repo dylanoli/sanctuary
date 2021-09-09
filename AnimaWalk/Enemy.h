@@ -12,6 +12,7 @@ class Enemy : public Actor
 {
 private:
     Player* player;    
+    int damage;
     void HandleAnimState();
 
 public:
@@ -25,6 +26,7 @@ public:
     void Update();
     void Draw();
     void OnCollision(Object* obj);
+    int GetDamage();
 };
 
 inline void Enemy::Draw()

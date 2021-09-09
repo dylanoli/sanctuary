@@ -1,10 +1,12 @@
 #include "Actor.h"
 #include "Player.h"
 #include "BlasterPistol.h"
+#include "Enemy.h"
 
 Player::Player(Scene* scene) : Actor(scene)
 {
     type    = T_PLAYER;
+    BBox(new Rect(-50, -13, 50, 43));
     tileSet = new TileSet("Resources/Walking.png", 55, 95, 8, 40);
     anim    = new Animation(tileSet, 0.060f, true);
     gun     = new BlasterPistol(scene);
@@ -103,4 +105,11 @@ void Player::HandleAnimState() {
 
     anim->Select(animState);
     anim->NextFrame();
+}
+
+void Player::OnCollision(Object* obj)
+{
+    if (obj->Type() == T_ENEMY) {
+        life -= ((Enemy*)obj)->GetDamage();
+    }
 }
