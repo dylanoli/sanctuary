@@ -46,6 +46,6 @@ void Bullet::Draw()
 
 void Bullet::OnCollision(Object* obj)
 {
-	if (obj->Type() != T_BULLET)
+	if (obj->Type() == T_ENEMY)
 		scene->Delete(this, MOVING);
 }
