@@ -165,6 +165,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="ArrowNextLevel.cpp" />
     <ClCompile Include="BlasterPistol.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -191,6 +192,7 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="ArrowNextLevel.h" />
     <ClInclude Include="BlasterPistol.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Constants.h" />

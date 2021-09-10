@@ -9,6 +9,7 @@
 #include "Sprite.h"
 #include "Scene.h"
 #include "Player.h"
+#include "ArrowNextLevel.h"
 
 // ------------------------------------------------------------------------------
 
@@ -18,6 +19,7 @@ private:
     bool ctrlKeyESC = false;        // controle do ESC
     Scene* scene = nullptr;
     Player* player = nullptr;
+    ArrowNextLevel* arrowNextLevel = nullptr;
 
 public:
     void Init();                    // inicialização
