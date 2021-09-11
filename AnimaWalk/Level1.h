@@ -22,10 +22,10 @@ private:
     ArrowNextLevel* arrowNextLevel = nullptr;
 
 public:
-    void Init();                    // inicialização
-    void Update();                  // atualização
-    void Draw();                    // desenho
-    void Finalize();                // finalização
+    void Init();                    
+    void Update();                  
+    void Draw();    
+    void Finalize();
 };
 
 // ------------------------------------------------------------------------------

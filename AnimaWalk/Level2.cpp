@@ -1,4 +1,4 @@
-#include "Level1.h"
+#include "Level3.h"
 #include "Level2.h"
 #include "Engine.h"
 #include "Home.h"
@@ -8,24 +8,24 @@
 
 // ------------------------------------------------------------------------------
 
-void Level1::Init()
+void Level2::Init()
 {
 	backg = new Sprite("Resources/Home/Background.png");
 	scene = new Scene();
 	player = new Player(scene);
 	arrowNextLevel = new ArrowNextLevel();
-	arrowNextLevel->MoveTo(window->CenterX()+420, window->CenterY());
-	auto enemy = new Lince(player, scene);
+	arrowNextLevel->MoveTo(window->CenterX() + 420, window->CenterY());
+	auto enemy = new Bear(player, scene);
 	player->MoveTo(window->CenterX(), window->CenterY());
 	scene->Add(player, MOVING);
 	scene->Add(enemy, MOVING);
-	scene->Add(arrowNextLevel, MOVING);
+	scene->Add(arrowNextLevel, STATIC);
 
 }
 
 // ------------------------------------------------------------------------------
 
-void Level1::Update()
+void Level2::Update()
 {
 	scene->Update();
 	scene->CollisionDetection();
@@ -33,16 +33,16 @@ void Level1::Update()
 	if (player->IsDied())
 		Engine::Next<GameOver>();
 
-    if (window->KeyDown(VK_ESCAPE))
-		Engine::Next<Home>();    
+	if (window->KeyDown(VK_ESCAPE))
+		Engine::Next<Home>();
 
-	if(arrowNextLevel->CanChangeLevel())
-		Engine::Next<Level2>();
+	//if (arrowNextLevel->CanChangeLevel())
+		//Engine::Next<Level3>();
 }
 
 // ------------------------------------------------------------------------------
 
-void Level1::Draw()
+void Level2::Draw()
 {
 	backg->Draw(float(window->CenterX()), float(window->CenterY()), Layer::BACK);
 	scene->Draw();
@@ -51,7 +51,7 @@ void Level1::Draw()
 
 // ------------------------------------------------------------------------------
 
-void Level1::Finalize()
+void Level2::Finalize()
 {
 	delete backg;
 }

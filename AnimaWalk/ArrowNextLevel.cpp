@@ -24,5 +24,8 @@ void ArrowNextLevel::Update()
 }
 void ArrowNextLevel::OnCollision(Object* obj)
 {
-
+    if (obj->Type() == T_PLAYER)
+    {
+        canChangeLevel = true;
+    }
 }

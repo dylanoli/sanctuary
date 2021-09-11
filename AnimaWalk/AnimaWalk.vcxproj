@@ -173,6 +173,7 @@
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Level1.cpp" />
+    <ClCompile Include="Level2.cpp" />
     <ClCompile Include="Lince.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Sanctuary.cpp" />
@@ -211,7 +212,6 @@
     <ClInclude Include="Level1.h" />
     <ClInclude Include="Level2.h" />
     <ClInclude Include="Level3.h" />
-    <ClInclude Include="Level4.h" />
     <ClInclude Include="Lince.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
