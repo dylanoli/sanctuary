@@ -1,5 +1,6 @@
 #include "Spawn.h"
 #include "Lince.h"
+#include "Bear.h"
 
 Spawn::Spawn(float i, int number, uint type, Scene* s, Player* p) {
 	interval = i;
@@ -23,7 +24,8 @@ void Spawn::Generate() {
 				break;
 			}
 			case BEAR: {
-
+				auto enemy = new Bear(player, scene, this);
+				scene->Add(enemy, MOVING);
 				break;
 			}
 			default:

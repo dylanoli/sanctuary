@@ -15,27 +15,34 @@ void Level2::Init()
 	player->MoveTo(window->CenterX(), window->CenterY());
 	scene->Add(player, MOVING);
 	
-	arrowNextLevel = new ArrowNextLevel();
-	arrowNextLevel->MoveTo(window->CenterX() + 420, window->CenterY());
-	scene->Add(arrowNextLevel, STATIC);
-
+	spawn = new Spawn(2.0f, 1, BEAR, scene, player);
 }
 
 // ------------------------------------------------------------------------------
 
 void Level2::Update()
 {
+	spawn->Generate();
+
 	scene->Update();
 	scene->CollisionDetection();
 
-	if (player->IsDied())
+	if (spawn->AllEnemiesIsDied() && !arrowExists) {
+		arrowExists = true;
+
+		arrowNextLevel = new ArrowNextLevel();
+		arrowNextLevel->MoveTo(window->CenterX() + 420, window->CenterY());
+		scene->Add(arrowNextLevel, MOVING);
+	}
+
+	if (arrowExists && arrowNextLevel->CanChangeLevel())
+		Engine::Next<Level3>();
+
+	if (!arrowExists && player->IsDied())
 		Engine::Next<GameOver>();
 
 	if (window->KeyDown(VK_ESCAPE))
 		Engine::Next<Home>();
-
-	//if (arrowNextLevel->CanChangeLevel())
-		//Engine::Next<Level3>();
 }
 
 // ------------------------------------------------------------------------------

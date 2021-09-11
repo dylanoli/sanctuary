@@ -10,6 +10,7 @@
 #include "Scene.h"
 #include "Player.h"
 #include "ArrowNextLevel.h"
+#include "Spawn.h"
 
 // ------------------------------------------------------------------------------
 
@@ -20,6 +21,8 @@ private:
     Scene* scene = nullptr;
     Player* player = nullptr;
     ArrowNextLevel* arrowNextLevel = nullptr;
+    Spawn* spawn = nullptr;
+    bool arrowExists = false;
 
 public:
     void Init();                    
