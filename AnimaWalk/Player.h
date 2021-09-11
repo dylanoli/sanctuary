@@ -7,6 +7,7 @@
 #include "Gun.h"  
 #include "Scene.h"  
 #include "Constants.h"
+#include "Sprite.h"
 
 enum PlayerState { STILL, WALK };
 enum PlayerAnimState { STILL_RIGHT, STILL_LEFT, WALK_LEFT, WALK_RIGHT };
@@ -15,8 +16,9 @@ class Player : public Actor
 {
 private:
     Gun* gun;
-    void HandleAnimState();
     bool receivingDamage;
+    Sprite *heartSprite[10];
+    void HandleAnimState();
 
 public:
     PlayerAnimState animState;
@@ -36,6 +38,11 @@ public:
 inline void Player::Draw()
 {
     anim->Draw(x, y, z);
+
+    for (size_t i = 0; i < life; i++)
+    {
+        heartSprite[i]->Draw(15 + (28 * i), 15, Layer::UPPER);
+    }
 }
 
 inline bool Player::IsDied() {

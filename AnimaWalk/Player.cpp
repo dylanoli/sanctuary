@@ -26,7 +26,15 @@ Player::Player(Scene* scene) : Actor(scene)
 
     state = STILL;
     speed = 300.0f;
+
     life  = 10;
+    Image * imgHeart = new Image("Resources/Heart.png");
+
+    for (int i = 0; i < life; i++)
+    {
+        heartSprite[i] = new Sprite(imgHeart);
+    }
+
     MoveTo(window->CenterX(), window->CenterY());
 }
 
