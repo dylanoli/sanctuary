@@ -13,31 +13,33 @@ void Level1::Init()
 	backg = new Sprite("Resources/Home/Background.png");
 	scene = new Scene();
 	player = new Player(scene);
-	arrowNextLevel = new ArrowNextLevel();
-	arrowNextLevel->MoveTo(window->CenterX()+420, window->CenterY());
-	auto enemy = new Lince(player, scene);
 	player->MoveTo(window->CenterX(), window->CenterY());
 	scene->Add(player, MOVING);
-	scene->Add(enemy, MOVING);
+	
+	arrowNextLevel = new ArrowNextLevel();
+	arrowNextLevel->MoveTo(window->CenterX()+420, window->CenterY());	
 	scene->Add(arrowNextLevel, MOVING);
 
+	spawn = new Spawn(2.0, 1, WOLF, scene, player);
 }
 
 // ------------------------------------------------------------------------------
 
 void Level1::Update()
 {
+	spawn->Generate();
+
 	scene->Update();
 	scene->CollisionDetection();
 
+    if(arrowNextLevel->CanChangeLevel())
+		Engine::Next<Level2>();
+	
 	if (player->IsDied())
 		Engine::Next<GameOver>();
 
-    if (window->KeyDown(VK_ESCAPE))
-		Engine::Next<Home>();    
-
-	if(arrowNextLevel->CanChangeLevel())
-		Engine::Next<Level2>();
+	if (window->KeyDown(VK_ESCAPE))
+		Engine::Next<Home>();
 }
 
 // ------------------------------------------------------------------------------
