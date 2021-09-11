@@ -2,7 +2,7 @@
 #include "Level2.h"
 #include "Engine.h"
 #include "Home.h"
-#include "Enemy.h"
+#include "Lince.h"
 #include "GameOver.h"
 
 // ------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ void Level1::Init()
 	player = new Player(scene);
 	arrowNextLevel = new ArrowNextLevel();
 	arrowNextLevel->MoveTo(window->CenterX()+420, window->CenterY());
-	auto enemy = new Enemy(player, scene);
+	auto enemy = new Lince(player, scene);
 	player->MoveTo(window->CenterX(), window->CenterY());
 	scene->Add(player, MOVING);
 	scene->Add(enemy, MOVING);

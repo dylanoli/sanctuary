@@ -16,7 +16,7 @@ protected:
     int life;
 
 public:
-    Actor(Scene*);
+    Actor(Scene* scene, float speed, int life);
     ~Actor();
 
     void Update();
@@ -31,8 +31,10 @@ inline void Actor::Draw()
     anim->Draw(x, y, z);
 }
 
-inline Actor::Actor(Scene* sc) {
-    scene = sc;
+inline Actor::Actor(Scene* scene, float speed, int life) {
+    Actor::scene = scene;
+    Actor::speed = speed;
+    Actor::life = life;
 }
 
 inline Actor::~Actor() {

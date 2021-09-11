@@ -23,7 +23,7 @@ public:
     EnemyState state;
     Direction lookDirection;
 
-    Enemy(Player* player, Scene* scene);
+    Enemy(Player* player, Scene* scene, float speed, int life, int damage, float cooldown);
     ~Enemy();
 
     void OnCollision(Object* obj);

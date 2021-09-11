@@ -15,15 +15,14 @@ enum PlayerAnimState { STILL_RIGHT, STILL_LEFT, WALK_LEFT, WALK_RIGHT };
 class Player : public Actor
 {
 private:
-    Gun* gun;
-    bool receivingDamage;
+    Gun* gun = nullptr;
     Sprite *heartSprite[10];
     void HandleAnimState();
 
 public:
-    PlayerAnimState animState;
-    PlayerState state;
-    Direction lookDirection;
+    PlayerAnimState animState = STILL_RIGHT;
+    PlayerState state = STILL;
+    Direction lookDirection = RIGHT;
 
     Player(Scene * scene);                             
     ~Player();                            

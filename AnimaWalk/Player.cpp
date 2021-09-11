@@ -3,9 +3,12 @@
 #include "BlasterPistol.h"
 #include "Enemy.h"
 
-Player::Player(Scene* scene) : Actor(scene)
+
+float refPlayerSpeed = 300.0f;
+int refPlayerLife = 10;
+
+Player::Player(Scene* scene) : Actor(scene, refPlayerSpeed, refPlayerLife)
 {
-    receivingDamage = false;
     type    = T_PLAYER;
     tileSet = new TileSet("Resources/Walking.png", 55, 95, 8, 40);
     BBox(new Rect(-15, -45, 15, 40));
@@ -25,9 +28,7 @@ Player::Player(Scene* scene) : Actor(scene)
     anim->Add(STILL_LEFT, SeqStillLeft, 1);
 
     state = STILL;
-    speed = 300.0f;
 
-    life  = 10;
     Image * imgHeart = new Image("Resources/Heart.png");
 
     for (int i = 0; i < life; i++)
