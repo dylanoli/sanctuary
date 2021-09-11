@@ -2,7 +2,7 @@
 
 float refBearSpeed = 120.0f;
 int refBearLife = 100;
-int refBearDamage = 4;
+int refBearDamage = 15;
 float refBearCooldown = 1.0f;
 
 Bear::Bear(Player* player, Scene* scene, Spawn* spawn, float startPosX, float startPosY) : Enemy(player, scene, spawn, startPosX, startPosY, refBearSpeed, refBearLife, refBearDamage, refBearCooldown)

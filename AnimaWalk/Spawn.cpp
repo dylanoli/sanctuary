@@ -47,7 +47,7 @@ void Spawn::Generate() {
 				break;
 			}
 			case BEAR: {
-				auto enemy = new Bear(player, scene, this);
+				auto enemy = new Bear(player, scene, this, posX, posY);
 				scene->Add(enemy, MOVING);
 				break;
 			}
