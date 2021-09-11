@@ -186,6 +186,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Snake.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TileSet.cpp" />
@@ -218,6 +219,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Snake.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TileSet.h" />

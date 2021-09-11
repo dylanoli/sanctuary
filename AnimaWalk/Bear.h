@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #include "Enemy.h"
 #include "Player.h"
 #include "Scene.h"
