@@ -10,6 +10,7 @@ void Level1::Init()
 {
 	backg = new Sprite("Resources/Home/Background.png");
 	scene = new Scene();
+
 	player = new Player(scene);
 	player->MoveTo(window->CenterX(), window->CenterY());
 	scene->Add(player, MOVING);
