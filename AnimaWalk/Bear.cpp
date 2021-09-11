@@ -1,12 +1,11 @@
 #include "Bear.h"
 
-
 float refBearSpeed = 120.0f;
 int refBearLife = 100;
 int refBearDamage = 4;
 float refBearCooldown = 1.0f;
 
-Bear::Bear(Player* player, Scene* scene) : Enemy(player, scene, refBearSpeed, refBearLife, refBearDamage, refBearCooldown)
+Bear::Bear(Player* player, Scene* scene, Spawn* spawn) : Enemy(player, scene, spawn, refBearSpeed, refBearLife, refBearDamage, refBearCooldown)
 {
     BBox(new Rect(-70, -40, 60, 43));
     tileSet = new TileSet("Resources/Bear.png", 158, 135, 6, 36);

@@ -2,15 +2,13 @@
 #include "Actor.h"
 #include "BlasterPistol.h"
 #include "Bullet.h"
-#include <sstream>
 
-using namespace std;
-
-Enemy::Enemy(Player* player, Scene* scene, float speed, int life, int damage, float cooldown) : Actor(scene, speed, life)
+Enemy::Enemy(Player* player, Scene* scene, Spawn* spawn, float speed, int life, int damage, float cooldown) : Actor(scene, speed, life)
 {
     type = T_ENEMY;
     Enemy::player = player;
     Enemy::scene = scene;
+    Enemy::spawn = spawn;
 
     state = ENEMY_WALK;    
     lookDirection = LEFT;
@@ -53,8 +51,11 @@ void Enemy::Update()
     }
 
     //controle a vida do enemy
-    if(life <= 0)
+    if (life <= 0) {
+        spawn->IncrementEnemieDied();
         scene->Delete(this, MOVING);
+    }
+
 
     HandleAnimState();
     HandleAtack();

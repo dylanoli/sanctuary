@@ -22,6 +22,7 @@ private:
     Player* player = nullptr;
     ArrowNextLevel* arrowNextLevel = nullptr;
     Spawn* spawn = nullptr;
+    bool arrowExists = false;
     
 
 public:

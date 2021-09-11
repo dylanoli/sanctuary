@@ -1,5 +1,5 @@
 #pragma once
-#pragma once
+
 #include "Enemy.h"
 #include "Player.h"
 #include "Scene.h"
@@ -9,7 +9,7 @@ class Bear : public Enemy
 private:
 	Sprite* heartSprite[10];
 public:
-	Bear(Player* player, Scene* scene);
+	Bear(Player* player, Scene* scene, Spawn* spawn);
 	~Bear();
 	void Draw();
 };

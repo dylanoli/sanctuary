@@ -6,6 +6,6 @@
 class Lince : public Enemy
 {
 public:
-	Lince(Player* player, Scene* scene);
+	Lince(Player* player, Scene* scene, Spawn* spawn);
 	~Lince();
 };

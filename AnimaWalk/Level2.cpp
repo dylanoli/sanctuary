@@ -2,8 +2,6 @@
 #include "Level2.h"
 #include "Engine.h"
 #include "Home.h"
-#include "Lince.h"
-#include "Bear.h"
 #include "GameOver.h"
 
 // ------------------------------------------------------------------------------
@@ -12,13 +10,13 @@ void Level2::Init()
 {
 	backg = new Sprite("Resources/Home/Background.png");
 	scene = new Scene();
+	
 	player = new Player(scene);
-	arrowNextLevel = new ArrowNextLevel();
-	arrowNextLevel->MoveTo(window->CenterX() + 420, window->CenterY());
-	auto enemy = new Bear(player, scene);
 	player->MoveTo(window->CenterX(), window->CenterY());
 	scene->Add(player, MOVING);
-	scene->Add(enemy, MOVING);
+	
+	arrowNextLevel = new ArrowNextLevel();
+	arrowNextLevel->MoveTo(window->CenterX() + 420, window->CenterY());
 	scene->Add(arrowNextLevel, STATIC);
 
 }

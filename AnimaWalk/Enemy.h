@@ -4,6 +4,7 @@
 #include "Animation.h"
 #include "Gun.h"
 #include "Player.h"
+#include "Spawn.h"
 
 enum EnemyState { ENEMY_ATACK, ENEMY_WALK };
 enum EnemyAnimState { ENEMY_WALK_LEFT, ENEMY_WALK_RIGHT, ENEMY_ATACK_RIGHT, ENEMY_ATACK_LEFT};
@@ -11,7 +12,8 @@ enum EnemyAnimState { ENEMY_WALK_LEFT, ENEMY_WALK_RIGHT, ENEMY_ATACK_RIGHT, ENEM
 class Enemy : public Actor
 {
 private:
-    Player* player;    
+    Player* player;   
+    Spawn* spawn;
     int damage;
     float cooldown;
     bool canAtack = false;
@@ -23,7 +25,7 @@ public:
     EnemyState state;
     Direction lookDirection;
 
-    Enemy(Player* player, Scene* scene, float speed, int life, int damage, float cooldown);
+    Enemy(Player* player, Scene* scene, Spawn* spawn, float speed, int life, int damage, float cooldown);
     ~Enemy();
 
     void OnCollision(Object* obj);

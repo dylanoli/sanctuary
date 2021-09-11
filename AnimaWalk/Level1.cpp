@@ -2,8 +2,6 @@
 #include "Level2.h"
 #include "Engine.h"
 #include "Home.h"
-#include "Lince.h"
-#include "Bear.h"
 #include "GameOver.h"
 
 // ------------------------------------------------------------------------------
@@ -16,10 +14,6 @@ void Level1::Init()
 	player->MoveTo(window->CenterX(), window->CenterY());
 	scene->Add(player, MOVING);
 	
-	arrowNextLevel = new ArrowNextLevel();
-	arrowNextLevel->MoveTo(window->CenterX()+420, window->CenterY());	
-	scene->Add(arrowNextLevel, MOVING);
-
 	spawn = new Spawn(2.0, 1, WOLF, scene, player);
 }
 
@@ -31,11 +25,19 @@ void Level1::Update()
 
 	scene->Update();
 	scene->CollisionDetection();
+	
+	if (spawn->AllEnemiesIsDied() && !arrowExists) {
+		arrowExists = true;
 
-    if(arrowNextLevel->CanChangeLevel())
+		arrowNextLevel = new ArrowNextLevel();
+		arrowNextLevel->MoveTo(window->CenterX() + 420, window->CenterY());
+		scene->Add(arrowNextLevel, MOVING);
+	}
+
+	if (arrowExists && arrowNextLevel->CanChangeLevel())
 		Engine::Next<Level2>();
 	
-	if (player->IsDied())
+	if (!arrowExists && player->IsDied())
 		Engine::Next<GameOver>();
 
 	if (window->KeyDown(VK_ESCAPE))
