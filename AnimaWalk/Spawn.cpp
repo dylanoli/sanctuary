@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
+#include "Bear.h"
 
 Spawn::Spawn(float i, int number, uint type, SideSpawn side, Scene* s, Player* p) {
 	interval = i;
@@ -46,7 +47,8 @@ void Spawn::Generate() {
 				break;
 			}
 			case BEAR: {
-
+				auto enemy = new Bear(player, scene, this);
+				scene->Add(enemy, MOVING);
 				break;
 			}
 			case SNAKE: {
