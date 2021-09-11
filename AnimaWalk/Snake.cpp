@@ -1,11 +1,11 @@
 #include "Snake.h"
 
-const float refSnakeSpeed = 310.0f;
+const float refSnakeSpeed = 250.0f;
 const float refSnakeCooldown = 0.3f;
 const int refSnakeLife = 6;
 const int refSnakeDamage = 1;
 
-Snake::Snake(Player* player, Scene* scene, Spawn* spawn) : Enemy(player, scene, spawn, refSnakeSpeed, refSnakeLife, refSnakeDamage, refSnakeCooldown)
+Snake::Snake(Player* player, Scene* scene, Spawn* spawn, float startPosX, float startPosY) : Enemy(player, scene, spawn, startPosX, startPosY, refSnakeSpeed, refSnakeLife, refSnakeDamage, refSnakeCooldown)
 {
     BBox(new Rect(-40, -20, 40, 30));
     tileSet = new TileSet("Resources/Snake.png", 100, 60, 3, 6);

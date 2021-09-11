@@ -9,7 +9,7 @@ class Bear : public Enemy
 private:
 	Sprite* heartSprite[10];
 public:
-	Bear(Player* player, Scene* scene, Spawn* spawn);
+	Bear(Player* player, Scene* scene, Spawn* spawn, float startPosX, float startPosY);
 	~Bear();
 	void Draw();
 };

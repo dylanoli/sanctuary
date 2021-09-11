@@ -8,6 +8,6 @@ class Snake : public Enemy
 private:
 	Sprite* heartSprite[10];
 public:
-	Snake(Player* player, Scene* scene, Spawn* spawn);
+	Snake(Player* player, Scene* scene, Spawn* spawn, float startPosX, float startPosY);
 	~Snake();
 };

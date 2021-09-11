@@ -25,7 +25,17 @@ public:
     EnemyState state;
     Direction lookDirection;
 
-    Enemy(Player* player, Scene* scene, Spawn* spawn, float speed, int life, int damage, float cooldown);
+    Enemy(
+        Player* player,
+        Scene* scene,
+        Spawn* spawn,
+        float startPosX,
+        float startPosY,
+        float speed,
+        int life,
+        int damage,
+        float cooldown
+    );
     ~Enemy();
 
     void OnCollision(Object* obj);

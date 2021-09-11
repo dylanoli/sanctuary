@@ -3,7 +3,17 @@
 #include "BlasterPistol.h"
 #include "Bullet.h"
 
-Enemy::Enemy(Player* player, Scene* scene, Spawn* spawn, float speed, int life, int damage, float cooldown) : Actor(scene, speed, life)
+Enemy::Enemy(
+    Player* player, 
+    Scene* scene, 
+    Spawn* spawn, 
+    float startPosX, 
+    float startPosY, 
+    float speed, 
+    int life, 
+    int damage, 
+    float cooldown
+) : Actor(scene, speed, life)
 {
     type = T_ENEMY;
     Enemy::player = player;
@@ -15,7 +25,7 @@ Enemy::Enemy(Player* player, Scene* scene, Spawn* spawn, float speed, int life, 
     Enemy::currentCooldown = cooldown;
     Enemy::cooldown = cooldown;
     Enemy::damage = damage;
-    MoveTo(window->Width(), window->CenterY());
+    MoveTo(startPosX, startPosY);
 }
 
 Enemy::~Enemy()

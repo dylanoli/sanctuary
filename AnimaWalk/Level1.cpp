@@ -11,23 +11,23 @@ void Level1::Init()
 	backg = new Sprite("Resources/Home/Background.png");
 	scene = new Scene();
 
-	player = new Player(scene);
-	player->MoveTo(window->CenterX(), window->CenterY());
+	player = new Player(scene);	
+	spawn = new Spawn(1.5, 7, WOLF, BOTH_SIDES, scene, player);
+	spawn2 = new Spawn(3, 4, SNAKE, BOTH_SIDES, scene, player);
+
 	scene->Add(player, MOVING);
-	
-	spawn = new Spawn(2.0, 1, WOLF, scene, player);
+	scene->Add(spawn, STATIC);
+	scene->Add(spawn2, STATIC);
 }
 
 // ------------------------------------------------------------------------------
 
 void Level1::Update()
 {
-	spawn->Generate();
-
 	scene->Update();
 	scene->CollisionDetection();
 	
-	if (spawn->AllEnemiesIsDied() && !arrowExists) {
+	if (spawn->AllEnemiesIsDied() && spawn2->AllEnemiesIsDied() && !arrowExists) {
 		arrowExists = true;
 
 		arrowNextLevel = new ArrowNextLevel();

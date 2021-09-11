@@ -5,7 +5,7 @@
 
 
 float refPlayerSpeed = 300.0f;
-int refPlayerLife = 10;
+int refPlayerLife = 50;
 
 Player::Player(Scene* scene) : Actor(scene, refPlayerSpeed, refPlayerLife)
 {
@@ -36,7 +36,7 @@ Player::Player(Scene* scene) : Actor(scene, refPlayerSpeed, refPlayerLife)
         heartSprite[i] = new Sprite(imgHeart);
     }
 
-    MoveTo(window->CenterX(), window->CenterY());
+    MoveTo(window->CenterX() - 420, window->CenterY());
 }
 
 Player::~Player()

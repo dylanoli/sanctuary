@@ -38,7 +38,11 @@ inline void Player::Draw()
 {
     anim->Draw(x, y, z);
 
-    for (size_t i = 0; i < life; i++)
+    const float countHeartFloat = 10 * ((life * 1.0f) / maxLife);
+    const int countHeartInt = (int)countHeartFloat;
+    const int countHeart = countHeartFloat > countHeartInt ? countHeartInt + 1 : countHeartInt;
+
+    for (size_t i = 0; i < countHeart; i++)
     {
         float posX = 15.0f + (28.0f * i);
         heartSprite[i]->Draw(posX, 15, Layer::UPPER);
