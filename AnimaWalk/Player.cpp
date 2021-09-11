@@ -31,7 +31,7 @@ Player::Player(Scene* scene) : Actor(scene, refPlayerSpeed, refPlayerLife)
 
     Image * imgHeart = new Image("Resources/Heart.png");
 
-    for (int i = 0; i < life; i++)
+    for (int i = 0; i < 10; i++)
     {
         heartSprite[i] = new Sprite(imgHeart);
     }

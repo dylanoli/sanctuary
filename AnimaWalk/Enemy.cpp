@@ -30,13 +30,13 @@ void Enemy::Update()
     const float posXPlayer = player->X();
     const float playerWidth = player->getTileSet()->TileWidth();
     
-    if (x > posXPlayer + playerWidth) {
+    if (x > posXPlayer + playerWidth && EndCooldown()) {
         lookDirection = RIGHT;
         state = ENEMY_WALK;
         Translate(-speed * gameTime, 0);
     }
 
-    if (x < posXPlayer - playerWidth) {
+    if (x < posXPlayer - playerWidth && EndCooldown()) {
         lookDirection = LEFT;
         state = ENEMY_WALK;
         Translate(speed * gameTime, 0);
@@ -44,11 +44,11 @@ void Enemy::Update()
    
     const float posYPlayer = player->Y();
     const float playerHeight = player->getTileSet()->TileHeight() / 8.0f;
-    if (y > posYPlayer + playerHeight) {
+    if (y > posYPlayer + playerHeight && EndCooldown()) {
         Translate(0, -speed * gameTime);
     }
 
-    if (y < posYPlayer - playerHeight) {
+    if (y < posYPlayer - playerHeight && EndCooldown()) {
         Translate(0, speed * gameTime);
     }
 
@@ -78,6 +78,7 @@ void Enemy::Atack()
     player->GetHit(damage);
     canAtack = false;
     currentCooldown = 0;
+    state = ENEMY_ATACK;
 }
 
 void Enemy::HandleAtack()
@@ -108,11 +109,10 @@ void Enemy::HandleAnimState() {
 void Enemy::OnCollision(Object* obj)
 {
     if (obj->Type() == T_PLAYER) {
-        if (currentCooldown > cooldown && !canAtack)
+        if (EndCooldown() && !canAtack)
         {
             canAtack = true;
         }
-        state = ENEMY_ATACK;
     }
 
     if (obj->Type() == T_BULLET)

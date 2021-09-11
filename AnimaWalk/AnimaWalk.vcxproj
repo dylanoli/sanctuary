@@ -166,6 +166,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="ArrowNextLevel.cpp" />
+    <ClCompile Include="Bear.cpp" />
     <ClCompile Include="BlasterPistol.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Enemy.cpp" />

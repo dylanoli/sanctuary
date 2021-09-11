@@ -32,9 +32,15 @@ public:
 
     void Atack();
     void HandleAtack();
+    bool EndCooldown();
 };
 
 inline void Enemy::Draw()
 {
     anim->Draw(x, y, z);
+}
+
+inline bool Enemy::EndCooldown()
+{
+    return currentCooldown >= cooldown;
 }

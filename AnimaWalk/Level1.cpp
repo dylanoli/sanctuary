@@ -3,6 +3,7 @@
 #include "Engine.h"
 #include "Home.h"
 #include "Lince.h"
+#include "Bear.h"
 #include "GameOver.h"
 
 // ------------------------------------------------------------------------------
@@ -14,10 +15,12 @@ void Level1::Init()
 	player = new Player(scene);
 	arrowNextLevel = new ArrowNextLevel();
 	arrowNextLevel->MoveTo(window->CenterX()+420, window->CenterY());
-	auto enemy = new Lince(player, scene);
+	//auto enemy = new Lince(player, scene);
+	auto enemy2 = new Bear(player, scene);
 	player->MoveTo(window->CenterX(), window->CenterY());
 	scene->Add(player, MOVING);
-	scene->Add(enemy, MOVING);
+	//scene->Add(enemy, MOVING);
+	scene->Add(enemy2, MOVING);
 	scene->Add(arrowNextLevel, STATIC);
 
 }

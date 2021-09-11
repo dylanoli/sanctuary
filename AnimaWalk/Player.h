@@ -40,7 +40,8 @@ inline void Player::Draw()
 
     for (size_t i = 0; i < life; i++)
     {
-        heartSprite[i]->Draw(15 + (28 * i), 15, Layer::UPPER);
+        float posX = 15.0f + (28.0f * i);
+        heartSprite[i]->Draw(posX, 15, Layer::UPPER);
     }
 }
 

@@ -14,6 +14,7 @@ protected:
     Scene* scene;
     float speed;
     int life;
+    int maxLife;
 
 public:
     Actor(Scene* scene, float speed, int life);
@@ -34,7 +35,7 @@ inline void Actor::Draw()
 inline Actor::Actor(Scene* scene, float speed, int life) {
     Actor::scene = scene;
     Actor::speed = speed;
-    Actor::life = life;
+    Actor::life = maxLife = life;
 }
 
 inline Actor::~Actor() {
