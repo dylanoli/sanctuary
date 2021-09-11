@@ -29,7 +29,8 @@ Enemy::Enemy(Player* player, Scene* scene) : Actor(scene)
     lookDirection = LEFT;
     speed = 170.0f;
     life = 10;
-    damage = 1;
+    damage = 2;
+    cooldown = currentCooldown = 1.0f;
     MoveTo(window->Width(), window->CenterY());
 }
 
@@ -70,6 +71,7 @@ void Enemy::Update()
         scene->Delete(this, MOVING);
 
     HandleAnimState();
+    HandleAtack();
 
     // mantém personagem dentro da tela
     if (x + tileSet->TileWidth() / 2.0f > window->Width())
@@ -83,6 +85,26 @@ void Enemy::Update()
 
     if (y - tileSet->TileHeight() / 2.0f < 0)
         MoveTo(x, tileSet->TileHeight() / 2.0f);
+}
+
+void Enemy::Atack()
+{
+    player->GetHit(damage);
+    canAtack = false;
+    currentCooldown = 0;
+}
+
+void Enemy::HandleAtack()
+{
+    if (!canAtack)
+    {
+        currentCooldown += gameTime;
+    }
+    else
+    {
+        Atack();
+    }
+
 }
 
 void Enemy::HandleAnimState() {
@@ -105,6 +127,10 @@ void Enemy::HandleAnimState() {
 void Enemy::OnCollision(Object* obj)
 {
     if (obj->Type() == T_PLAYER) {
+        if (currentCooldown > cooldown && !canAtack)
+        {
+            canAtack = true;
+        }
         state = ENEMY_ATACK;
     }
 

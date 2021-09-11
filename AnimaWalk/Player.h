@@ -29,6 +29,7 @@ public:
     void Update();                     
     void Draw();            
     void OnCollision(Object* obj);
+    void GetHit(int damage);
     bool IsDied();
 };
 

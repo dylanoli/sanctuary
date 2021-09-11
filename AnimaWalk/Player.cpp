@@ -26,7 +26,7 @@ Player::Player(Scene* scene) : Actor(scene)
 
     state = STILL;
     speed = 300.0f;
-    life  = 200;
+    life  = 10;
     MoveTo(window->CenterX(), window->CenterY());
 }
 
@@ -93,6 +93,11 @@ void Player::Update()
         MoveTo(x, tileSet->TileHeight() / 2.0f);
 }
 
+void Player::GetHit(int damage)
+{
+    life -= damage;
+}
+
 void Player::HandleAnimState() {
     // atualiza animação
     if (state == STILL && lookDirection == RIGHT)
@@ -111,11 +116,4 @@ void Player::HandleAnimState() {
 
 void Player::OnCollision(Object* obj)
 {
-    if (obj->Type() == T_ENEMY) {
-        if (!receivingDamage) {
-            life -= ((Enemy*)obj)->GetDamage();
-            receivingDamage = true;
-        } else
-            receivingDamage = !receivingDamage;        
-    }
 }

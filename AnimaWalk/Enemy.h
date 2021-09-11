@@ -13,6 +13,9 @@ class Enemy : public Actor
 private:
     Player* player;    
     int damage;
+    float cooldown;
+    bool canAtack = false;
+    float currentCooldown = 0;
     void HandleAnimState();
 
 public:
@@ -27,14 +30,11 @@ public:
     void Update();
     void Draw();
 
-    int GetDamage();
+    void Atack();
+    void HandleAtack();
 };
 
 inline void Enemy::Draw()
 {
     anim->Draw(x, y, z);
-}
-
-inline int Enemy::GetDamage() {
-    return damage;
 }
