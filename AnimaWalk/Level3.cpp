@@ -39,7 +39,7 @@ void Level3::Update()
 		Engine::Next<Victory>();
 
 	if (!arrowExists && player->IsDied())
-		Engine::Next<GameOver>();
+		Engine::Next<GameOver>(LEVEL3);
 
 	if (window->KeyDown(VK_ESCAPE))
 		Engine::Next<Home>();

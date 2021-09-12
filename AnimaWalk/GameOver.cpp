@@ -5,13 +5,36 @@
 
 // ------------------------------------------------------------------------------
 
+GameOver::GameOver(uint lastLevel)
+{
+	backg = new Sprite("Resources/GameOver/Background.png");
+	logo = new Sprite("Resources/GameOver/GameOver.png");
+	restartMessage = new Sprite("Resources/GameOver/RestartMessage.png");
+	youCatchUpMessage = new Sprite("Resources/GameOver/YouCatchMessage.png");
+
+	switch (lastLevel)
+	{
+	case LEVEL1:
+		GameOver::lastLevel = new Sprite("Resources/GameOver/LevelOne.png");
+		break;
+	case LEVEL2:
+		GameOver::lastLevel = new Sprite("Resources/GameOver/LevelTwo.png");
+		break;
+	case LEVEL3:
+		GameOver::lastLevel = new Sprite("Resources/GameOver/LevelThree.png");
+		break;
+	}
+}
+
 void GameOver::Init()
 {
 	backg = new Sprite("Resources/GameOver/Background.png");
 	logo = new Sprite("Resources/GameOver/GameOver.png");
 	restartMessage = new Sprite("Resources/GameOver/RestartMessage.png");
 	youCatchUpMessage = new Sprite("Resources/GameOver/YouCatchMessage.png");
-	lastLevel = new Sprite("Resources/GameOver/LevelOne.png");
+	
+	if(lastLevel == nullptr)
+		lastLevel = new Sprite("Resources/GameOver/LevelOne.png");
 }
 
 // ------------------------------------------------------------------------------

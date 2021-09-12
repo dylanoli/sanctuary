@@ -10,6 +10,8 @@
 
 // ------------------------------------------------------------------------------
 
+enum LastLevel { LEVEL1, LEVEL2, LEVEL3 };
+
 class GameOver : public Game {
 private:
     Sprite* backg = nullptr;       // pano de fundo
@@ -20,6 +22,7 @@ private:
     bool ctrlKeyESC = false;        // controle do ESC
 
 public:
+    GameOver(uint);
     void Init();                    // inicialização
     void Update();                  // atualização
     void Draw();                    // desenho
