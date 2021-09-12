@@ -2,6 +2,7 @@
 #include "Engine.h"
 #include "Home.h"
 #include "GameOver.h"
+#include "Victory.h"
 
 // ------------------------------------------------------------------------------
 
@@ -34,8 +35,8 @@ void Level3::Update()
 		scene->Add(arrowNextLevel, MOVING);
 	}
 
-	//if (arrowExists && arrowNextLevel->CanChangeLevel())
-		//Engine::Next<Level3>();
+	if (arrowExists && arrowNextLevel->CanChangeLevel())
+		Engine::Next<Victory>();
 
 	if (!arrowExists && player->IsDied())
 		Engine::Next<GameOver>();
