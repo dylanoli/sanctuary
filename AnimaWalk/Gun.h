@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _SANCTUARY_GUN_H_
+#define _SANCTUARY_GUN_H_
+
 #include "Object.h"
 #include "Sprite.h"
 #include "Constants.h"
@@ -55,3 +57,5 @@ public:
 			Object::MoveTo(px - compensationDirection, py);
 	}
 };
+
+#endif

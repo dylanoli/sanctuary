@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _SANCTUARY_ARROW_NEXT_H_
+#define _SANCTUARY_ARROW_NEXT_H_
+
 #include "Object.h"
 #include "Constants.h"
 #include "TileSet.h"
@@ -29,3 +31,5 @@ inline bool ArrowNextLevel::CanChangeLevel()
 {
     return canChangeLevel;
 }
+
+#endif

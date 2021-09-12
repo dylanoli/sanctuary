@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _SANCTUARY_ENEMY_H_
+#define _SANCTUARY_ENEMY_H_
+
 #include "Actor.h"
 #include "TileSet.h"
 #include "Animation.h"
@@ -56,3 +58,5 @@ inline bool Enemy::EndCooldown()
 {
     return currentCooldown >= cooldown;
 }
+
+#endif

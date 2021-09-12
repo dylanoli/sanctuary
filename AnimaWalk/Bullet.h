@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _SANCTUARY_BULLET_H_
+#define _SANCTUARY_BULLET_H_
+
 #include "Object.h";
 #include "Constants.h";
 #include "Sprite.h";
@@ -24,3 +26,5 @@ public:
 
 inline int Bullet::GetDamage()
 { return damage; }
+
+#endif
