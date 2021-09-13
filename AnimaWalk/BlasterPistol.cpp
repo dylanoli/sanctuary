@@ -13,8 +13,6 @@ float FireRate = 0.3f;
 
 BlasterPistol::BlasterPistol(Scene* scene) : Gun(
 	scene,
-	FileNameSpriteRight,
-	FileNameSpriteLeft,
 	CompensationDirection,
 	FileBulletNameSpriteRight,
 	FileBulletNameSpriteLeft,

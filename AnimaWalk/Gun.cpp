@@ -4,8 +4,6 @@
 
 Gun::Gun(
 	Scene* scene,
-	string fileNameSpriteRight,
-	string fileNameSpriteLeft,
 	uint compensationDirection,
 	string fileBulletNameSpriteRight,
 	string fileBulletNameSpriteLeft,
@@ -15,8 +13,6 @@ Gun::Gun(
 	GunMode gunMode
 )
 {
-	Gun::spriteRight = new Sprite(fileNameSpriteRight);
-	Gun::spriteLeft = new Sprite(fileNameSpriteLeft);
 	Gun::compensationDirection = compensationDirection;
 	Gun::scene = scene;
 	Gun::bulletImageLeft = new Image(fileBulletNameSpriteLeft);
@@ -29,17 +25,16 @@ Gun::Gun(
 
 Gun::~Gun()
 {
-	delete spriteRight;
-	delete spriteLeft;
+
 }
 
 void Gun::Shot() 
 {
 	if (canShot) {
 		if (lookDirection == RIGHT)
-			scene->Add(new Bullet(x + 20, y, lookDirection, bulletVelocity, bulletDamage, bulletImageRight, bulletImageLeft, scene), MOVING);			
+			scene->Add(new Bullet(x + 40, y - 10, lookDirection, bulletVelocity, bulletDamage, bulletImageRight, bulletImageLeft, scene), MOVING);			
 		else
-			scene->Add(new Bullet(x - 20, y, lookDirection, bulletVelocity, bulletDamage, bulletImageRight, bulletImageLeft, scene), MOVING);
+			scene->Add(new Bullet(x - 40, y - 10, lookDirection, bulletVelocity, bulletDamage, bulletImageRight, bulletImageLeft, scene), MOVING);
 		
 		canShot = false;
 	}
@@ -65,8 +60,5 @@ void Gun::Update() {
 }
 
 void Gun::Draw() {
-	if(lookDirection == RIGHT)
-		spriteRight->Draw(x, y, Layer::UPPER);
-	else
-		spriteLeft->Draw(x, y, Layer::UPPER);
+	//remove sprite arma
 }

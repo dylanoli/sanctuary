@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "BlasterPistol.h"
 #include "Enemy.h"
+#include <iostream>
 
 
 float refPlayerSpeed = 300.0f;
@@ -10,20 +11,20 @@ int refPlayerLife = 50;
 Player::Player(Scene* scene) : Actor(scene, refPlayerSpeed, refPlayerLife)
 {
     type    = T_PLAYER;
-    tileSet = new TileSet("Resources/Walking.png", 55, 95, 8, 40);
-    BBox(new Rect(-15, -45, 15, 40));
-    anim    = new Animation(tileSet, 0.060f, true);
+    tileSet = new TileSet("Resources/astronner.png", 126, 126, 4, 13);
+    BBox(new Rect(-20, -50, 20, 50));
+    anim    = new Animation(tileSet, 0.21f, true);
     gun     = new BlasterPistol(scene);
     
     Player::scene->Add(gun, STATIC);
 
-    uint SeqLeft[8]  = { 0, 1, 2, 3, 4, 5, 6, 7 };
-    uint SeqRight[8] = { 15, 14, 13, 12, 11, 10, 9, 8 };
-    uint SeqStillRight[1] = { 10 };
-    uint SeqStillLeft[1] = { 5 };
+    uint SeqLeft[4]   = { 9, 10, 11, 12 };
+    uint SeqRight[4]  = { 3, 4, 5, 6 };
+    uint SeqStillRight[1] = { 1 };
+    uint SeqStillLeft[1] = { 7 };
 
-    anim->Add(WALK_LEFT,  SeqLeft,  8);
-    anim->Add(WALK_RIGHT, SeqRight, 8);
+    anim->Add(WALK_LEFT,  SeqLeft,  4);
+    anim->Add(WALK_RIGHT, SeqRight, 4);
     anim->Add(STILL_RIGHT, SeqStillRight, 1);
     anim->Add(STILL_LEFT, SeqStillLeft, 1);
 
@@ -49,6 +50,7 @@ void Player::Update()
     // anda para cima
     if (window->KeyDown(VK_UP))
     {
+        gun->setCanShot(false);
         Translate(0, -speed * gameTime);
         state = WALK;
     }
@@ -56,6 +58,7 @@ void Player::Update()
     // anda para baixo
     if (window->KeyDown(VK_DOWN))
     {
+        gun->setCanShot(false);
         Translate(0, speed * gameTime);
         state = WALK;
     }
@@ -95,11 +98,14 @@ void Player::Update()
     if (x - tileSet->TileWidth() / 2.0f < 0)
         MoveTo(tileSet->TileWidth() / 2.0f, y);
 
-    if (y + tileSet->TileHeight() / 2.0f > window->Height())
+    //bloqueio da arvore
+    if ((y + tileSet->TileHeight() / 2.0f) > window->Height())
         MoveTo(x, window->Height() - tileSet->TileHeight() / 2.0f);
 
-    if (y - tileSet->TileHeight() / 2.0f < 0)
-        MoveTo(x, tileSet->TileHeight() / 2.0f);
+    std::cout << y;
+    if ((y - tileSet->TileHeight() / 2.0f) < (250 - tileSet->TileHeight() / 2.0f))
+        MoveTo(x, 250);
+
 }
 
 void Player::GetHit(int damage)
