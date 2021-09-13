@@ -18,6 +18,7 @@ private:
     Gun* gun = nullptr;
     Sprite *heartSprite[10];
     void HandleAnimState();
+    bool godModeOn = false;
 
 public:
     PlayerAnimState animState = STILL_RIGHT;
