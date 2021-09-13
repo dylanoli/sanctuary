@@ -8,7 +8,7 @@
 
 void Level2::Init()
 {
-	backg = new Sprite("Resources/Home/Background.png");
+	backg = new Sprite("Resources/Background.png");
 	scene = new Scene();
 
 	player = new Player(scene);

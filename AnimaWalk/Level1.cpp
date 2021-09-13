@@ -8,7 +8,7 @@
 
 void Level1::Init()
 {
-	backg = new Sprite("Resources/Home/Background.png");
+	backg = new Sprite("Resources/Background.png");
 	introMessage = new Sprite("Resources/IntroMessage.png");
 	scene = new Scene();
 

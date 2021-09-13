@@ -36,7 +36,7 @@ void Enemy::Update()
 {
     // controla a direcao do enemy
     const float posXPlayer = player->X();
-    const float playerWidth = player->getTileSet()->TileWidth();
+    const float playerWidth = player->getTileSet()->TileWidth() / 2;
     
     if (x > posXPlayer + playerWidth && EndCooldown()) {
         lookDirection = RIGHT;

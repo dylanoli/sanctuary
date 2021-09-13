@@ -10,8 +10,6 @@ class Gun : public Object
 {
 private:
 	bool canShot = true;
-	Sprite* spriteRight;
-	Sprite* spriteLeft;
 	uint compensationDirection;
 	Scene* scene;
 	Image* bulletImageLeft;
@@ -28,8 +26,6 @@ protected:
 public:
 	Gun(
 		Scene* scene,
-		string fileNameSpriteRight,
-		string fileNameSpriteLeft,
 		uint compensationDirection,
 		string fileBulletNameSpriteRight,
 		string fileBulletNameSpriteLeft,
@@ -47,6 +43,10 @@ public:
 	inline void SetDirection(Direction direction)
 	{
 		lookDirection = direction;
+	}
+
+	inline void setCanShot(bool can) {
+		canShot = can;
 	}
 
 	inline void MoveTo(float px, float py) 
