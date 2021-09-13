@@ -60,4 +60,6 @@ void Level2::Draw()
 void Level2::Finalize()
 {
 	delete backg;
+	delete spawn;
+	delete spawn2;
 }

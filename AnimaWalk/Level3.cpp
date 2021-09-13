@@ -17,7 +17,6 @@ void Level3::Init()
 
 	scene->Add(player, MOVING);
 	scene->Add(spawn, STATIC);
-
 }
 
 // ------------------------------------------------------------------------------
@@ -59,4 +58,5 @@ void Level3::Draw()
 void Level3::Finalize()
 {
 	delete backg;
+	delete spawn;
 }
