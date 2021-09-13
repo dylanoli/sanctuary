@@ -40,7 +40,7 @@ void Level2::Update()
 		Engine::Next<Level3>();
 
 	if (!arrowExists && player->IsDied())
-		Engine::Next<GameOver>();
+		Engine::Next<GameOver>(LEVEL2);
 
 	if (window->KeyDown(VK_ESCAPE))
 		Engine::Next<Home>();
@@ -60,4 +60,6 @@ void Level2::Draw()
 void Level2::Finalize()
 {
 	delete backg;
+	delete spawn;
+	delete spawn2;
 }

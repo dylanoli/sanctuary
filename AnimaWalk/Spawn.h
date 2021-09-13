@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _SANCTUARY_SPAWN_H_
+#define _SANCTUARY_SPAWN_H_
 
 #include "Timer.h"
 #include "Types.h"
@@ -32,4 +33,6 @@ class Spawn: public Object {
 inline void Spawn::Draw() {
 
 }
+
+#endif
 

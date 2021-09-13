@@ -17,6 +17,7 @@
 class Level1 : public Game {
 private:
     Sprite* backg = nullptr;       // pano de fundo
+    Sprite* introMessage = nullptr;
     bool ctrlKeyESC = false;        // controle do ESC
     Scene* scene = nullptr;
     Player* player = nullptr;

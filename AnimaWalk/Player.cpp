@@ -85,7 +85,10 @@ void Player::Update()
     if (window->KeyUp(VK_UP) && window->KeyUp(VK_DOWN) && window->KeyUp(VK_LEFT) && window->KeyUp(VK_RIGHT))
     {
         state = STILL;
-    }    
+    }   
+
+    if (window->KeyDown('G'))
+        godModeOn = !godModeOn;
 
     HandleAnimState();
 
@@ -110,7 +113,8 @@ void Player::Update()
 
 void Player::GetHit(int damage)
 {
-    life -= damage;
+    if(!godModeOn)
+        life -= damage;
 }
 
 void Player::HandleAnimState() {

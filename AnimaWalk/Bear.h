@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _SANCTUARY_BEAR_H_
+#define _SANCTUARY_BEAR_H_
 
 #include "Enemy.h"
 #include "Player.h"
@@ -28,3 +29,5 @@ inline void Bear::Draw()
 		heartSprite[i]->Draw(posX, 15, Layer::UPPER);
 	}
 }
+
+#endif

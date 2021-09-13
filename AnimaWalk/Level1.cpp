@@ -9,10 +9,11 @@
 void Level1::Init()
 {
 	backg = new Sprite("Resources/Background.png");
+	introMessage = new Sprite("Resources/IntroMessage.png");
 	scene = new Scene();
 
 	player = new Player(scene);	
-	spawn = new Spawn(2, 3, WOLF, LEFT_ONLY, scene, player);
+	spawn = new Spawn(4.0f, 3, WOLF, LEFT_ONLY, scene, player);
 
 	scene->Add(player, MOVING);
 	scene->Add(spawn, STATIC);
@@ -37,7 +38,7 @@ void Level1::Update()
 		Engine::Next<Level2>();
 	
 	if (!arrowExists && player->IsDied())
-		Engine::Next<GameOver>();
+		Engine::Next<GameOver>(LEVEL1);
 
 	if (window->KeyDown(VK_ESCAPE))
 		Engine::Next<Home>();
@@ -47,6 +48,7 @@ void Level1::Update()
 
 void Level1::Draw()
 {
+	introMessage->Draw(float(window->CenterX()), float(window->CenterY() + 200.0f), Layer::FRONT);
 	backg->Draw(float(window->CenterX()), float(window->CenterY()), Layer::BACK);
 	scene->Draw();
 	scene->DrawBBox();
@@ -57,4 +59,6 @@ void Level1::Draw()
 void Level1::Finalize()
 {
 	delete backg;
+	delete introMessage;
+	delete spawn;
 }

@@ -2,6 +2,7 @@
 #include "Engine.h"
 #include "Home.h"
 #include "GameOver.h"
+#include "Victory.h"
 
 // ------------------------------------------------------------------------------
 
@@ -16,7 +17,6 @@ void Level3::Init()
 
 	scene->Add(player, MOVING);
 	scene->Add(spawn, STATIC);
-
 }
 
 // ------------------------------------------------------------------------------
@@ -34,11 +34,11 @@ void Level3::Update()
 		scene->Add(arrowNextLevel, MOVING);
 	}
 
-	//if (arrowExists && arrowNextLevel->CanChangeLevel())
-		//Engine::Next<Level3>();
+	if (arrowExists && arrowNextLevel->CanChangeLevel())
+		Engine::Next<Victory>();
 
 	if (!arrowExists && player->IsDied())
-		Engine::Next<GameOver>();
+		Engine::Next<GameOver>(LEVEL3);
 
 	if (window->KeyDown(VK_ESCAPE))
 		Engine::Next<Home>();
@@ -58,4 +58,5 @@ void Level3::Draw()
 void Level3::Finalize()
 {
 	delete backg;
+	delete spawn;
 }
