@@ -38,7 +38,7 @@ void Spawn::Generate() {
 				varyX = choice > 5? MAX_VARY: -MAX_VARY;
 			}
 			const float posX = window->CenterX() + varyX;
-			const float posY = window->CenterY() + ((rand() % 540) - 270);
+			const float posY = window->CenterY() + (rand() % 100) + 20;
 			switch (spawnType)
 			{
 			case WOLF: {
