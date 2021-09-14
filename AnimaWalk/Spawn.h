@@ -5,6 +5,7 @@
 #include "Types.h"
 #include "Player.h"
 #include "Object.h"
+#include <random>
 
 enum SpawnType { WOLF, SNAKE, BEAR };
 enum SideSpawn { LEFT_ONLY, RIGHT_ONLY, BOTH_SIDES };
@@ -20,12 +21,13 @@ class Spawn: public Object {
 		SideSpawn sideSpawn;
 		Player* player;
 		Scene* scene;
+		void CreateMobi();
+		pair<float, float> GenerateRandomCoords();
 
 	public:
 		Spawn(float, int, uint, SideSpawn, Scene*, Player*);
 		void Update();
 		void Draw();
-		void Generate();
 		bool AllEnemiesIsDied();
 		void IncrementEnemieDied();
 };
