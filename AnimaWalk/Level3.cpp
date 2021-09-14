@@ -50,7 +50,6 @@ void Level3::Draw()
 {
 	backg->Draw(float(window->CenterX()), float(window->CenterY()), Layer::BACK);
 	scene->Draw();
-	scene->DrawBBox();
 }
 
 // ------------------------------------------------------------------------------

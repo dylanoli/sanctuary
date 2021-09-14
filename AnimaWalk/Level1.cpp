@@ -51,7 +51,6 @@ void Level1::Draw()
 	introMessage->Draw(float(window->CenterX()), float(window->CenterY() + 200.0f), Layer::FRONT);
 	backg->Draw(float(window->CenterX()), float(window->CenterY()), Layer::BACK);
 	scene->Draw();
-	scene->DrawBBox();
 }
 
 // ------------------------------------------------------------------------------
