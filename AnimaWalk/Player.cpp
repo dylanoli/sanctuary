@@ -42,7 +42,8 @@ Player::Player(Scene* scene) : Actor(scene, refPlayerSpeed, refPlayerLife)
 
 Player::~Player()
 {
-    
+    for (int i = 0; i < 10; i++)
+        delete heartSprite[i];
 }
 
 void Player::Update()

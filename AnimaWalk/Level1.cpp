@@ -13,7 +13,7 @@ void Level1::Init()
 	scene = new Scene();
 
 	player = new Player(scene);	
-	spawn = new Spawn(4.0f, 3, WOLF, LEFT_ONLY, scene, player);
+	spawn = new Spawn(4.0f, 3, WOLF, RIGHT_ONLY, scene, player);
 
 	scene->Add(player, MOVING);
 	scene->Add(spawn, STATIC);
