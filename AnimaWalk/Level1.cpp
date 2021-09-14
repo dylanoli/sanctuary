@@ -60,5 +60,5 @@ void Level1::Finalize()
 {
 	delete backg;
 	delete introMessage;
-	delete spawn;
+	delete scene;
 }

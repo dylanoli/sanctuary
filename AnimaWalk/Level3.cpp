@@ -58,5 +58,5 @@ void Level3::Draw()
 void Level3::Finalize()
 {
 	delete backg;
-	delete spawn;
+	delete scene;
 }

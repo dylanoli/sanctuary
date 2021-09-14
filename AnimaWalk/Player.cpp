@@ -42,7 +42,7 @@ Player::Player(Scene* scene) : Actor(scene, refPlayerSpeed, refPlayerLife)
 
 Player::~Player()
 {
-    delete gun;
+    
 }
 
 void Player::Update()
