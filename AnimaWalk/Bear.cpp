@@ -31,5 +31,6 @@ Bear::Bear(Player* player, Scene* scene, Spawn* spawn, float startPosX, float st
 
 Bear::~Bear()
 {
-
+    for (int i = 0; i < 10; i++)
+        delete heartSprite[i];
 }
