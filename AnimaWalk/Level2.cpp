@@ -12,9 +12,9 @@ void Level2::Init()
 	scene = new Scene();
 
 	player = new Player(scene);
-	spawn = new Spawn(1.5, 7, WOLF, BOTH_SIDES, scene, player);
-	spawn2 = new Spawn(3, 4, SNAKE, BOTH_SIDES, scene, player);
-
+	spawn = new Spawn(1, 10, WOLF, BOTH_SIDES, scene, player);
+	spawn2 = new Spawn(3, 6, SNAKE, BOTH_SIDES, scene, player);
+	
 	scene->Add(player, MOVING);
 	scene->Add(spawn, STATIC);
 	scene->Add(spawn2, STATIC);

@@ -2,7 +2,7 @@
 
 float refSpeed = 140.0f;
 int refLife = 10;
-int refDamage = 2;
+int refDamage = 4;
 float refCooldown = 0.3f;
 
 Lince::Lince(Player* player, Scene* scene, Spawn* spawn, float startPosX, float startPosY) : Enemy(player, scene, spawn, startPosX, startPosY, refSpeed, refLife, refDamage, refCooldown)
