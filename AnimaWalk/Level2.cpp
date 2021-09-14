@@ -32,7 +32,7 @@ void Level2::Update()
 		arrowExists = true;
 
 		arrowNextLevel = new ArrowNextLevel();
-		arrowNextLevel->MoveTo(window->CenterX() + 420, window->CenterY());
+		arrowNextLevel->MoveTo(window->CenterX() + 420, window->CenterY() + 100);
 		scene->Add(arrowNextLevel, MOVING);
 	}
 
