@@ -42,10 +42,10 @@ void Level1::Init()
     plat = new Platform(200, window->CenterY() + 100, PLATTYPES::LARGE, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(650, window->CenterY(), PLATTYPES::SMALL, white);
+    plat = new Platform(720, window->CenterY() + 60, PLATTYPES::SMALL, white);
     scene->Add(plat, STATIC);
 
-    plat = new Platform(440, window->CenterY() - 80, PLATTYPES::SMALL, white);
+    plat = new Platform(440, window->CenterY() - 120, PLATTYPES::SMALL, white);
     scene->Add(plat, STATIC);
 
     Player * player = new Player(scene);

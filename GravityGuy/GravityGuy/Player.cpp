@@ -1,6 +1,9 @@
 #include "Actor.h"
 #include "Player.h"
 #include <iostream>
+#include <sstream>
+
+using namespace std;
 
 float refPlayerSpeed = 300.0f;
 int refPlayerLife = 50;
@@ -42,8 +45,6 @@ Player::~Player()
 
 void Player::Update()
 {
-    Translate(0, 300 * gameTime);
-
     // anda para esquerda
     if (window->KeyDown(VK_LEFT))
     {
@@ -66,10 +67,38 @@ void Player::Update()
         state = STILL;
     }
 
-    if (window->KeyDown('G'))
+    if (window->KeyPress('G'))
         godModeOn = !godModeOn;
 
     HandleAnimState();
+
+    if (jumping)
+    {
+        if (jumpDuration.Elapsed(0.5f))
+        {
+            jumping = false;
+            velY = 0;
+        }
+        else
+        {
+            velY += 2000.0f * gameTime;
+        }
+
+        Translate(0, velY * gameTime);
+    }
+    else
+    {
+        if (window->KeyPress(VK_UP))
+        {
+            velY = -400;
+
+            // inicia temporizadores
+            jumpDuration.Start();
+            jumping = true;
+        }
+
+        Translate(0, 300 * gameTime);
+    }
 
     // mantém personagem dentro da tela
     if (x + tileSet->TileWidth() / 2.0f > window->Width())
@@ -84,7 +113,6 @@ void Player::Update()
 
     if ((y - tileSet->TileHeight() / 2.0f) < (250 - tileSet->TileHeight() / 2.0f))
         MoveTo(x, 250);
-
 }
 
 void Player::GetHit(int damage)
@@ -113,6 +141,7 @@ void Player::OnCollision(Object* obj)
 {
     
    // mantém personagem em cima da plataforma
-   MoveTo(this->X(), obj->Y() - 66);
+    MoveTo(this->X(), obj->Y() - 72);
+    
         
 }

@@ -17,6 +17,10 @@ private:
     Sprite* heartSprite[10];
     void HandleAnimState();
     bool godModeOn = false;
+    Timer timer;
+    Timer jumpDuration;
+    bool jumping = false;
+    float velY = 0.0f;
 
 public:
     PlayerAnimState animState = STILL_RIGHT;
