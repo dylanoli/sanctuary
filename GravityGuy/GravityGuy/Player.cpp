@@ -31,7 +31,7 @@ Player::Player(Scene* scene) : Actor(scene, refPlayerSpeed, refPlayerLife)
         heartSprite[i] = new Sprite(imgHeart);
     }
 
-    MoveTo(window->CenterX() - 420, window->CenterY());
+    MoveTo(0, window->CenterY() + 100);
 }
 
 Player::~Player()
@@ -42,19 +42,7 @@ Player::~Player()
 
 void Player::Update()
 {
-    // anda para cima
-    if (window->KeyDown(VK_UP))
-    {
-        Translate(0, -speed * gameTime);
-        state = WALK;
-    }
-
-    // anda para baixo
-    if (window->KeyDown(VK_DOWN))
-    {
-        Translate(0, speed * gameTime);
-        state = WALK;
-    }
+    Translate(0, 300 * gameTime);
 
     // anda para esquerda
     if (window->KeyDown(VK_LEFT))
@@ -94,7 +82,6 @@ void Player::Update()
     if ((y + tileSet->TileHeight() / 2.0f) > window->Height())
         MoveTo(x, window->Height() - tileSet->TileHeight() / 2.0f);
 
-    std::cout << y;
     if ((y - tileSet->TileHeight() / 2.0f) < (250 - tileSet->TileHeight() / 2.0f))
         MoveTo(x, 250);
 
@@ -124,4 +111,8 @@ void Player::HandleAnimState() {
 
 void Player::OnCollision(Object* obj)
 {
+    
+   // mantém personagem em cima da plataforma
+   MoveTo(this->X(), obj->Y() - 66);
+        
 }

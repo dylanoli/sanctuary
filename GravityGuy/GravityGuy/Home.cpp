@@ -25,8 +25,8 @@ void Home::Update()
     }
 
     // passa ao primeiro nível com ENTER
-    //if (window->KeyDown(VK_RETURN))
-      //  Engine::Next<Level1>();
+    if (window->KeyDown(VK_RETURN))
+        Engine::Next<Level1>();
 }
 
 // ------------------------------------------------------------------------------

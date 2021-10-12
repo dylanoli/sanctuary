@@ -31,8 +31,6 @@ Platform::~Platform()
 
 void Platform::Update()
 {
-    // move plataforma apenas no eixo x
-    Translate(-200.0f * gameTime, 0);
 }
 
 // -------------------------------------------------------------------------------
