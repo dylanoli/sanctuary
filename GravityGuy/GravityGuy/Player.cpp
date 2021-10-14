@@ -110,9 +110,6 @@ void Player::Update()
     //bloqueio da arvore
     if ((y + tileSet->TileHeight() / 2.0f) > window->Height())
         MoveTo(x, window->Height() - tileSet->TileHeight() / 2.0f);
-
-    if ((y - tileSet->TileHeight() / 2.0f) < (250 - tileSet->TileHeight() / 2.0f))
-        MoveTo(x, 250);
 }
 
 void Player::GetHit(int damage)
