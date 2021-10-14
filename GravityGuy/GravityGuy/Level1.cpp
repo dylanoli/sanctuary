@@ -42,7 +42,7 @@ void Level1::Init()
     uint  platType;
     Color white{ 1,1,1,1 };
 
-    plat = new Platform(200, window->CenterY() + 200, PLATTYPES::LARGE, white);
+    plat = new Platform(200, window->CenterY() + 100, PLATTYPES::LARGE, white);
     scene->Add(plat, STATIC);
 
     plat = new Platform(720, window->CenterY() + 60, PLATTYPES::SMALL, white);
@@ -74,9 +74,11 @@ void Level1::Update()
 
 void Level1::Draw()
 {
-        scene->DrawBBox();
     backg->Draw(float(window->CenterX()), float(window->CenterY()), Layer::BACK);
     scene->Draw();
+
+    if (GravityGuy::viewBBox)
+        scene->DrawBBox();
 }
 
 // ------------------------------------------------------------------------------

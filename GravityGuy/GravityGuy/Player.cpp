@@ -34,7 +34,7 @@ Player::Player(Scene* scene) : Actor(scene, refPlayerSpeed, refPlayerLife)
         heartSprite[i] = new Sprite(imgHeart);
     }
 
-    MoveTo(0, 0);
+    MoveTo(0, window->CenterY());
 }
 
 Player::~Player()
@@ -109,11 +109,6 @@ void Player::Update()
 
     if ((y + tileSet->TileHeight() / 2.0f) > window->Height())
         MoveTo(x, window->Height() - tileSet->TileHeight() / 2.0f);
-
-    stringstream ss;
-
-    ss << "--------------- " << this->Bottom() << "\n";
-    OutputDebugString(ss.str().c_str());
 }
 
 void Player::GetHit(int damage)
@@ -140,22 +135,6 @@ void Player::HandleAnimState() {
 
 void Player::OnCollision(Object* obj)
 {
-    stringstream ss;
-
-    float padding = 19;
-
-    ss << "--------------- " << this->Bottom() << " " << obj->Y() - padding << "\n";
-    OutputDebugString(ss.str().c_str());
-    
-    ss << "--------------- l " << y << " " << (this->Bottom() <= obj->Y() - padding) << "\n";
-    OutputDebugString(ss.str().c_str());
-
-   // mantém personagem em cima da plataforma
-    if (this->Bottom() <= obj->Y() - padding) {
+    if(this->Bottom() <= obj->Y())
         MoveTo(this->X(), obj->Y() - 72);
-        ss << "--------------- j " << obj->Y() - 72 << "\n";
-        OutputDebugString(ss.str().c_str());
-    }
-    
-        
 }
