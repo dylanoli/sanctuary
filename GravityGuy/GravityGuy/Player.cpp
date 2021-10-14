@@ -34,7 +34,7 @@ Player::Player(Scene* scene) : Actor(scene, refPlayerSpeed, refPlayerLife)
         heartSprite[i] = new Sprite(imgHeart);
     }
 
-    MoveTo(0, window->CenterY() + 100);
+    MoveTo(0, 0);
 }
 
 Player::~Player()
@@ -110,6 +110,11 @@ void Player::Update()
     //bloqueio da arvore
     if ((y + tileSet->TileHeight() / 2.0f) > window->Height())
         MoveTo(x, window->Height() - tileSet->TileHeight() / 2.0f);
+
+    stringstream ss;
+
+    ss << "--------------- " << y + tileSet->TileHeight() / 2 << "\n";
+    OutputDebugString(ss.str().c_str());
 }
 
 void Player::GetHit(int damage)
@@ -136,9 +141,17 @@ void Player::HandleAnimState() {
 
 void Player::OnCollision(Object* obj)
 {
+    stringstream ss;
+
+    ss << "--------------- " << y + tileSet->TileHeight() / 2 << " " << obj->Y() - 20 << "\n";
+    OutputDebugString(ss.str().c_str());
     
+    ss << "--------------- " << (y + tileSet->TileHeight() / 2 <= obj->Y() - 20) << "\n";
+    OutputDebugString(ss.str().c_str());
+
    // mantém personagem em cima da plataforma
-    MoveTo(this->X(), obj->Y() - 72);
+    if(y + tileSet->TileHeight() / 2 <= obj->Y() - 20)
+        MoveTo(this->X(), obj->Y() - 100);
     
         
 }
