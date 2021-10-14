@@ -107,13 +107,12 @@ void Player::Update()
     if (x - tileSet->TileWidth() / 2.0f < 0)
         MoveTo(tileSet->TileWidth() / 2.0f, y);
 
-    //bloqueio da arvore
     if ((y + tileSet->TileHeight() / 2.0f) > window->Height())
         MoveTo(x, window->Height() - tileSet->TileHeight() / 2.0f);
 
     stringstream ss;
 
-    ss << "--------------- " << y + tileSet->TileHeight() / 2 << "\n";
+    ss << "--------------- " << this->Bottom() << "\n";
     OutputDebugString(ss.str().c_str());
 }
 
@@ -143,15 +142,20 @@ void Player::OnCollision(Object* obj)
 {
     stringstream ss;
 
-    ss << "--------------- " << y + tileSet->TileHeight() / 2 << " " << obj->Y() - 20 << "\n";
+    float padding = 19;
+
+    ss << "--------------- " << this->Bottom() << " " << obj->Y() - padding << "\n";
     OutputDebugString(ss.str().c_str());
     
-    ss << "--------------- " << (y + tileSet->TileHeight() / 2 <= obj->Y() - 20) << "\n";
+    ss << "--------------- l " << y << " " << (this->Bottom() <= obj->Y() - padding) << "\n";
     OutputDebugString(ss.str().c_str());
 
    // mantém personagem em cima da plataforma
-    if(y + tileSet->TileHeight() / 2 <= obj->Y() - 20)
-        MoveTo(this->X(), obj->Y() - 100);
+    if (this->Bottom() <= obj->Y() - padding) {
+        MoveTo(this->X(), obj->Y() - 72);
+        ss << "--------------- j " << obj->Y() - 72 << "\n";
+        OutputDebugString(ss.str().c_str());
+    }
     
         
 }

@@ -35,6 +35,8 @@ public:
     void OnCollision(Object* obj);
     void GetHit(int damage);
     bool IsDied();
+    float Bottom();
+    float Top();
 };
 
 inline void Player::Draw()
@@ -54,6 +56,14 @@ inline void Player::Draw()
 
 inline bool Player::IsDied() {
     return life <= 0;
+}
+
+inline float Player::Top() {
+    return y - 50;
+}
+
+inline float Player::Bottom() {
+    return y + 50;
 }
 
 #endif
