@@ -27,6 +27,9 @@ Scene* Level1::scene = nullptr;
 
 void Level1::Init()
 {
+
+    backg = new Sprite("Resources/Background.png");
+
     // cria gerenciador de cena
     scene = new Scene();
 
@@ -71,8 +74,8 @@ void Level1::Update()
 
 void Level1::Draw()
 {
+    backg->Draw(float(window->CenterX()), float(window->CenterY()), Layer::BACK);
     scene->Draw();
-
     if (GravityGuy::viewBBox)
         scene->DrawBBox();
 }

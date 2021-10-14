@@ -27,7 +27,7 @@ private:
 
 public:
     static Scene* scene;           // cena do nível
-
+    Sprite* backg = nullptr;       // pano de fundo
     void Init();                    // inicialização do nível
     void Update();                  // atualiza lógica do jogo
     void Draw();                    // desenha jogo
