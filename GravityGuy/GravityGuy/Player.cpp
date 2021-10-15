@@ -135,6 +135,6 @@ void Player::HandleAnimState() {
 
 void Player::OnCollision(Object* obj)
 {
-    if(this->Bottom() <= obj->Y())
+    if(this->Bottom() <= obj->Y() + 12)
         MoveTo(this->X(), obj->Y() - 72);
 }
