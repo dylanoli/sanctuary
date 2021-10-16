@@ -30,7 +30,7 @@ void GravityGuy::Init()
     audio = new Audio();
     audio->Add(MENU, "Resources/Menu.wav");
     audio->Add(MUSIC, "Resources/Music.wav");
-    audio->Add(TRANSITION, "Resources/Transition.wav");
+    audio->Add(TRANSITION, "Resources/Transition.wav", 2);
     audio->Add(MUSIC2, "Resources/Music2.wav");
     audio->Add(FINAL, "Resources/Final.wav");
 

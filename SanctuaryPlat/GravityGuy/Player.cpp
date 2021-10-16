@@ -26,13 +26,7 @@ Player::Player()
     anim->Add(0, SeqRight, 4);
 
     // cria bounding box
-
-    BBox(new Rect(-20, -50, 20, 50));
-    //BBox(new Rect(
-    //    -1.0f * tileset->TileWidth() / 2.0f,
-    //    -1.0f * tileset->TileHeight() / 2.0f,
-    //    tileset->TileWidth() / 2.0f,
-    //    tileset->TileHeight() / 2.0f));
+    BBox(new Rect(-20, -50, 20, 50));    
     
     // inicializa estado do player
     level = 0;
@@ -82,18 +76,6 @@ void Player::OnCollision(Object * obj)
         }
     }
 
-    // ----------------------------------------------------------
-    // Processa teclas pressionadas
-    // ----------------------------------------------------------
-    // jogador só pode alterar a gravidade enquanto estiver
-    // em cima de uma plataforma, não é possível a mudança no ar
-    // ----------------------------------------------------------
-
-    if (window->KeyPress(VK_UP))
-    {
-        // toca efeito sonoro
-        GravityGuy::audio->Play(TRANSITION);        
-    }
 }
 
 // ---------------------------------------------------------------------------------
@@ -124,6 +106,9 @@ void Player::Update()
             jumpDuration.Start();
             jumping = true;
             isOnTheFloor = false;
+
+            GravityGuy::audio->Volume(TRANSITION, 0.05f);
+            GravityGuy::audio->Play(TRANSITION);
         }
 
         Translate(0, 300 * gameTime);
