@@ -31,6 +31,8 @@ private:
     boolean jumping;
     Timer jumpDuration;
     float velY;
+    Timer scoreInterval;
+    uint score;
     
 public:
     Player();                           // construtor
@@ -44,6 +46,7 @@ public:
     void OnCollision(Object * obj);     // resolução da colisão
     void Update();                      // atualização do objeto
     void Draw();                        // desenho do objeto
+    uint Score();
 };
 
 // ---------------------------------------------------------------------------------
@@ -60,6 +63,9 @@ inline float Player::Top()
 
 inline void Player::Draw()
 { anim->Draw(x, y, z); }
+
+inline uint Player::Score() 
+{ return score; }
 
 // ---------------------------------------------------------------------------------
 

@@ -19,15 +19,17 @@
 #include "Sprite.h"
 #include "TileSet.h"
 #include "Animation.h"
+#include "Font.h"
 
 // ------------------------------------------------------------------------------
 
 class Home : public Game
 {
 private:
-    Sprite * backg = nullptr;       // pano de fundo
-    TileSet * tileset = nullptr;    // tileset da animação
-    Animation * anim = nullptr;     // animação do menu
+    Sprite* logo = nullptr;       // pano de fundo
+    TileSet* tileset = nullptr;    // tileset da animação
+    Animation* anim = nullptr;     // animação do menu
+    Font* fixedsys = nullptr;
 
 public:
     void Init();                    // inicia nível

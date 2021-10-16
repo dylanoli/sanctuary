@@ -14,14 +14,22 @@
 #include "Home.h"
 #include "Level1.h"
 
+#include <sstream>
+
+using std::stringstream;
+
 // ------------------------------------------------------------------------------
 
 void Home::Init()
 {
-    backg = new Sprite("Resources/TitleScreen.png");
-    tileset = new TileSet("Resources/PressEnter.png", 72, 48, 1, 5);
-    anim = new Animation(tileset, 0.180f, true);
+    logo = new Sprite("Resources/Home/Logo.png");
+    tileset = new TileSet("Resources/Home/Background.png", 1305, 720, 1, 13);
+    anim = new Animation(tileset, 0.1f, true);
+    GravityGuy::audio->Volume(MENU, 0.5f);
     GravityGuy::audio->Play(MENU, true);
+
+    fixedsys = new Font("Resources/Font/fixedsys.png");
+    fixedsys->Spacing("Resources/Font/fixedsys.dat");
 }
 
 // ------------------------------------------------------------------------------
@@ -48,8 +56,15 @@ void Home::Update()
 
 void Home::Draw()
 {
-    backg->Draw(window->CenterX(), window->CenterY(), Layer::BACK);
-    anim->Draw(545, 275);
+    anim->Draw(window->CenterX(), window->CenterY());
+    logo->Draw(window->CenterX(), window->CenterY() - 100, Layer::FRONT);
+    
+    stringstream ss;
+    ss << "Pressione Enter para iniciar";
+    
+    Color color(1.0f, 1.0f, 1.0f, 1.0f);
+    
+    fixedsys->Draw(250, window->CenterY() + 100, ss.str().c_str(), color, Layer::FRONT);
 }
 
 // ------------------------------------------------------------------------------
@@ -57,8 +72,9 @@ void Home::Draw()
 void Home::Finalize()
 {
     delete anim;
+    delete logo;
     delete tileset;
-    delete backg;
+    delete fixedsys;
 }
 
 // ------------------------------------------------------------------------------

@@ -17,10 +17,9 @@
 #include "Platform.h"
 #include "Background.h"
 
-#include <string>
-#include <fstream>
-using std::ifstream;
-using std::string;
+#include <sstream>
+
+using std::stringstream;
 
 // ------------------------------------------------------------------------------
 // Inicializa membros estáticos da classe
@@ -50,35 +49,15 @@ void Level2::Init()
     float posX, posY;
     uint  platType;
 
-    ifstream fin;
-    fin.open("Level2.txt");
+    GravityGuy::audio->Frequency(JUMP, 0.85f);
+    GravityGuy::audio->Volume(MUSIC2, 0.3f);
+    GravityGuy::audio->Play(MUSIC2, true);
 
-    fin >> posX;
-    while (!fin.eof())
-    {
-        if (fin.good())
-        {
-            // lê linha com informações da plataforma
-            fin >> posY; fin >> platType;
-            plat = new Platform(posX, posY, platType, dark);
-            scene->Add(plat, STATIC);
-        }
-        else
-        {
-            // ignora comentários
-            fin.clear();
-            char temp[80];
-            fin.getline(temp, 80);
-        }
+    fixedsys = new Font("Resources/Font/fixedsys.png");
+    fixedsys->Spacing("Resources/Font/fixedsys.dat");
 
-        fin >> posX;
-    }
-    fin.close();
-
-    // ----------------------
-
-    GravityGuy::audio->Frequency(MUSIC, 1.00f);
-    GravityGuy::audio->Frequency(TRANSITION, 0.85f);
+    tahoma = new Font("Resources/Font/tahoma.png");
+    tahoma->Spacing("Resources/Font/tahoma.dat");
 }
 
 // ------------------------------------------------------------------------------
@@ -87,13 +66,13 @@ void Level2::Update()
 {
     if (window->KeyPress(VK_ESCAPE) || GravityGuy::player->Level() == 2 || window->KeyPress('N'))
     {
-        GravityGuy::audio->Stop(MUSIC);
+        GravityGuy::audio->Stop(MUSIC2);
         GravityGuy::NextLevel<Home>();
         GravityGuy::player->Reset();
     }
     else if (GravityGuy::player->Bottom() < 0 || GravityGuy::player->Top() > window->Height())
     {
-        GravityGuy::audio->Stop(MUSIC);
+        GravityGuy::audio->Stop(MUSIC2);
         GravityGuy::NextLevel<GameOver>();
         GravityGuy::player->Reset();
     }
@@ -111,6 +90,13 @@ void Level2::Draw()
     backg->Draw();
     scene->Draw();
 
+    Color color(1.0f, 1.0f, 1.0f, 1.0f);
+    fixedsys->Draw(window->Height() + 300.0f, 20, "Level 2", color, Layer::FRONT);
+
+    stringstream ss;
+    ss << GravityGuy::player->Score();
+    tahoma->Draw(window->Height() + 350.0f, 50, ss.str().c_str(), color, Layer::FRONT);
+
     if (GravityGuy::viewBBox)
         scene->DrawBBox();
 }
@@ -121,6 +107,8 @@ void Level2::Finalize()
 {
     scene->Remove(GravityGuy::player, MOVING);
     delete scene;
+    delete fixedsys;
+    delete tahoma;
 }
 
 // ------------------------------------------------------------------------------

@@ -16,13 +16,19 @@
 
 #include "Game.h"
 #include "Sprite.h"
+#include "TileSet.h"
+#include "Animation.h"
+#include "Font.h"
 
 // ------------------------------------------------------------------------------
 
 class GameOver : public Game
 {
 private:
-    Sprite * title = nullptr;       // tela de fim
+    Sprite* logo = nullptr;
+    TileSet* tileset = nullptr;    // tileset da animação
+    Animation* anim = nullptr;     // animação do menu
+    Font* fixedsys = nullptr;
 
 public:
     void Init();                    // inicialização do nível

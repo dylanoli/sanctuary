@@ -19,6 +19,7 @@
 #include "Scene.h"
 #include "Player.h"
 #include "Background.h"
+#include "Font.h"
 
 // ------------------------------------------------------------------------------
 
@@ -26,6 +27,8 @@ class Level2 : public Game
 {
 private:
     Background* backg = nullptr;   // pano de fundo animado
+    Font* fixedsys = nullptr;
+    Font* tahoma = nullptr;
 
 public:
     static Scene* scene;           // cena do nível

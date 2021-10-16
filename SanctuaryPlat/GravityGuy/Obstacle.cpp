@@ -1,6 +1,7 @@
 #include "Obstacle.h"
+#include "GravityGuy.h"
 
-Obstacle::Obstacle(float posX, float posY, Scene* _scene)
+Obstacle::Obstacle(float posX, float posY, Scene *_scene)
 {
 	scene = _scene;
 	const int MAX_VARY = 430;
@@ -13,7 +14,7 @@ Obstacle::Obstacle(float posX, float posY, Scene* _scene)
 
 	const int stoneId = dist(mt);
 
-    string src;
+	string src;
 	switch (stoneId)
 	{
 	case 1:
@@ -31,31 +32,32 @@ Obstacle::Obstacle(float posX, float posY, Scene* _scene)
 	default:
 		break;
 	}
-    obstacle = new Sprite(src);
+	obstacle = new Sprite(src);
 
-    BBox(new Rect(-obstacle->Width() / 2.0f,
-        -obstacle->Height() / 2.0f,
-        obstacle->Width() / 2.0f,
-        obstacle->Height() / 2.0f));
+	BBox(new Rect(-obstacle->Width() / 2.0f,
+				  -obstacle->Height() / 2.0f,
+				  obstacle->Width() / 2.0f,
+				  obstacle->Height() / 2.0f));
 
-    MoveTo(posX, posY, Layer::MIDDLE);
+	MoveTo(posX, posY, Layer::MIDDLE);
 }
 
 // ---------------------------------------------------------------------------------
 
 Obstacle::~Obstacle()
 {
-    delete obstacle;
+	delete obstacle;
 }
 
 // -------------------------------------------------------------------------------
 
 void Obstacle::Update()
 {
-    Translate(-200 * gameTime, 0);
-
 	if (x < -500)
 		scene->Delete();
+
+	float currentX = (200 + GravityGuy::player->Score()) * gameTime;
+	Translate(-1 * currentX, 0);
 }
 
 // -------------------------------------------------------------------------------
