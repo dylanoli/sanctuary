@@ -24,8 +24,8 @@ Player::Player()
     uint invert[4] = {6,7,8,9};
     uint normal[4] = {1,2,3,4};
 
-    anim->Add(INVERTED, invert, 4);
-    anim->Add(NORMAL, normal, 4);
+    anim->Add(0, invert, 4);
+    anim->Add(1, normal, 4);
 
     // cria bounding box
     BBox(new Rect(
@@ -35,10 +35,10 @@ Player::Player()
         tileset->TileHeight() / 2.0f));
     
     // inicializa estado do player
-    gravity = NORMAL;  
     level = 0;
     velY = 0.0f;
     jumping = false;
+    isOnTheFloor = false;
     
     // posição inicial
     MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
@@ -58,7 +58,6 @@ void Player::Reset()
 {
     // volta ao estado inicial
     MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
-    gravity = NORMAL;
     level = 0;
 }
 
@@ -75,8 +74,10 @@ void Player::OnCollision(Object * obj)
     else
     {
         // mantém personagem em cima da plataforma
-        if (gravity == NORMAL)
+        if (!jumping) {
+            isOnTheFloor = true;
             MoveTo(window->CenterX(), obj->Y() - 40);
+        }
     }
 
     // ----------------------------------------------------------
@@ -113,20 +114,20 @@ void Player::Update()
     }
     else
     {
-        if (window->KeyPress(VK_UP))
+        if (window->KeyPress(VK_UP) && isOnTheFloor)
         {
             velY = -400;
 
             // inicia temporizadores
             jumpDuration.Start();
             jumping = true;
+            isOnTheFloor = false;
         }
 
         Translate(0, 300 * gameTime);
     }
 
     // atualiza animação
-    anim->Select(gravity);
     anim->NextFrame();
 }
 

@@ -19,10 +19,6 @@
 #include "Object.h"                     // interface de Object
 #include "Animation.h"                  // animação de sprites
 
-// ------------------------------------------------------------------------------
-
-enum Gravity {NORMAL,INVERTED};         // tipo da gravidade
-
 // ---------------------------------------------------------------------------------
 
 class Player : public Object
@@ -30,8 +26,8 @@ class Player : public Object
 private:
     TileSet   * tileset;                // folha de sprites do personagem
     Animation * anim;                   // animação do personagem
-    uint        gravity;                // gravidade atuando sobre o jogador
     int         level;                  // nível finalizado
+    bool isOnTheFloor;
     boolean jumping;
     Timer jumpDuration;
     float velY;
