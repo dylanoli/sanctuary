@@ -49,8 +49,9 @@ void Level2::Init()
     float posX, posY;
     uint  platType;
 
-    GravityGuy::audio->Frequency(MUSIC, 1.00f);
     GravityGuy::audio->Frequency(TRANSITION, 0.85f);
+    GravityGuy::audio->Volume(MUSIC2, 0.3f);
+    GravityGuy::audio->Play(MUSIC2, true);
 
     fixedsys = new Font("Resources/Font/fixedsys.png");
     fixedsys->Spacing("Resources/Font/fixedsys.dat");
@@ -65,13 +66,13 @@ void Level2::Update()
 {
     if (window->KeyPress(VK_ESCAPE) || GravityGuy::player->Level() == 2 || window->KeyPress('N'))
     {
-        GravityGuy::audio->Stop(MUSIC);
+        GravityGuy::audio->Stop(MUSIC2);
         GravityGuy::NextLevel<Home>();
         GravityGuy::player->Reset();
     }
     else if (GravityGuy::player->Bottom() < 0 || GravityGuy::player->Top() > window->Height())
     {
-        GravityGuy::audio->Stop(MUSIC);
+        GravityGuy::audio->Stop(MUSIC2);
         GravityGuy::NextLevel<GameOver>();
         GravityGuy::player->Reset();
     }

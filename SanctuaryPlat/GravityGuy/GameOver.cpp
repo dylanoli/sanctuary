@@ -19,14 +19,19 @@
 void GameOver::Init()
 {
     title = new Sprite("Resources/GameOver.png");
+
+    GravityGuy::audio->Volume(FINAL, 0.3f);
+    GravityGuy::audio->Play(FINAL, true);
 }
 
 // ----------------------------------------------------------------------
 
 void GameOver::Update()
 {
-    if (window->KeyPress(VK_ESCAPE) || window->KeyPress(VK_RETURN))
+    if (window->KeyPress(VK_ESCAPE) || window->KeyPress(VK_RETURN)) {
+        GravityGuy::audio->Stop(FINAL);
         GravityGuy::NextLevel<Home>();
+    }
 }
 
 // ----------------------------------------------------------------------

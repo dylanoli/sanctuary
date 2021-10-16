@@ -31,6 +31,8 @@ void GravityGuy::Init()
     audio->Add(MENU, "Resources/Menu.wav");
     audio->Add(MUSIC, "Resources/Music.wav");
     audio->Add(TRANSITION, "Resources/Transition.wav");
+    audio->Add(MUSIC2, "Resources/Music2.wav");
+    audio->Add(FINAL, "Resources/Final.wav");
 
     // bounding box não visível
     viewBBox = false;

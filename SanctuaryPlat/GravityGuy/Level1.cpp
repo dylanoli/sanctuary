@@ -58,9 +58,9 @@ void Level1::Init()
     // ----------------------
 
     // inicia com música
-    GravityGuy::audio->Frequency(MUSIC, 0.94f);
+    GravityGuy::audio->Volume(MUSIC, 0.3f);
     GravityGuy::audio->Frequency(TRANSITION, 1.0f);
-    GravityGuy::audio->Play(MUSIC);
+    GravityGuy::audio->Play(MUSIC, true);
 
     fixedsys = new Font("Resources/Font/fixedsys.png");
     fixedsys->Spacing("Resources/Font/fixedsys.dat");
