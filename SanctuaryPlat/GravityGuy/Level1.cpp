@@ -87,6 +87,7 @@ void Level1::Update()
     }
     else if (GravityGuy::player->Level() == 1 || window->KeyPress('N'))
     {
+        GravityGuy::audio->Stop(MUSIC);
         GravityGuy::NextLevel<Level2>();
     }
     else
