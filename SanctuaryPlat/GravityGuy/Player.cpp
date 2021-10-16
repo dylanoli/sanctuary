@@ -17,22 +17,22 @@
 
 Player::Player()
 {
-    tileset = new TileSet("Resources/GravityGuy.png", 32, 48, 5, 10);
+    tileset = new TileSet("Resources/astronner.png", 126, 126, 4, 13);
     anim = new Animation(tileset, 0.120f, true);
 
     // sequências de animação do player
-    uint invert[4] = {6,7,8,9};
-    uint normal[4] = {1,2,3,4};
+    uint SeqRight[4] = { 3, 4, 5, 6 };
 
-    anim->Add(0, invert, 4);
-    anim->Add(1, normal, 4);
+    anim->Add(0, SeqRight, 4);
 
     // cria bounding box
-    BBox(new Rect(
-        -1.0f * tileset->TileWidth() / 2.0f,
-        -1.0f * tileset->TileHeight() / 2.0f,
-        tileset->TileWidth() / 2.0f,
-        tileset->TileHeight() / 2.0f));
+
+    BBox(new Rect(-20, -50, 20, 50));
+    //BBox(new Rect(
+    //    -1.0f * tileset->TileWidth() / 2.0f,
+    //    -1.0f * tileset->TileHeight() / 2.0f,
+    //    tileset->TileWidth() / 2.0f,
+    //    tileset->TileHeight() / 2.0f));
     
     // inicializa estado do player
     level = 0;
@@ -41,7 +41,7 @@ Player::Player()
     isOnTheFloor = false;
     
     // posição inicial
-    MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
+    MoveTo(100, 24.0f, Layer::FRONT);
 }
 
 // ---------------------------------------------------------------------------------
@@ -76,7 +76,7 @@ void Player::OnCollision(Object * obj)
         // mantém personagem em cima da plataforma
         if (!jumping) {
             isOnTheFloor = true;
-            MoveTo(window->CenterX(), obj->Y() - 40);
+            MoveTo(x, obj->Y() - 70);
         }
     }
 
