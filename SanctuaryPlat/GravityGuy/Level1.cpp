@@ -56,7 +56,7 @@ void Level1::Init()
     plat = new Platform(window->CenterX(), window->CenterY() + 140, PLATTYPES::LARGE, white);
     scene->Add(plat, STATIC);
 
-    Obstacle* obstacle = new Obstacle(window->CenterX(), window->CenterY() + 80, OBSTACLETYPE::ROCK, white);
+    Obstacle* obstacle = new Obstacle(window->CenterX() + 300, window->CenterY() + 95, OBSTACLETYPE::ROCK, white);
     scene->Add(obstacle, STATIC);
     // ----------------------
 

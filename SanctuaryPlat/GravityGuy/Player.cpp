@@ -100,14 +100,14 @@ void Player::Update()
 {
     if (jumping)
     {
-        if (jumpDuration.Elapsed(0.5f))
+        if (jumpDuration.Elapsed(1.0f))
         {
             jumping = false;
             velY = 0;
         }
         else
         {
-            velY += 1000.f * gameTime;
+            velY += 700.f * gameTime;
         }
 
         Translate(0, velY * gameTime);

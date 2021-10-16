@@ -2,7 +2,7 @@
 
 Obstacle::Obstacle(float posX, float posY, uint platType, Color tint) : color(tint)
 {
-    obstacle = new Sprite("Resources/SmallGray.png"); type = platType;
+    obstacle = new Sprite("Resources/Stone4.png"); type = platType;
 
     BBox(new Rect(-obstacle->Width() / 2.0f,
         -obstacle->Height() / 2.0f,
