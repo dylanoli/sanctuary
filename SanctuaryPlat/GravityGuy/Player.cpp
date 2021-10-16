@@ -107,8 +107,8 @@ void Player::Update()
             jumping = true;
             isOnTheFloor = false;
 
-            GravityGuy::audio->Volume(TRANSITION, 0.05f);
-            GravityGuy::audio->Play(TRANSITION);
+            GravityGuy::audio->Volume(JUMP, 0.05f);
+            GravityGuy::audio->Play(JUMP);
         }
 
         Translate(0, 300 * gameTime);

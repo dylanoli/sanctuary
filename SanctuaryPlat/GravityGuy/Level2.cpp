@@ -49,7 +49,7 @@ void Level2::Init()
     float posX, posY;
     uint  platType;
 
-    GravityGuy::audio->Frequency(TRANSITION, 0.85f);
+    GravityGuy::audio->Frequency(JUMP, 0.85f);
     GravityGuy::audio->Volume(MUSIC2, 0.3f);
     GravityGuy::audio->Play(MUSIC2, true);
 
