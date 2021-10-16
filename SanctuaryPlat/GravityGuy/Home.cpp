@@ -18,9 +18,10 @@
 
 void Home::Init()
 {
-    backg = new Sprite("Resources/TitleScreen.png");
-    tileset = new TileSet("Resources/PressEnter.png", 72, 48, 1, 5);
-    anim = new Animation(tileset, 0.180f, true);
+    logo = new Sprite("Resources/Home/Logo.png");
+    startMessage = new Sprite("Resources/Home/StartMessage.png");
+    tileset = new TileSet("Resources/Home/Background.png", 1305, 720, 1, 13);
+    anim = new Animation(tileset, 0.1f, true);
     GravityGuy::audio->Volume(MENU, 0.5f);
     GravityGuy::audio->Play(MENU, true);
 }
@@ -49,8 +50,9 @@ void Home::Update()
 
 void Home::Draw()
 {
-    backg->Draw(window->CenterX(), window->CenterY(), Layer::BACK);
-    anim->Draw(545, 275);
+    anim->Draw(window->CenterX(), window->CenterY());
+    logo->Draw(window->CenterX(), window->CenterY() - 100, Layer::FRONT);
+    startMessage->Draw(window->CenterX(), window->CenterY() + 100, Layer::FRONT);
 }
 
 // ------------------------------------------------------------------------------
@@ -58,8 +60,9 @@ void Home::Draw()
 void Home::Finalize()
 {
     delete anim;
+    delete logo;
     delete tileset;
-    delete backg;
+    delete startMessage;
 }
 
 // ------------------------------------------------------------------------------
