@@ -19,6 +19,7 @@
 #include "Sprite.h"
 #include "TileSet.h"
 #include "Animation.h"
+#include "Font.h"
 
 // ------------------------------------------------------------------------------
 
@@ -26,9 +27,9 @@ class Home : public Game
 {
 private:
     Sprite* logo = nullptr;       // pano de fundo
-    Sprite* startMessage = nullptr;
     TileSet* tileset = nullptr;    // tileset da animação
     Animation* anim = nullptr;     // animação do menu
+    Font* fixedsys = nullptr;
 
 public:
     void Init();                    // inicia nível
