@@ -15,7 +15,12 @@
 
 Platform::Platform(float posX, float posY, uint platType, Color tint) : color(tint)
 {
-    platform = new Sprite("Resources/LongGray.png"); type = LARGE;
+
+    img = new Image("Resources/LongLongGray.png");
+    platform = new Sprite(img);
+    platform2 = new Sprite(img);
+    xSprite = x;
+    type = LARGE;
     
     BBox(new Rect(-platform->Width()/2.0f, 
                   -platform->Height()/2.0f, 
@@ -30,13 +35,25 @@ Platform::Platform(float posX, float posY, uint platType, Color tint) : color(ti
 Platform::~Platform()
 {
     delete platform;
+    delete platform2;
+    delete img;
 }
 
 // -------------------------------------------------------------------------------
 
 void Platform::Update()
 {
-
+    xSprite -= 200 * gameTime;
 }
 
 // -------------------------------------------------------------------------------
+
+inline void Platform::Draw()
+{
+    platform->Draw(xSprite, y, Layer::UPPER, 1.0f, 0.0f, color);
+    platform2->Draw(xSprite + img->Width(), y, Layer::UPPER, 1.0f, 0.0f, color);
+
+    // traz pano de fundo de volta para dentro da tela
+    if (xSprite + img->Width() / 2.0f < 0)
+        xSprite += img->Width();
+}

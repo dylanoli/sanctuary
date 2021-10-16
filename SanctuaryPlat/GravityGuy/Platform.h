@@ -17,6 +17,7 @@
 #include "Types.h"                                      // tipos específicos da engine
 #include "Object.h"                                     // interface de Object
 #include "Sprite.h"                                     // desenho de sprites
+#include "Image.h"  
 
 // ---------------------------------------------------------------------------------
 
@@ -28,7 +29,10 @@ class Platform : public Object
 {
 private:
     Sprite * platform = nullptr;            // sprite da plataforma
+    Sprite * platform2 = nullptr;            // sprite da plataforma
+    Image* img;                       
     Color color;                            // cor da plataforma
+    float xSprite;                 
 
 public:
     Platform(float posX, float posY, 
@@ -43,8 +47,6 @@ public:
 // ---------------------------------------------------------------------------------
 // Função Membro Inline
 
-inline void Platform::Draw()
-{ platform->Draw(x, y, z, 1.0f, 0.0f, color); }
 
 // ---------------------------------------------------------------------------------
 
