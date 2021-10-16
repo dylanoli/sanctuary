@@ -17,7 +17,11 @@
 #include "Types.h"                                      // tipos específicos da engine
 #include "Object.h"                                     // interface de Object
 #include "Sprite.h"                                     // desenho de sprites
+#include <random>
+#include "Timer.h"
+#include "Scene.h"   
 
+using namespace std;
 // ---------------------------------------------------------------------------------
 
 enum OBSTACLETYPE { ROCK };
@@ -28,12 +32,10 @@ class Obstacle : public Object
 {
 private:
     Sprite* obstacle = nullptr;            // sprite da plataforma
-    Color color;                            // cor da plataforma
+    Scene* scene = nullptr;
 
 public:
-    Obstacle(float posX, float posY,
-        uint platType,
-        Color tint);                   // construtor    
+    Obstacle(float posX, float posY, Scene* _scene);
     ~Obstacle();                            // destrutor
 
     void Update();                          // atualização do objeto
@@ -45,7 +47,7 @@ public:
 
 inline void Obstacle::Draw()
 {
-    obstacle->Draw(x, y, z, 1.0f, 0.0f, color);
+    obstacle->Draw(x, y, z, 1.0f, 0.0f);
 }
 
 // ---------------------------------------------------------------------------------

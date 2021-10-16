@@ -1,8 +1,37 @@
 #include "Obstacle.h"
 
-Obstacle::Obstacle(float posX, float posY, uint platType, Color tint) : color(tint)
+Obstacle::Obstacle(float posX, float posY, Scene* _scene)
 {
-    obstacle = new Sprite("Resources/Stone4.png"); type = platType;
+	scene = _scene;
+	const int MAX_VARY = 430;
+
+	int varyX = 0;
+
+	random_device rd;
+	mt19937 mt(rd());
+	uniform_real_distribution<float> dist(1, 4);
+
+	const int stoneId = dist(mt);
+
+    string src;
+	switch (stoneId)
+	{
+	case 1:
+		src = "Resources/Stone1.png";
+		break;
+	case 2:
+		src = "Resources/Stone2.png";
+		break;
+	case 3:
+		src = "Resources/Stone3.png";
+		break;
+	case 4:
+		src = "Resources/Stone4.png";
+		break;
+	default:
+		break;
+	}
+    obstacle = new Sprite(src);
 
     BBox(new Rect(-obstacle->Width() / 2.0f,
         -obstacle->Height() / 2.0f,
@@ -24,6 +53,9 @@ Obstacle::~Obstacle()
 void Obstacle::Update()
 {
     Translate(-200 * gameTime, 0);
+
+	if (x < -500)
+		scene->Delete();
 }
 
 // -------------------------------------------------------------------------------

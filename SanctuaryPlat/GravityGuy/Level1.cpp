@@ -18,6 +18,7 @@
 #include "Platform.h"
 #include "Background.h"
 #include "Obstacle.h"
+#include "SpawnObstacule.h"
 
 #include <string>
 #include <fstream>
@@ -48,7 +49,6 @@ void Level1::Init()
     // ----------------------
 
     Platform * plat;
-    uint  platType;
     Color white { 1,1,1,1 };
 
     ifstream fin;
@@ -56,14 +56,14 @@ void Level1::Init()
     plat = new Platform(window->CenterX(), window->CenterY() + 140, PLATTYPES::LARGE, white);
     scene->Add(plat, STATIC);
 
-    Obstacle* obstacle = new Obstacle(window->CenterX() + 300, window->CenterY() + 95, OBSTACLETYPE::ROCK, white);
-    scene->Add(obstacle, STATIC);
+    SpawnObstacule* spo = new SpawnObstacule(scene);
+    scene->Add(spo, STATIC);
     // ----------------------
 
     // inicia com música
-    GravityGuy::audio->Frequency(MUSIC, 0.94f);
-    GravityGuy::audio->Frequency(TRANSITION, 1.0f);
-    GravityGuy::audio->Play(MUSIC);
+   // GravityGuy::audio->Frequency(MUSIC, 0.94f);
+    //GravityGuy::audio->Frequency(TRANSITION, 1.0f);
+    //GravityGuy::audio->Play(MUSIC);
 }
 
 // ------------------------------------------------------------------------------
