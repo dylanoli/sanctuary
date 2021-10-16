@@ -19,10 +19,9 @@
 #include "Background.h"
 #include "Obstacle.h"
 
-#include <string>
-#include <fstream>
-using std::ifstream;
-using std::string;
+#include <sstream>
+
+using std::stringstream;
 
 // ------------------------------------------------------------------------------
 // Inicializa membros estáticos da classe
@@ -51,8 +50,6 @@ void Level1::Init()
     uint  platType;
     Color white { 1,1,1,1 };
 
-    ifstream fin;
-
     plat = new Platform(window->CenterX(), window->CenterY() + 140, PLATTYPES::LARGE, white);
     scene->Add(plat, STATIC);
 
@@ -64,6 +61,12 @@ void Level1::Init()
     GravityGuy::audio->Frequency(MUSIC, 0.94f);
     GravityGuy::audio->Frequency(TRANSITION, 1.0f);
     GravityGuy::audio->Play(MUSIC);
+
+    fixedsys = new Font("Resources/Font/fixedsys.png");
+    fixedsys->Spacing("Resources/Font/fixedsys.dat");
+
+    tahoma = new Font("Resources/Font/tahoma.png");
+    tahoma->Spacing("Resources/Font/tahoma.dat");
 }
 
 // ------------------------------------------------------------------------------
@@ -91,6 +94,7 @@ void Level1::Update()
         scene->Update();
         scene->CollisionDetection();
     }    
+
 }
 
 // ------------------------------------------------------------------------------
@@ -99,6 +103,14 @@ void Level1::Draw()
 {
     backg->Draw();
     scene->Draw();
+    
+    Color color(1.0f, 1.0f, 1.0f, 1.0f);
+    fixedsys->Draw(window->Height() + 300.0f, 20, "Level 1", color, Layer::FRONT);
+
+    stringstream ss;
+    ss << GravityGuy::player->Score();
+    tahoma->Draw(window->Height() + 350.0f, 50, ss.str().c_str(), color, Layer::FRONT);
+
 
     if (GravityGuy::viewBBox)
         scene->DrawBBox();
@@ -110,6 +122,8 @@ void Level1::Finalize()
 {
     scene->Remove(GravityGuy::player, MOVING);
     delete scene;
+    delete fixedsys;
+    delete tahoma;
 }
 
 // ------------------------------------------------------------------------------

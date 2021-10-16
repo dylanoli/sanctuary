@@ -42,6 +42,8 @@ Player::Player()
     
     // posição inicial
     MoveTo(100, 24.0f, Layer::FRONT);
+
+    scoreInterval.Start();
 }
 
 // ---------------------------------------------------------------------------------
@@ -129,6 +131,11 @@ void Player::Update()
 
     // atualiza animação
     anim->NextFrame();
+
+    if (scoreInterval.Elapsed(0.2f)) {
+        score += 1;
+        scoreInterval.Reset();
+    }
 }
 
 // ---------------------------------------------------------------------------------

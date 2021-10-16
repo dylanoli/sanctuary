@@ -1,4 +1,5 @@
 #include "Obstacle.h"
+#include "GravityGuy.h"
 
 Obstacle::Obstacle(float posX, float posY, uint platType, Color tint) : color(tint)
 {
@@ -23,7 +24,8 @@ Obstacle::~Obstacle()
 
 void Obstacle::Update()
 {
-    Translate(-200 * gameTime, 0);
+    float currentX = (200 + GravityGuy::player->Score()) * gameTime;
+    Translate(-1 * currentX, 0);
 }
 
 // -------------------------------------------------------------------------------

@@ -17,10 +17,9 @@
 #include "Platform.h"
 #include "Background.h"
 
-#include <string>
-#include <fstream>
-using std::ifstream;
-using std::string;
+#include <sstream>
+
+using std::stringstream;
 
 // ------------------------------------------------------------------------------
 // Inicializa membros estáticos da classe
@@ -50,35 +49,14 @@ void Level2::Init()
     float posX, posY;
     uint  platType;
 
-    ifstream fin;
-    fin.open("Level2.txt");
-
-    fin >> posX;
-    while (!fin.eof())
-    {
-        if (fin.good())
-        {
-            // lê linha com informações da plataforma
-            fin >> posY; fin >> platType;
-            plat = new Platform(posX, posY, platType, dark);
-            scene->Add(plat, STATIC);
-        }
-        else
-        {
-            // ignora comentários
-            fin.clear();
-            char temp[80];
-            fin.getline(temp, 80);
-        }
-
-        fin >> posX;
-    }
-    fin.close();
-
-    // ----------------------
-
     GravityGuy::audio->Frequency(MUSIC, 1.00f);
     GravityGuy::audio->Frequency(TRANSITION, 0.85f);
+
+    fixedsys = new Font("Resources/Font/fixedsys.png");
+    fixedsys->Spacing("Resources/Font/fixedsys.dat");
+
+    tahoma = new Font("Resources/Font/tahoma.png");
+    tahoma->Spacing("Resources/Font/tahoma.dat");
 }
 
 // ------------------------------------------------------------------------------
@@ -111,6 +89,13 @@ void Level2::Draw()
     backg->Draw();
     scene->Draw();
 
+    Color color(1.0f, 1.0f, 1.0f, 1.0f);
+    fixedsys->Draw(window->Height() + 300.0f, 20, "Level 2", color, Layer::FRONT);
+
+    stringstream ss;
+    ss << GravityGuy::player->Score();
+    tahoma->Draw(window->Height() + 350.0f, 50, ss.str().c_str(), color, Layer::FRONT);
+
     if (GravityGuy::viewBBox)
         scene->DrawBBox();
 }
@@ -121,6 +106,8 @@ void Level2::Finalize()
 {
     scene->Remove(GravityGuy::player, MOVING);
     delete scene;
+    delete fixedsys;
+    delete tahoma;
 }
 
 // ------------------------------------------------------------------------------
