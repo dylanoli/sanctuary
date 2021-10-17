@@ -89,7 +89,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     engine->window->Mode(WINDOWED);
     engine->window->Size(960, 540);
     engine->window->Color(0, 0, 0);
-    engine->window->Title("Gravity Guy");
+    engine->window->Title("Sanctuary Platform");
     engine->window->Icon(IDI_ICON);
     engine->window->Cursor(IDC_CURSOR);
     //engine->graphics->VSync(true);
