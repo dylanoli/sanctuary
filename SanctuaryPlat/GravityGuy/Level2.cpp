@@ -93,8 +93,8 @@ void Level2::Draw()
     fixedsys->Draw(window->Height() + 300.0f, 20, "Level 2", color, Layer::FRONT);
 
     stringstream ss;
-    ss << GravityGuy::player->Score();
-    tahoma->Draw(window->Height() + 350.0f, 50, ss.str().c_str(), color, Layer::FRONT);
+    ss << "Score: " << GravityGuy::player->Score();
+    tahoma->Draw(window->Height() + 310, 50, ss.str().c_str(), color, Layer::FRONT);
 
     if (GravityGuy::viewBBox)
         scene->DrawBBox();
