@@ -9,8 +9,8 @@
 //
 **********************************************************************************/
 
-#ifndef _GRAVITYGUY_PLAYER_H_
-#define _GRAVITYGUY_PLAYER_H_
+#ifndef _SANCTUARY_PLAYER_H_
+#define _SANCTUARY_PLAYER_H_
 
 // ---------------------------------------------------------------------------------
 // Inclusões

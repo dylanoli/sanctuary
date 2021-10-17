@@ -9,8 +9,8 @@
 //
 **********************************************************************************/
 
-#ifndef _GRAVITYGUY_LEVEL1_H_
-#define _GRAVITYGUY_LEVEL1_H_
+#ifndef _SANCTUARY_LEVEL1_H_
+#define _SANCTUARY_LEVEL1_H_
 
 // ------------------------------------------------------------------------------
 // Inclusões

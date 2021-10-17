@@ -9,8 +9,8 @@
 //
 **********************************************************************************/
 
-#ifndef _GRAVITYGUY_PLATFORM_H_
-#define _GRAVITYGUY_PLATFORM_H_
+#ifndef _SANCTUARY_PLATFORM_H_
+#define _SANCTUARY_PLATFORM_H_
 
 // ---------------------------------------------------------------------------------
 

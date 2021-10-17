@@ -9,8 +9,8 @@
 //
 **********************************************************************************/
 
-#ifndef _GRAVITYGUY_OBSTACLE_H_
-#define _GRAVITYGUY_OBSTACLE_H_
+#ifndef _SANCTUARY_OBSTACLE_H_
+#define _SANCTUARY_OBSTACLE_H_
 
 // ---------------------------------------------------------------------------------
 

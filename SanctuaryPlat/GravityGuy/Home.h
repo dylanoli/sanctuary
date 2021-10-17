@@ -9,8 +9,8 @@
 //
 **********************************************************************************/
 
-#ifndef _GRAVITYGUY_HOME_H_
-#define _GRAVITYGUY_HOME_H_
+#ifndef _SANCTUARY_HOME_H_
+#define _SANCTUARY_HOME_H_
 
 // ------------------------------------------------------------------------------
 // Inclusões

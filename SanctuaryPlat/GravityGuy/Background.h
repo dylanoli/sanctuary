@@ -9,8 +9,8 @@
 //
 **********************************************************************************/
 
-#ifndef _GRAVITYGUY_BACKGROUND_H_
-#define _GRAVITYGUY_BACKGROUND_H_
+#ifndef _SANCTUARY_BACKGROUND_H_
+#define _SANCTUARY_BACKGROUND_H_
 
 // ---------------------------------------------------------------------------------
 

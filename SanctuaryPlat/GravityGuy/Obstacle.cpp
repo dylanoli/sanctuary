@@ -35,10 +35,7 @@ Obstacle::Obstacle(float posX, float posY, Scene *_scene)
 	}
 	obstacle = new Sprite(src);
 
-	BBox(new Rect(-obstacle->Width() / 2.0f,
-				  -obstacle->Height() / 2.0f,
-				  obstacle->Width() / 2.0f,
-				  obstacle->Height() / 2.0f));
+	BBox(new Circle(obstacle->Height() / 2.0f));
 
 	MoveTo(posX, posY, Layer::MIDDLE);
 }
