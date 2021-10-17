@@ -1,6 +1,6 @@
 #include "SpawnObstacule.h"
 #include "Obstacle.h"
-#include "GravityGuy.h"
+#include "Sanctuary.h"
 #include <random>
 
 SpawnObstacule::SpawnObstacule(Scene* _scene)

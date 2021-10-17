@@ -9,7 +9,7 @@
 //
 **********************************************************************************/
 
-#include "GravityGuy.h"
+#include "Sanctuary.h"
 #include "Home.h"
 #include "Level2.h"
 #include "GameOver.h"
@@ -39,7 +39,7 @@ void Level2::Init()
     scene->Add(backg, STATIC);
 
     // adiciona jogador na cena
-    scene->Add(GravityGuy::player, MOVING);
+    scene->Add(Sanctuary::player, MOVING);
 
     // ----------------------
     // plataformas
@@ -49,9 +49,9 @@ void Level2::Init()
     float posX, posY;
     uint  platType;
 
-    GravityGuy::audio->Frequency(JUMP, 0.85f);
-    GravityGuy::audio->Volume(MUSIC2, 0.3f);
-    GravityGuy::audio->Play(MUSIC2, true);
+    Sanctuary::audio->Frequency(JUMP, 0.85f);
+    Sanctuary::audio->Volume(MUSIC2, 0.3f);
+    Sanctuary::audio->Play(MUSIC2, true);
 
     fixedsys = new Font("Resources/Font/fixedsys.png");
     fixedsys->Spacing("Resources/Font/fixedsys.dat");
@@ -64,16 +64,16 @@ void Level2::Init()
 
 void Level2::Update()
 {
-    if (window->KeyPress(VK_ESCAPE) || GravityGuy::player->Level() == 2 || window->KeyPress('N'))
+    if (window->KeyPress(VK_ESCAPE) || Sanctuary::player->Level() == 2 || window->KeyPress('N'))
     {
-        GravityGuy::audio->Stop(MUSIC2);
-        GravityGuy::NextLevel<Home>();
-        GravityGuy::player->Reset();
+        Sanctuary::audio->Stop(MUSIC2);
+        Sanctuary::NextLevel<Home>();
+        Sanctuary::player->Reset();
     }
-    else if (GravityGuy::player->Bottom() < 0 || GravityGuy::player->Top() > window->Height())
+    else if (Sanctuary::player->Bottom() < 0 || Sanctuary::player->Top() > window->Height())
     {
-        GravityGuy::audio->Stop(MUSIC2);
-        GravityGuy::NextLevel<GameOver>();
+        Sanctuary::audio->Stop(MUSIC2);
+        Sanctuary::NextLevel<GameOver>();
     }
     else
     {
@@ -93,10 +93,10 @@ void Level2::Draw()
     fixedsys->Draw(window->Height() + 300.0f, 20, "Level 2", color, Layer::FRONT);
 
     stringstream ss;
-    ss << "Score: " << GravityGuy::player->Score();
+    ss << "Score: " << Sanctuary::player->Score();
     tahoma->Draw(window->Height() + 310, 50, ss.str().c_str(), color, Layer::FRONT);
 
-    if (GravityGuy::viewBBox)
+    if (Sanctuary::viewBBox)
         scene->DrawBBox();
 }
 
@@ -104,7 +104,7 @@ void Level2::Draw()
 
 void Level2::Finalize()
 {
-    scene->Remove(GravityGuy::player, MOVING);
+    scene->Remove(Sanctuary::player, MOVING);
     delete scene;
     delete fixedsys;
     delete tahoma;

@@ -26,7 +26,7 @@ enum TYPES { DEFAULT, FINISH, OBSTACULE };
 
 // ------------------------------------------------------------------------------
 
-class GravityGuy : public Game
+class Sanctuary : public Game
 {
 private:
     static Game * level;            // nível atual do jogo

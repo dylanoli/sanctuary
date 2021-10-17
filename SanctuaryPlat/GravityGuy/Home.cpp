@@ -10,7 +10,7 @@
 **********************************************************************************/
 
 #include "Engine.h"
-#include "GravityGuy.h"
+#include "Sanctuary.h"
 #include "Home.h"
 #include "Level1.h"
 
@@ -25,8 +25,8 @@ void Home::Init()
     logo = new Sprite("Resources/Home/Logo.png");
     tileset = new TileSet("Resources/Home/Background.png", 1305, 720, 1, 13);
     anim = new Animation(tileset, 0.1f, true);
-    GravityGuy::audio->Volume(MENU, 0.5f);
-    GravityGuy::audio->Play(MENU, true);
+    Sanctuary::audio->Volume(MENU, 0.5f);
+    Sanctuary::audio->Play(MENU, true);
 
     fixedsys = new Font("Resources/Font/fixedsys.png");
     fixedsys->Spacing("Resources/Font/fixedsys.dat");
@@ -43,8 +43,8 @@ void Home::Update()
     // se a tecla ENTER for pressionada
     if (window->KeyPress(VK_RETURN))
     {
-        GravityGuy::audio->Stop(MENU);
-        GravityGuy::NextLevel<Level1>();
+        Sanctuary::audio->Stop(MENU);
+        Sanctuary::NextLevel<Level1>();
     }
     else
     {

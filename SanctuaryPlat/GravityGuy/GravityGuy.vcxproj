@@ -160,7 +160,7 @@
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Graphics.cpp" />
-    <ClCompile Include="GravityGuy.cpp" />
+    <ClCompile Include="Sanctuary.cpp" />
     <ClCompile Include="Home.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Level1.cpp" />
@@ -190,7 +190,7 @@
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="Graphics.h" />
-    <ClInclude Include="GravityGuy.h" />
+    <ClInclude Include="Sanctuary.h" />
     <ClInclude Include="Home.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Level1.h" />

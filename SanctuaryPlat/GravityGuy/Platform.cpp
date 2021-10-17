@@ -10,7 +10,7 @@
 **********************************************************************************/
 
 #include "Platform.h"
-#include "GravityGuy.h"
+#include "Sanctuary.h"
 
 // ---------------------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ Platform::~Platform()
 
 void Platform::Update()
 {
-    xSprite -= (200 + GravityGuy::player->Score()) * gameTime;
+    xSprite -= (200 + Sanctuary::player->Score()) * gameTime;
 }
 
 // -------------------------------------------------------------------------------

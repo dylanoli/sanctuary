@@ -11,7 +11,7 @@
 
 #include "Engine.h"
 #include "GameOver.h"
-#include "GravityGuy.h"
+#include "Sanctuary.h"
 #include "Home.h"
 
 #include <sstream>
@@ -26,8 +26,8 @@ void GameOver::Init()
     tileset = new TileSet("Resources/Home/Background.png", 1305, 720, 1, 13);
     anim = new Animation(tileset, 0.1f, true);
 
-    GravityGuy::audio->Volume(FINAL, 0.3f);
-    GravityGuy::audio->Play(FINAL, true);
+    Sanctuary::audio->Volume(FINAL, 0.3f);
+    Sanctuary::audio->Play(FINAL, true);
 
     fixedsys = new Font("Resources/Font/fixedsys.png");
     fixedsys->Spacing("Resources/Font/fixedsys.dat");
@@ -38,8 +38,8 @@ void GameOver::Init()
 void GameOver::Update()
 {
     if (window->KeyPress(VK_ESCAPE) || window->KeyPress(VK_RETURN)) {
-        GravityGuy::audio->Stop(FINAL);
-        GravityGuy::NextLevel<Home>();
+        Sanctuary::audio->Stop(FINAL);
+        Sanctuary::NextLevel<Home>();
     }
 }
 
@@ -60,7 +60,7 @@ void GameOver::Draw()
     fixedsys->Draw(250, window->CenterY() + 100, ss.str().c_str(), color, Layer::FRONT);
     
     ss.str("");
-    ss << GravityGuy::player->Score() << " pontos";
+    ss << Sanctuary::player->Score() << " pontos";
     fixedsys->Draw(400, window->CenterY() + 140, ss.str().c_str(), color, Layer::FRONT);
 }
 
@@ -72,7 +72,7 @@ void GameOver::Finalize()
     delete tileset;
     delete logo;
     delete fixedsys;
-    GravityGuy::player->Reset();
+    Sanctuary::player->Reset();
 }
 
 // ----------------------------------------------------------------------

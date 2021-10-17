@@ -10,21 +10,21 @@
 **********************************************************************************/
 
 #include "Engine.h"
-#include "GravityGuy.h"
+#include "Sanctuary.h"
 #include "Home.h"
 #include "GameOver.h"
 
 // ------------------------------------------------------------------------------
 
 // inicializa membros estáticos da classe
-Game*   GravityGuy::level = nullptr;
-Player* GravityGuy::player = nullptr;
-Audio*  GravityGuy::audio = nullptr;
-bool    GravityGuy::viewBBox = false;
+Game*   Sanctuary::level = nullptr;
+Player* Sanctuary::player = nullptr;
+Audio*  Sanctuary::audio = nullptr;
+bool    Sanctuary::viewBBox = false;
 
 // ------------------------------------------------------------------------------
 
-void GravityGuy::Init() 
+void Sanctuary::Init()
 {
     // cria sistema de áudio
     audio = new Audio();
@@ -47,7 +47,7 @@ void GravityGuy::Init()
 
 // ------------------------------------------------------------------------------
 
-void GravityGuy::Update()
+void Sanctuary::Update()
 {
     // habilita/desabilita visualização da bounding box
     if (window->KeyPress('B'))
@@ -59,7 +59,7 @@ void GravityGuy::Update()
 
 // ------------------------------------------------------------------------------
 
-void GravityGuy::Draw()
+void Sanctuary::Draw()
 {
     // desenha nível
     level->Draw();
@@ -67,7 +67,7 @@ void GravityGuy::Draw()
 
 // ------------------------------------------------------------------------------
 
-void GravityGuy::Finalize()
+void Sanctuary::Finalize()
 {
     level->Finalize();
 
@@ -95,7 +95,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     //engine->graphics->VSync(true);
 
     // inicia o jogo
-    int status = engine->Start(new GravityGuy());
+    int status = engine->Start(new Sanctuary());
 
     delete engine;
     return status;

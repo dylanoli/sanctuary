@@ -10,7 +10,7 @@
 **********************************************************************************/
 
 #include "Player.h"
-#include "GravityGuy.h"
+#include "Sanctuary.h"
 #include "Platform.h"
 
 // ---------------------------------------------------------------------------------
@@ -113,8 +113,8 @@ void Player::Update()
             jumping = true;
             isOnTheFloor = false;
 
-            GravityGuy::audio->Volume(JUMP, 0.05f);
-            GravityGuy::audio->Play(JUMP);
+            Sanctuary::audio->Volume(JUMP, 0.05f);
+            Sanctuary::audio->Play(JUMP);
         }
 
         Translate(0, 300 * gameTime);

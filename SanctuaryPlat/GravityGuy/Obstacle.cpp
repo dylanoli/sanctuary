@@ -1,5 +1,5 @@
 #include "Obstacle.h"
-#include "GravityGuy.h"
+#include "Sanctuary.h"
 
 Obstacle::Obstacle(float posX, float posY, Scene *_scene)
 {
@@ -57,7 +57,7 @@ void Obstacle::Update()
 	if (x < -500)
 		scene->Delete();
 
-	float currentX = (200 + GravityGuy::player->Score()) * gameTime;
+	float currentX = (200 + Sanctuary::player->Score()) * gameTime;
 	Translate(-1 * currentX, 0);
 }
 
