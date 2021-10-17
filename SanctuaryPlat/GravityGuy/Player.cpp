@@ -53,7 +53,9 @@ Player::~Player()
 void Player::Reset()
 {
     // volta ao estado inicial
-    MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
+    MoveTo(100, 24.0f, Layer::FRONT);
+    isAlive = true;
+    score = 0;
     level = 0;
 }
 
@@ -66,6 +68,10 @@ void Player::OnCollision(Object * obj)
     {
         // chegou ao final do nível
         level++;
+    }
+    else if (obj->Type() == OBSTACULE)
+    {
+        isAlive = false;
     }
     else
     {

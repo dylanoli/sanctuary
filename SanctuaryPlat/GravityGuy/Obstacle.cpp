@@ -5,6 +5,7 @@ Obstacle::Obstacle(float posX, float posY, Scene *_scene)
 {
 	scene = _scene;
 	const int MAX_VARY = 430;
+	type = OBSTACULE;
 
 	int varyX = 0;
 

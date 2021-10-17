@@ -1,5 +1,6 @@
 #include "SpawnObstacule.h"
 #include "Obstacle.h"
+#include "GravityGuy.h"
 #include <random>
 
 SpawnObstacule::SpawnObstacule(Scene* _scene)
@@ -24,6 +25,7 @@ void SpawnObstacule::Update()
 		//set time to next spawn
 		random_device rd;
 		mt19937 mt(rd());
+
 		uniform_real_distribution<float> dist(1, 3);
 		timeToNextSpawn = dist(mt);
 

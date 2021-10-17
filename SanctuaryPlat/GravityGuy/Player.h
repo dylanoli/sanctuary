@@ -28,6 +28,7 @@ private:
     Animation * anim;                   // animação do personagem
     int         level;                  // nível finalizado
     bool isOnTheFloor;
+    bool isAlive = true;
     boolean jumping;
     Timer jumpDuration;
     float velY;
@@ -42,6 +43,7 @@ public:
     int Level();                        // último nível finalizado
     float Bottom();                     // coordenadas da base
     float Top();                        // coordenadas do topo
+    bool IsAlive();                        // coordenadas do topo
 
     void OnCollision(Object * obj);     // resolução da colisão
     void Update();                      // atualização do objeto
@@ -51,6 +53,10 @@ public:
 
 // ---------------------------------------------------------------------------------
 // Função Membro Inline
+inline bool Player::IsAlive()
+{
+    return isAlive;
+}
 
 inline int Player::Level()
 { return level; }

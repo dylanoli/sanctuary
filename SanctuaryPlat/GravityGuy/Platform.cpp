@@ -14,14 +14,12 @@
 
 // ---------------------------------------------------------------------------------
 
-Platform::Platform(float posX, float posY, uint platType, Color tint) : color(tint)
+Platform::Platform(float posX, float posY)
 {
-
     img = new Image("Resources/LongLongGray.png");
     platform = new Sprite(img);
     platform2 = new Sprite(img);
     xSprite = x;
-    type = LARGE;
     
     BBox(new Rect(-platform->Width()/2.0f, 
                   -platform->Height()/2.0f, 
@@ -51,8 +49,8 @@ void Platform::Update()
 
 inline void Platform::Draw()
 {
-    platform->Draw(xSprite, y, Layer::UPPER, 1.0f, 0.0f, color);
-    platform2->Draw(xSprite + img->Width(), y, Layer::UPPER, 1.0f, 0.0f, color);
+    platform->Draw(xSprite, y, Layer::UPPER, 1.0f, 0.0f);
+    platform2->Draw(xSprite + img->Width(), y, Layer::UPPER, 1.0f, 0.0f);
 
     // traz pano de fundo de volta para dentro da tela
     if (xSprite + img->Width() / 2.0f < 0)

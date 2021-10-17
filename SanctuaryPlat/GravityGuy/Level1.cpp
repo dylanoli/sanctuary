@@ -50,7 +50,7 @@ void Level1::Init()
     Platform *plat;
     Color white{1, 1, 1, 1};
 
-    plat = new Platform(window->CenterX(), window->CenterY() + 140, PLATTYPES::LARGE, white);
+    plat = new Platform(window->CenterX(), window->CenterY() + 140);
     scene->Add(plat, STATIC);
 
     SpawnObstacule *spo = new SpawnObstacule(scene);
@@ -79,7 +79,7 @@ void Level1::Update()
         GravityGuy::NextLevel<Home>();
         GravityGuy::player->Reset();
     }
-    else if (GravityGuy::player->Bottom() < 0 || GravityGuy::player->Top() > window->Height())
+    else if (!GravityGuy::player->IsAlive())
     {
         GravityGuy::audio->Stop(MUSIC);
         GravityGuy::NextLevel<GameOver>();
