@@ -72,6 +72,7 @@ void GameOver::Finalize()
     delete tileset;
     delete logo;
     delete fixedsys;
+    GravityGuy::player->Reset();
 }
 
 // ----------------------------------------------------------------------

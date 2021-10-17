@@ -74,7 +74,6 @@ void Level2::Update()
     {
         GravityGuy::audio->Stop(MUSIC2);
         GravityGuy::NextLevel<GameOver>();
-        GravityGuy::player->Reset();
     }
     else
     {
