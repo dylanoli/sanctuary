@@ -34,7 +34,7 @@ void Level2::Init()
     scene = new Scene();
 
     // pano de fundo do jogo
-    Color dark{ 0.4f, 0.4f, 0.4f, 1.0f };
+    Color dark{ 0.29f, 0.0f, 0.5f, 1.0f };
     backg = new Background(dark);
     scene->Add(backg, STATIC);
 
