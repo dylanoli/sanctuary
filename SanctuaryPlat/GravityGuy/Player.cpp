@@ -29,7 +29,6 @@ Player::Player()
     BBox(new Rect(-20, -50, 20, 50));    
     
     // inicializa estado do player
-    level = 0;
     velY = 0.0f;
     jumping = false;
     isOnTheFloor = false;
@@ -56,7 +55,6 @@ void Player::Reset()
     MoveTo(100, 24.0f, Layer::FRONT);
     isAlive = true;
     score = 0;
-    level = 0;
 }
 
 
@@ -64,12 +62,7 @@ void Player::Reset()
 
 void Player::OnCollision(Object * obj)
 {
-    if (obj->Type() == FINISH)
-    {
-        // chegou ao final do nível
-        level++;
-    }
-    else if (obj->Type() == OBSTACULE)
+    if (obj->Type() == OBSTACULE)
     {
         isAlive = false;
     }

@@ -18,6 +18,7 @@
 #include "Background.h"
 
 #include <sstream>
+#include "SpawnObstacule.h"
 
 using std::stringstream;
 
@@ -38,16 +39,14 @@ void Level2::Init()
     backg = new Background(dark);
     scene->Add(backg, STATIC);
 
+    Platform * plat = new Platform(window->CenterX(), window->CenterY() + 140);
+    scene->Add(plat, STATIC);
+
+    SpawnObstacule* spo = new SpawnObstacule(scene);
+    scene->Add(spo, STATIC);
+
     // adiciona jogador na cena
     scene->Add(Sanctuary::player, MOVING);
-
-    // ----------------------
-    // plataformas
-    // ----------------------
-
-    Platform* plat;
-    float posX, posY;
-    uint  platType;
 
     Sanctuary::audio->Frequency(JUMP, 0.85f);
     Sanctuary::audio->Volume(MUSIC2, 0.3f);
@@ -64,7 +63,7 @@ void Level2::Init()
 
 void Level2::Update()
 {
-    if (window->KeyPress(VK_ESCAPE) || Sanctuary::player->Level() == 2 || window->KeyPress('N'))
+    if (window->KeyPress(VK_ESCAPE) || window->KeyPress('N'))
     {
         Sanctuary::audio->Stop(MUSIC2);
         Sanctuary::NextLevel<Home>();

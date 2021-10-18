@@ -84,7 +84,7 @@ void Level1::Update()
         Sanctuary::audio->Stop(MUSIC);
         Sanctuary::NextLevel<GameOver>();
     }
-    else if (Sanctuary::player->Level() == 1 || window->KeyPress('N'))
+    else if (Sanctuary::player->Score() > 100 || window->KeyPress('N'))
     {
         Sanctuary::audio->Stop(MUSIC);
         Sanctuary::NextLevel<Level2>();

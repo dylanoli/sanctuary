@@ -26,7 +26,6 @@ class Player : public Object
 private:
     TileSet   * tileset;                // folha de sprites do personagem
     Animation * anim;                   // animação do personagem
-    int         level;                  // nível finalizado
     bool isOnTheFloor;
     bool isAlive = true;
     boolean jumping;
@@ -40,7 +39,6 @@ public:
     ~Player();                          // destrutor
 
     void Reset();                       // volta ao estado inicial
-    int Level();                        // último nível finalizado
     float Bottom();                     // coordenadas da base
     float Top();                        // coordenadas do topo
     bool IsAlive();                        // coordenadas do topo
@@ -54,12 +52,7 @@ public:
 // ---------------------------------------------------------------------------------
 // Função Membro Inline
 inline bool Player::IsAlive()
-{
-    return isAlive;
-}
-
-inline int Player::Level()
-{ return level; }
+{ return isAlive; }
 
 inline float Player::Bottom()
 { return y + tileset->Height()/2; }
