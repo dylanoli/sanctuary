@@ -69,7 +69,7 @@ void Level2::Update()
         Sanctuary::NextLevel<Home>();
         Sanctuary::player->Reset();
     }
-    else if (Sanctuary::player->Bottom() < 0 || Sanctuary::player->Top() > window->Height())
+    else if (!Sanctuary::player->IsAlive())
     {
         Sanctuary::audio->Stop(MUSIC2);
         Sanctuary::NextLevel<GameOver>();
