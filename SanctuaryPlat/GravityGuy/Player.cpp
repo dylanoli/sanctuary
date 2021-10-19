@@ -97,7 +97,7 @@ void Player::Update()
     }
     else
     {
-        if (window->KeyPress(VK_UP) && isOnTheFloor)
+        if ((window->KeyPress(VK_UP) || window->KeyPress(VK_SPACE)) && isOnTheFloor)
         {
             velY = -400;
 
