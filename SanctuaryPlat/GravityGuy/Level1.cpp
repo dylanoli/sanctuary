@@ -53,7 +53,7 @@ void Level1::Init()
     plat = new Platform(window->CenterX(), window->CenterY() + 140);
     scene->Add(plat, STATIC);
 
-    SpawnObstacule *spo = new SpawnObstacule(scene);
+    SpawnObstacule *spo = new SpawnObstacule(scene, 2.0f);
     scene->Add(spo, STATIC);
     // ----------------------
 

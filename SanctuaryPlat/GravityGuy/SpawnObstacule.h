@@ -12,7 +12,7 @@
 class SpawnObstacule: public Object
 {
 public:
-	SpawnObstacule(Scene* _scene);
+	SpawnObstacule(Scene* _scene, float spawnInterval);
 	~SpawnObstacule();
 
 private:

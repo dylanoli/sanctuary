@@ -3,11 +3,11 @@
 #include "Sanctuary.h"
 #include <random>
 
-SpawnObstacule::SpawnObstacule(Scene* _scene)
+SpawnObstacule::SpawnObstacule(Scene* _scene, float spawnInterval)
 {
 	scene = _scene;
 	timeSpawn.Start();
-	timeToNextSpawn = 2;
+	timeToNextSpawn = spawnInterval;
 }
 
 SpawnObstacule::~SpawnObstacule()
