@@ -81,6 +81,10 @@ void Player::OnCollision(Object * obj)
 
 void Player::Update()
 {
+    if (window->KeyPress(VK_DOWN) && jumping) {
+        jumping = false;
+    }
+
     if (jumping)
     {
         if (jumpDuration.Elapsed(1.0f))
