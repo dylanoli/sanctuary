@@ -1,0 +1,39 @@
+﻿  compilation object save succeeded; see C:\Users\dylan\Documents\GitHub\sanctuary\GravityGuy\Shaders\Pixel.cso
+  compilation object save succeeded; see C:\Users\dylan\Documents\GitHub\sanctuary\GravityGuy\Shaders\Vertex.cso
+  Animation.cpp
+  Audio.cpp
+  Background.cpp
+  Engine.cpp
+  Font.cpp
+  Game.cpp
+  GameOver.cpp
+  Geometry.cpp
+  Graphics.cpp
+  Sanctuary.cpp
+  Home.cpp
+  Image.cpp
+  Level1.cpp
+C:\Users\dylan\Documents\GitHub\sanctuary\GravityGuy\Level1.cpp(111,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Level2.cpp
+C:\Users\dylan\Documents\GitHub\sanctuary\GravityGuy\Level2.cpp(96,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Object.cpp
+  Obstacle.cpp
+C:\Users\dylan\Documents\GitHub\sanctuary\GravityGuy\Obstacle.cpp(16,26): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\dylan\Documents\GitHub\sanctuary\GravityGuy\Obstacle.cpp(16,20): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+  Obstacle.h
+  Platform.cpp
+  Player.cpp
+  Renderer.cpp
+  Generating Code...
+  Compiling...
+  Scene.cpp
+  Sound.cpp
+  SpawnObstacule.cpp
+  Sprite.cpp
+  Texture.cpp
+  TileSet.cpp
+  Timer.cpp
+  Window.cpp
+  Generating Code...
+x64\Debug\Obstacle.obj : warning LNK4042: object specified more than once; extras ignored
+  GravityGuy.vcxproj -> C:\Users\dylan\Documents\GitHub\sanctuary\x64\Debug\GravityGuy.exe

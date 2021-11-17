@@ -93,6 +93,7 @@
     <ClCompile Include="Vector.cpp">
       <Filter>Engine\Arquivos de Origem</Filter>
     </ClCompile>
+<<<<<<< HEAD:BasicAI/BasicAI.vcxproj.filters
     <ClCompile Include="Window.cpp">
       <Filter>Engine\Arquivos de Origem</Filter>
     </ClCompile>
@@ -139,6 +140,12 @@
       <Filter>Game\Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Explosion.cpp">
+=======
+    <ClCompile Include="AnimaWalk.cpp">
+      <Filter>Game\Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Lady.cpp">
+>>>>>>> parent of 9a3dd71 (Merge pull request #2 from dylanoli/develop):AnimaWalk/AnimaWalk.vcxproj.filters
       <Filter>Game\Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
@@ -209,6 +216,7 @@
     <ClInclude Include="Vector.h">
       <Filter>Engine\Arquivos de Cabeçalho</Filter>
     </ClInclude>
+<<<<<<< HEAD:BasicAI/BasicAI.vcxproj.filters
     <ClInclude Include="Blue.h">
       <Filter>Game\Arquivos de Cabeçalho</Filter>
     </ClInclude>
@@ -258,6 +266,15 @@
       <Filter>Game\Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Explosion.h">
+=======
+    <ClInclude Include="Resources.h">
+      <Filter>Game\Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimaWalk.h">
+      <Filter>Game\Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Lady.h">
+>>>>>>> parent of 9a3dd71 (Merge pull request #2 from dylanoli/develop):AnimaWalk/AnimaWalk.vcxproj.filters
       <Filter>Game\Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>
