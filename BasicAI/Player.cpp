@@ -25,7 +25,7 @@ Player::Player()
     gamepadOn = gamepad->Initialize();
 
     // configuração do objeto
-    sprite = new Sprite("Resources/Player.png");
+    sprite = new Sprite("Resources/Naves/Player.png");
     missile = new Image("Resources/Missile.png");
     speed.RotateTo(90.0f);
     speed.ScaleTo(0.0f);

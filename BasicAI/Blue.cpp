@@ -25,7 +25,6 @@ Blue::Blue(float pX, float pY, Player* p)
     speed.RotateTo(0.0f);
     speed.ScaleTo(0.0f);
     MoveTo(pX, pY);
-    factor = -0.25f;
     type = BLUE;
 
     // incrementa contador
@@ -53,6 +52,32 @@ void Blue::OnCollision(Object * obj)
         BasicAI::scene->Add(new Explosion(x, y), STATIC);
         BasicAI::audio->Play(EXPLODE);
     }
+    else if (obj->Type() == BLUE) {
+        Blue* greenA = this;
+        Blue* greenB = static_cast<Blue*>(obj);
+
+        Point pA{ greenA->X(), greenA->Y() };
+        Point pB{ greenB->X(), greenB->Y() };
+
+        float angleA = Line::Angle(pA, pB);
+        float angleB = angleA + 180.0f;
+
+        if (angleB > 360)
+            angleB -= 360.0f;
+
+        Vector impactA{ angleA, 0.75f * greenA->speed.Magnitude() };
+        Vector impactB{ angleB, 0.75f * greenB->speed.Magnitude() };
+
+        greenA->speed.Add(impactB);
+        greenB->speed.Add(impactA);
+
+        // limita velocidade das rochas
+        if (greenB->speed.Magnitude() > 15.0f)
+            greenB->speed.ScaleTo(15.0f);
+
+        if (greenA->speed.Magnitude() > 15.0f)
+            greenA->speed.ScaleTo(15.0f);
+    }
 }
 
 // -------------------------------------------------------------------------------
@@ -61,9 +86,11 @@ void Blue::Update()
 {
     // a magnitude do vetor 'target' controla quão 
     // rápido o objeto converge para a direção do alvo
-    Vector target { Line::Angle(Point(x, y), Point(player->X(), player->Y())), 2.0f * gameTime };
+    Vector target { Line::Angle(Point(x, y), Point(player->X(), player->Y())), 50.0f * gameTime };
     speed.Add(target);
-    
+
+    RotateTo(-speed.Angle() + 90);
+
     // limita a magnitude da velocidade para impedir 
     // que ela cresça indefinidamente pelo soma vetorial
     if (speed.Magnitude() > 4.5)
@@ -71,15 +98,6 @@ void Blue::Update()
 
     // move o objeto pelo seu vetor velocidade
     Translate(speed.XComponent() * 50.0f * gameTime, -speed.YComponent() * 50.0f * gameTime);
-
-    // aplica fator de escala
-    Scale(1.0f + factor * gameTime);
-
-    // amplia e reduz objeto
-    if (scale < 0.85f)
-        factor = 0.25f;
-    if (scale > 1.00f)
-        factor = -0.25f;
 
     // mantém o objeto dentro do mundo do jogo
     if (x < 50)
