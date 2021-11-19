@@ -1,24 +1,24 @@
 /**********************************************************************************
-// WaveG (Código Fonte)
+// WaveG (Cï¿½digo Fonte)
 //
-// Criação:     06 Ago 2019
-// Atualização: 11 Nov 2021
+// Criaï¿½ï¿½o:     06 Ago 2019
+// Atualizaï¿½ï¿½o: 11 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Cria uma onda de inimigos Green
+// Descriï¿½ï¿½o:   Cria uma onda de inimigos Shooter
 //
 **********************************************************************************/
 
 #include "WaveG.h"
 #include "BasicAI.h"
-#include "Green.h"
+#include "Shooter.h"
 #include "Hud.h"
 
 // ------------------------------------------------------------------------------
 
 WaveG::WaveG() : secs(10.0f, 15.0f)
 {
-    // atraso para a próxima onda 
+    // atraso para a prï¿½xima onda
     delay = secs.Rand();
 }
 
@@ -26,7 +26,6 @@ WaveG::WaveG() : secs(10.0f, 15.0f)
 
 WaveG::~WaveG()
 {
-
 }
 
 // -------------------------------------------------------------------------------
@@ -37,18 +36,18 @@ void WaveG::Update()
     static uint counter = 8;
 
     // se passou o tempo de atraso
-    if (timer.Elapsed(delay) && Hud::greens < 16)
+    if (timer.Elapsed(delay) && Hud::shooters < 16)
     {
         if (counter > 0)
         {
             // toca som de nova onda
-            BasicAI::audio->Play(GREEN);
+            BasicAI::audio->Play(SHOOTER);
 
             // adiciona nova inimigo
-            BasicAI::scene->Add(new Green(50, 50, BasicAI::player), MOVING);
-            BasicAI::scene->Add(new Green(game->Width() - 50, 50, BasicAI::player), MOVING);
-            BasicAI::scene->Add(new Green(game->Width() - 50, game->Height() - 50, BasicAI::player), MOVING);
-            BasicAI::scene->Add(new Green(50, game->Height() - 50, BasicAI::player), MOVING);
+            BasicAI::scene->Add(new Shooter(50, 50, BasicAI::player), MOVING);
+            BasicAI::scene->Add(new Shooter(game->Width() - 50, 50, BasicAI::player), MOVING);
+            BasicAI::scene->Add(new Shooter(game->Width() - 50, game->Height() - 50, BasicAI::player), MOVING);
+            BasicAI::scene->Add(new Shooter(50, game->Height() - 50, BasicAI::player), MOVING);
 
             delay = 0.450f;
             timer.Start();
@@ -68,7 +67,6 @@ void WaveG::Update()
 
 void WaveG::Draw()
 {
-    
 }
 
 // -------------------------------------------------------------------------------

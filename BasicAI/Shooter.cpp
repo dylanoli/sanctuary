@@ -1,65 +1,68 @@
 /**********************************************************************************
-// Green (Código Fonte)
+// Shooter (Cï¿½digo Fonte)
 // 
-// Criação:     15 Out 2012
-// Atualização: 11 Nov 2021
+// Criaï¿½ï¿½o:     15 Out 2012
+// Atualizaï¿½ï¿½o: 11 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Objeto faz uma fuga suavizada
+// Descriï¿½ï¿½o:   Objeto faz uma fuga suavizada
 //
 **********************************************************************************/
 
-#include "Green.h"
+#include "Shooter.h"
 #include "BasicAI.h"
-#include "Random.h" 
+#include "Random.h"
 #include "Explosion.h"
+#include "Player.h"
 
 // ---------------------------------------------------------------------------------
 
-Green::Green(float pX, float pY, Player * p)
+Shooter::Shooter(float pX, float pY, Player *p)
 {
     player = p;
-    sprite = new Sprite(BasicAI::green);
-    BBox(new Circle(20.0f));
+    sprite = new Sprite(BasicAI::shooter);
+    BBox(new Circle(40.0f));
     speed.RotateTo(90.0f);
     MoveTo(pX, pY);
-    type = GREEN;
+    type = SHOOTER;
 
-    // mantém certa distância do jogador
-    RandI dist{ 100, 400 };
+    // mantï¿½m certa distï¿½ncia do jogador
+    RandI dist{100, 400};
     distance = dist.Rand();
 
     // incrementa contador
-    ++Hud::greens;
+    ++Hud::shooters;
 }
 
 // ---------------------------------------------------------------------------------
 
-Green::~Green()
+Shooter::~Shooter()
 {
     delete sprite;
 
     // decrementa contador
-    --Hud::greens;
+    --Hud::shooters;
 }
 
 // -------------------------------------------------------------------------------
 
-void Green::OnCollision(Object * obj)
+void Shooter::OnCollision(Object *obj)
 {
     if (obj->Type() == MISSILE)
     {
+        Player::score += 10;
         BasicAI::scene->Delete(obj, STATIC);
         BasicAI::scene->Delete(this, MOVING);
         BasicAI::scene->Add(new Explosion(x, y), STATIC);
         BasicAI::audio->Play(EXPLODE);
     }
-    else if (obj->Type() == GREEN) {
-        Green* greenA = this;
-        Green* greenB = static_cast<Green*>(obj);
+    else if (obj->Type() == SHOOTER)
+    {
+        Shooter *shooterA = this;
+        Shooter *shooterB = static_cast<Shooter *>(obj);
 
-        Point pA{ greenA->X(), greenA->Y() };
-        Point pB{ greenB->X(), greenB->Y() };
+        Point pA{shooterA->X(), shooterA->Y()};
+        Point pB{shooterB->X(), shooterB->Y()};
 
         float angleA = Line::Angle(pA, pB);
         float angleB = angleA + 180.0f;
@@ -67,28 +70,28 @@ void Green::OnCollision(Object * obj)
         if (angleB > 360)
             angleB -= 360.0f;
 
-        Vector impactA{ angleA, 0.75f * greenA->speed.Magnitude() };
-        Vector impactB{ angleB, 0.75f * greenB->speed.Magnitude() };
+        Vector impactA{angleA, 0.75f * shooterA->speed.Magnitude()};
+        Vector impactB{angleB, 0.75f * shooterB->speed.Magnitude()};
 
-        greenA->speed.Add(impactB);
-        greenB->speed.Add(impactA);
+        shooterA->speed.Add(impactB);
+        shooterB->speed.Add(impactA);
 
         // limita velocidade das rochas
-        if (greenB->speed.Magnitude() > 15.0f)
-            greenB->speed.ScaleTo(15.0f);
+        if (shooterB->speed.Magnitude() > 15.0f)
+            shooterB->speed.ScaleTo(15.0f);
 
-        if (greenA->speed.Magnitude() > 15.0f)
-            greenA->speed.ScaleTo(15.0f);
+        if (shooterA->speed.Magnitude() > 15.0f)
+            shooterA->speed.ScaleTo(15.0f);
     }
 }
 
 // -------------------------------------------------------------------------------
 
-void Green::Update()
+void Shooter::Update()
 {
-    // a magnitude do vetor target controla quão rápido o objeto converge para a direção do alvo
+    // a magnitude do vetor target controla quï¿½o rï¿½pido o objeto converge para a direï¿½ï¿½o do alvo
     Vector target = Vector(Line::Angle(Point(x, y), Point(player->X(), player->Y())), 20.0f * gameTime);
-    
+
     // fugir se o player chegar muito perto
     if (Point::Distance(Point(x, y), Point(player->X(), player->Y())) < distance)
     {
@@ -97,8 +100,8 @@ void Green::Update()
     }
 
     speed.Add(target);
-    
-    // limita a magnitude da velocidade para impedir 
+
+    // limita a magnitude da velocidade para impedir
     // seu crescimento indefinido na soma vetorial
     if (speed.Magnitude() > 8)
         speed.ScaleTo(8.0f);
@@ -107,7 +110,7 @@ void Green::Update()
     Translate(speed.XComponent() * 50.0f * gameTime, -speed.YComponent() * 50.0f * gameTime);
     RotateTo(-speed.Angle() + 90);
 
-    // mantém o objeto dentro do mundo do jogo
+    // mantï¿½m o objeto dentro do mundo do jogo
     if (x < 50)
         MoveTo(50, y);
     if (y < 50)

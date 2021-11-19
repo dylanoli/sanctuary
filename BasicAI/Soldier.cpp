@@ -1,93 +1,94 @@
 /**********************************************************************************
-// Orange (Código Fonte)
+// Soldier (Cï¿½digo Fonte)
 // 
-// Criação:     05 Ago 2019
-// Atualização: 11 Nov 2021
+// Criaï¿½ï¿½o:     05 Ago 2019
+// Atualizaï¿½ï¿½o: 11 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Objeto faz movimento retilíneo
+// Descriï¿½ï¿½o:   Objeto faz movimento retilï¿½neo
 //
 **********************************************************************************/
 
 #include "BasicAI.h"
-#include "Orange.h"
-#include "Random.h" 
+#include "Soldier.h"
+#include "Random.h"
 #include "Explosion.h"
 
 // ---------------------------------------------------------------------------------
 
-Orange::Orange(float pX, float pY, float ang)
+Soldier::Soldier(float pX, float pY, float ang)
 {
-    sprite = new Sprite(BasicAI::orange);
+    sprite = new Sprite(BasicAI::soldier);
 
     // ajusta o vetor velocidade
     speed.RotateTo(ang);
     speed.ScaleTo(400);
     RotateTo(-speed.Angle());
-    BBox(new Circle(20.0f));
+    BBox(new Circle(40.0f));
     MoveTo(pX, pY);
-    type = ORANGE;
+    type = SOLDIER;
 
-    // configuração do emissor de partículas
+    // configuraï¿½ï¿½o do emissor de partï¿½culas
     Generator emitter;
-    emitter.imgFile = "Resources/Spark.png";    // arquivo de imagem
-    emitter.angle = speed.Angle() + 180;        // ângulo base do emissor
-    emitter.spread = 5;                         // espalhamento em graus
-    emitter.lifetime = 0.4f;                    // tempo de vida em segundos
-    emitter.frequency = 0.010f;                 // tempo entre geração de novas partículas
-    emitter.percentToDim = 0.8f;                // desaparece após 60% da vida
-    emitter.minSpeed = 100.0f;                  // velocidade mínima das partículas
-    emitter.maxSpeed = 200.0f;                  // velocidade máxima das partículas
-    emitter.color.r = 1.0f;                     // componente Red da partícula 
-    emitter.color.g = 0.5;                      // componente Green da partícula 
-    emitter.color.b = 0.0f;                     // componente Blue da partícula 
-    emitter.color.a = 1.0f;                     // transparência da partícula
+    emitter.imgFile = "Resources/Spark.png"; // arquivo de imagem
+    emitter.angle = speed.Angle() + 180;     // ï¿½ngulo base do emissor
+    emitter.spread = 5;                      // espalhamento em graus
+    emitter.lifetime = 0.4f;                 // tempo de vida em segundos
+    emitter.frequency = 0.010f;              // tempo entre geraï¿½ï¿½o de novas partï¿½culas
+    emitter.percentToDim = 0.8f;             // desaparece apï¿½s 60% da vida
+    emitter.minSpeed = 100.0f;               // velocidade mï¿½nima das partï¿½culas
+    emitter.maxSpeed = 200.0f;               // velocidade mï¿½xima das partï¿½culas
+    emitter.color.r = 1.0f;                  // componente Red da partï¿½cula
+    emitter.color.g = 0.5;                   // componente Shooter da partï¿½cula
+    emitter.color.b = 0.0f;                  // componente stalker da partï¿½cula
+    emitter.color.a = 1.0f;                  // transparï¿½ncia da partï¿½cula
 
-    // cria sistema de partículas
+    // cria sistema de partï¿½culas
     tail = new Particles(emitter);
     tailCount = 0;
 
     // incrementa contagem
-    ++Hud::oranges;
+    ++Hud::soldiers;
 }
 
 // ---------------------------------------------------------------------------------
 
-Orange::~Orange()
+Soldier::~Soldier()
 {
     delete sprite;
     delete tail;
 
     // decrementa contagem
     Hud::particles -= tailCount;
-    --Hud::oranges;
+    --Hud::soldiers;
 }
 
 // -------------------------------------------------------------------------------
 
-void Orange::OnCollision(Object * obj)
+void Soldier::OnCollision(Object *obj)
 {
     if (obj->Type() == MISSILE)
     {
+        Player::score += 5;
         BasicAI::scene->Delete(obj, STATIC);
         BasicAI::scene->Delete(this, MOVING);
         BasicAI::scene->Add(new Explosion(x, y), STATIC);
-        BasicAI::audio->Play(EXPLODE);        
+        BasicAI::audio->Play(EXPLODE);
     }
 }
 
 // -------------------------------------------------------------------------------
 
-void Orange::Update()
+void Soldier::Update()
 {
     // movimenta objeto pelo seu vetor velocidade
     Translate(speed.XComponent() * gameTime, -speed.YComponent() * gameTime);
 
-    // ajusta ângulo do vetor na direção oposta
+    // ajusta ï¿½ngulo do vetor na direï¿½ï¿½o oposta
     if (x < 50 || y < 50 || x > game->Width() - 50 || y > game->Height() - 50)
     {
         Rotate(180);
-        speed.Rotate(180);        
+        speed.Rotate(180);
         Translate(speed.XComponent() * gameTime, -speed.YComponent() * gameTime);
     }
 
@@ -103,7 +104,7 @@ void Orange::Update()
 
 // ---------------------------------------------------------------------------------
 
-void Orange::Draw()
+void Soldier::Draw()
 {
     sprite->Draw(x, y, Layer::LOWER, scale, rotation);
     tail->Draw(Layer::LOWER, 1.0f);

@@ -1,28 +1,28 @@
 /**********************************************************************************
-// WaveB (Código Fonte)
+// WaveB (Cï¿½digo Fonte)
 //
-// Criação:     06 Ago 2019
-// Atualização: 11 Nov 2021
+// Criaï¿½ï¿½o:     06 Ago 2019
+// Atualizaï¿½ï¿½o: 11 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Cria uma onda de inimigos Blue
+// Descriï¿½ï¿½o:   Cria uma onda de inimigos Stalker
 //
 **********************************************************************************/
 
 #include "WaveB.h"
 #include "BasicAI.h"
-#include "Blue.h"
+#include "Stalker.h"
 #include "Hud.h"
 
 // ------------------------------------------------------------------------------
 
 WaveB::WaveB() : posX(0, window->Width()), posY(0, window->Height()), secs(8.0f, 12.0f)
 {
-    // posição dos inimigos
+    // posiï¿½ï¿½o dos inimigos
     pX = posX.Rand();
     pY = posY.Rand();
 
-    // atraso para a próxima onda 
+    // atraso para a prï¿½xima onda
     delay = secs.Rand();
 }
 
@@ -30,7 +30,6 @@ WaveB::WaveB() : posX(0, window->Width()), posY(0, window->Height()), secs(8.0f,
 
 WaveB::~WaveB()
 {
-
 }
 
 // -------------------------------------------------------------------------------
@@ -41,15 +40,15 @@ void WaveB::Update()
     static uint counter = 8;
 
     // se passou o tempo de atraso
-    if (timer.Elapsed(delay) && Hud::blues < 15)
+    if (timer.Elapsed(delay) && Hud::stalker < 15)
     {
         if (counter > 0)
         {
             // toca som de nova onda
-            BasicAI::audio->Play(BLUE);
+            BasicAI::audio->Play(STALKER);
 
             // adiciona nova inimigo
-            BasicAI::scene->Add(new Blue(pX, pY, BasicAI::player), MOVING);
+            BasicAI::scene->Add(new Stalker(pX, pY, BasicAI::player), MOVING);
 
             delay = 0.850f;
             timer.Start();
@@ -57,7 +56,7 @@ void WaveB::Update()
         }
         else
         {
-            // nova posição do inimigo
+            // nova posiï¿½ï¿½o do inimigo
             pX = posX.Rand();
             pY = posY.Rand();
 
@@ -73,7 +72,6 @@ void WaveB::Update()
 
 void WaveB::Draw()
 {
-    
 }
 
 // -------------------------------------------------------------------------------

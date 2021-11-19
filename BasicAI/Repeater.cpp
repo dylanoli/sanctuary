@@ -1,65 +1,67 @@
 /**********************************************************************************
-// Magenta (Código Fonte)
+// Repeater (Cï¿½digo Fonte)
 // 
-// Criação:     10 Out 2012
-// Atualização: 11 Nov 2021
+// Criaï¿½ï¿½o:     10 Out 2012
+// Atualizaï¿½ï¿½o: 11 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Objeto faz um perseguição direta
+// Descriï¿½ï¿½o:   Objeto faz um perseguiï¿½ï¿½o direta
 //
 **********************************************************************************/
 
 #include "BasicAI.h"
-#include "Magenta.h"
-#include "Random.h" 
+#include "Repeater.h"
+#include "Random.h"
 #include "Hud.h"
 #include "Explosion.h"
 
 // ---------------------------------------------------------------------------------
 
-Magenta::Magenta(float pX, float pY, Player * p)
+Repeater::Repeater(float pX, float pY, Player *p)
 {
     player = p;
-    sprite = new Sprite(BasicAI::magenta);
-    BBox(new Circle(18.0f));
-    
+    sprite = new Sprite(BasicAI::repeater);
+    BBox(new Circle(40));
+
     speed.RotateTo(90);
     speed.ScaleTo(2.0f);
-    
+
     MoveTo(pX, pY);
-    type = MAGENTA;
+    type = REPEATER;
 
     // incrementa contador
-    ++Hud::magentas;
+    ++Hud::repeaters;
 }
 
 // ---------------------------------------------------------------------------------
 
-Magenta::~Magenta()
+Repeater::~Repeater()
 {
     delete sprite;
 
     // decrementa contador
-    --Hud::magentas;
+    --Hud::repeaters;
 }
 
 // -------------------------------------------------------------------------------
 
-void Magenta::OnCollision(Object * obj)
+void Repeater::OnCollision(Object *obj)
 {
     if (obj->Type() == MISSILE)
     {
+        Player::score += 5;
         BasicAI::scene->Delete(obj, STATIC);
         BasicAI::scene->Delete(this, MOVING);
         BasicAI::scene->Add(new Explosion(x, y), STATIC);
         BasicAI::audio->Play(EXPLODE);
     }
-    else if (obj->Type() == MAGENTA) {
-        Magenta* greenA = this;
-        Magenta* greenB = static_cast<Magenta*>(obj);
+    else if (obj->Type() == REPEATER)
+    {
+        Repeater *shooterA = this;
+        Repeater *shooterB = static_cast<Repeater *>(obj);
 
-        Point pA{ greenA->X(), greenA->Y() };
-        Point pB{ greenB->X(), greenB->Y() };
+        Point pA{shooterA->X(), shooterA->Y()};
+        Point pB{shooterB->X(), shooterB->Y()};
 
         float angleA = Line::Angle(pA, pB);
         float angleB = angleA + 180.0f;
@@ -67,28 +69,28 @@ void Magenta::OnCollision(Object * obj)
         if (angleB > 360)
             angleB -= 360.0f;
 
-        Vector impactA{ angleA, 0.75f * greenA->speed.Magnitude() };
-        Vector impactB{ angleB, 0.75f * greenB->speed.Magnitude() };
+        Vector impactA{angleA, 0.75f * shooterA->speed.Magnitude()};
+        Vector impactB{angleB, 0.75f * shooterB->speed.Magnitude()};
 
-        greenA->speed.Add(impactB);
-        greenB->speed.Add(impactA);
+        shooterA->speed.Add(impactB);
+        shooterB->speed.Add(impactA);
 
         // limita velocidade das rochas
-        if (greenB->speed.Magnitude() > 15.0f)
-            greenB->speed.ScaleTo(15.0f);
+        if (shooterB->speed.Magnitude() > 15.0f)
+            shooterB->speed.ScaleTo(15.0f);
 
-        if (greenA->speed.Magnitude() > 15.0f)
-            greenA->speed.ScaleTo(15.0f);
+        if (shooterA->speed.Magnitude() > 15.0f)
+            shooterA->speed.ScaleTo(15.0f);
     }
 }
 
 // -------------------------------------------------------------------------------
 
-void Magenta::Update()
+void Repeater::Update()
 {
-    // ajusta ângulo do vetor 
+    // ajusta ï¿½ngulo do vetor
     speed.RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())));
-    
+
     RotateTo(-speed.Angle() + 90);
 
     // movimenta objeto pelo seu vetor velocidade

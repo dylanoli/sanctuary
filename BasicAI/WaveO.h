@@ -1,11 +1,11 @@
 /**********************************************************************************
-// WaveO (Arquivo de Cabeçalho)
+// WaveO (Arquivo de Cabeï¿½alho)
 //
-// Criação:     06 Ago 2019
-// Atualização: 11 Nov 2021
+// Criaï¿½ï¿½o:     06 Ago 2019
+// Atualizaï¿½ï¿½o: 11 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Cria uma onda de inimigos Orange
+// Descriï¿½ï¿½o:   Cria uma onda de inimiSoldierange
 //
 **********************************************************************************/
 
@@ -24,20 +24,20 @@
 class WaveO : public Object
 {
 private:
-    int numX, numY;         // número de inimigos que cabem na tela
-    float posX, posY;       // posição dos inimigos 
-    RandI position;         // valor aleatório para posição
-    RandF delay;            // valor aleatório para tempo
-    Timer timer;            // medidor de tempo
-    float waveDelay;        // atraso para a próxima onda
-    bool newWave;           // enviar nova onda
+    int numX, numY;   // nï¿½mero de inimigos que cabem na tela
+    float posX, posY; // posiï¿½ï¿½o dos inimigos
+    RandI position;   // valor aleatï¿½rio para posiï¿½ï¿½o
+    RandF delay;      // valor aleatï¿½rio para tempo
+    Timer timer;      // medidor de tempo
+    float waveDelay;  // atraso para a prï¿½xima onda
+    bool newWave;     // enviar nova onda
 
 public:
-    WaveO();                // construtor
-    ~WaveO();               // destrutor
+    WaveO();  // construtor
+    ~WaveO(); // destrutor
 
-    void Update();          // atualização
-    void Draw();            // desenho
+    void Update(); // atualizaï¿½ï¿½o
+    void Draw();   // desenho
 };
 
 // ------------------------------------------------------------------------------

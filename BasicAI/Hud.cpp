@@ -1,32 +1,33 @@
 /**********************************************************************************
-// Hud (Código Fonte)
+// Hud (Cï¿½digo Fonte)
 //
-// Criação:     02 Ago 2019
-// Atualização: 11 Nov 2021
+// Criaï¿½ï¿½o:     02 Ago 2019
+// Atualizaï¿½ï¿½o: 11 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Heads Up Display
+// Descriï¿½ï¿½o:   Heads Up Display
 //
 **********************************************************************************/
 
 #include "Hud.h"
 #include "BasicAI.h"
+#include "Player.h"
 
 // ------------------------------------------------------------------------------
 
 // inicializa contadores
 uint Hud::missiles = 0;
-uint Hud::oranges = 0;
-uint Hud::magentas = 0;
-uint Hud::blues = 0;
-uint Hud::greens = 0;
+uint Hud::soldiers = 0;
+uint Hud::repeaters = 0;
+uint Hud::stalker = 0;
+uint Hud::shooters = 0;
 uint Hud::particles = 0;
 
 // ------------------------------------------------------------------------------
 
 Hud::Hud()
 {
-    // cria fonte para exibição de texto
+    // cria fonte para exibiï¿½ï¿½o de texto
     font = new Font("Resources/Tahoma14.png");
     font->Spacing("Resources/Tahoma14.dat");
     bold = new Font("Resources/Tahoma14b.png");
@@ -77,7 +78,7 @@ void Hud::Draw()
     infoBox->Draw(game->viewport.left + 140, game->viewport.top + 100, Layer::FRONT);
 
     // define cor do texto
-    Color textColor{ 0.7f, 0.7f, 0.7f, 1.0f };
+    Color textColor{0.7f, 0.7f, 0.7f, 1.0f};
 
     // desenha texto
     text.str("");
@@ -89,16 +90,12 @@ void Hud::Draw()
     font->Draw(40, 92, text.str(), textColor);
 
     text.str("");
-    text << "Partículas: " << particles;
+    text << "Vida: " << Player::life;
     font->Draw(40, 112, text.str(), textColor);
 
     text.str("");
-    text << "Inimigos: " << oranges + magentas + blues + greens;
+    text << "Pontuacao: " << Player::score;
     font->Draw(40, 132, text.str(), textColor);
-
-    text.str("");
-    text << "Mísseis: " << missiles;
-    font->Draw(40, 152, text.str(), textColor);
 }
 
 // -------------------------------------------------------------------------------

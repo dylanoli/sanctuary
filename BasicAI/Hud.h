@@ -1,11 +1,11 @@
 /**********************************************************************************
-// Hud (Arquivo de Cabeçalho)
+// Hud (Arquivo de Cabeï¿½alho)
 //
-// Criação:     02 Ago 2019
-// Atualização: 11 Nov 2021
+// Criaï¿½ï¿½o:     02 Ago 2019
+// Atualizaï¿½ï¿½o: 11 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Heads Up Display
+// Descriï¿½ï¿½o:   Heads Up Display
 //
 **********************************************************************************/
 
@@ -25,31 +25,30 @@ using std::stringstream;
 class Hud : public Object
 {
 private:
-    Font * font = nullptr;              // fonte para exibição normal
-    Font * bold = nullptr;              // fonte para exibição negrito
-    Sprite * infoBox = nullptr;         // área de informações do jogo
+    Font *font = nullptr;      // fonte para exibiï¿½ï¿½o normal
+    Font *bold = nullptr;      // fonte para exibiï¿½ï¿½o negrito
+    Sprite *infoBox = nullptr; // ï¿½rea de informaï¿½ï¿½es do jogo
 
-    stringstream text;                  // texto temporário
-    uint frameCount;                    // contador de quadros por segundo
-    float totalTime;                    // tempo total transcorrido 
-    uint fps;                           // valor para exibição do fps
+    stringstream text; // texto temporï¿½rio
+    uint frameCount;   // contador de quadros por segundo
+    float totalTime;   // tempo total transcorrido
+    uint fps;          // valor para exibiï¿½ï¿½o do fps
 
 public:
-    static uint missiles;               // número de mísseis na tela
-    static uint oranges;                // número de inimigos laranja
-    static uint magentas;               // número de inimigos rosa
-    static uint blues;                  // número de inimigos azul
-    static uint greens;                 // número de inimigos verde
-    static uint particles;              // número de partículas ativas
+    static uint missiles;  // nï¿½mero de mï¿½sseis na tela
+    static uint soldiers;  // nï¿½mero de inimigos laranja
+    static uint repeaters; // nï¿½mero de inimigos rosa
+    static uint stalker;   // nï¿½mero de inimigos azul
+    static uint shooters;  // nï¿½mero de inimigos verde
+    static uint particles; // nï¿½mero de partï¿½culas ativas
 
-    Hud();                              // construtor
-    ~Hud();                             // destrutor
+    Hud();  // construtor
+    ~Hud(); // destrutor
 
-    void Update();                      // atualização
-    void Draw();                        // desenho
+    void Update(); // atualizaï¿½ï¿½o
+    void Draw();   // desenho
 };
 
 // ------------------------------------------------------------------------------
 
 #endif
-

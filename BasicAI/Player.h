@@ -1,11 +1,11 @@
 /**********************************************************************************
-// Player (Arquivo de Cabeçalho)
+// Player (Arquivo de Cabeï¿½alho)
 // 
-// Criação:     10 Out 2012
-// Atualização: 11 Nov 2021
+// Criaï¿½ï¿½o:     10 Out 2012
+// Atualizaï¿½ï¿½o: 11 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Define a classe jogador
+// Descriï¿½ï¿½o:   Define a classe jogador
 //
 **********************************************************************************/
 
@@ -16,8 +16,8 @@
 
 #include "Object.h"                     // objetos do jogo
 #include "Sprite.h"                     // desenho de sprites
-#include "Vector.h"                     // representação de vetores
-#include "Particles.h"                  // sistema de partículas
+#include "Vector.h"                     // representaï¿½ï¿½o de vetores
+#include "Particles.h"                  // sistema de partï¿½culas
 #include "Controller.h"                 // entrada pelo controle
 #include "Timer.h"                      // controle do tempo
 
@@ -28,21 +28,23 @@ class Player : public Object
 private:
     Sprite * sprite;                    // sprite do objeto
     Particles * tail;                   // calda do jogador
-    uint tailCount;                     // quantidade de partículas da calda
+    uint tailCount;                     // quantidade de partï¿½culas da calda
     
     Controller * gamepad;               // leitura do controle
-    bool gamepadOn;                     // controle está ligado
+    bool gamepadOn;                     // controle estï¿½ ligado
     
     Timer timer;                        // controla tempo dos disparos
-    llong start;                        // marcação de início do disparo
+    llong start;                        // marcaï¿½ï¿½o de inï¿½cio do disparo
     bool axisCtrl;                      // habilita leitura de disparos
     bool keysCtrl;                      // habilita disparos pelas setas
     bool keysPressed;                   // qualquer seta pressionada
-    float firingAngle;                  // direção dos disparos
+    float firingAngle;                  // direï¿½ï¿½o dos disparos
 
 public:
-    static Image * missile;             // imagem do míssil
-    Vector speed;                       // velocidade e direção de movimento
+    static Image * missile;             // imagem do mï¿½ssil
+    static int life;
+    static int score;
+    Vector speed;                       // velocidade e direï¿½ï¿½o de movimento
 
     Player();                           // construtor
     ~Player();                          // destrutor
@@ -51,8 +53,9 @@ public:
     bool KeysTimed(bool pressed, float time);
 
     void Move(Vector && v);             // movimenta jogador
-    void Update();                      // atualização
+    void Update();                      // atualizaï¿½ï¿½o
     void Draw();                        // desenho
+    void OnCollision(Object* obj);
 }; 
 // ---------------------------------------------------------------------------------
 

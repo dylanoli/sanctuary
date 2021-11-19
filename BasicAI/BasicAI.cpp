@@ -1,68 +1,68 @@
 /**********************************************************************************
-// BasicAI (Código Fonte)
+// BasicAI (Cï¿½digo Fonte)
 // 
-// Criação:     23 Out 2012
-// Atualização: 11 Nov 2021
+// Criaï¿½ï¿½o:     23 Out 2012
+// Atualizaï¿½ï¿½o: 11 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Demonstração de todas as IAs
+// Descriï¿½ï¿½o:   Demonstraï¿½ï¿½o de todas as IAs
 
 //
 **********************************************************************************/
 
 #include "Resources.h"
 #include "BasicAI.h"
-#include "Engine.h"    
+#include "Engine.h"
 #include "Delay.h"
 
 // ------------------------------------------------------------------------------
 
-Player * BasicAI::player  = nullptr;
-Audio  * BasicAI::audio   = nullptr;
-Scene  * BasicAI::scene   = nullptr;
-bool     BasicAI::viewHUD = false;
-Image  * BasicAI::blue    = nullptr;
-Image  * BasicAI::green   = nullptr;
-Image  * BasicAI::magenta = nullptr;
-Image  * BasicAI::orange  = nullptr;
+Player *BasicAI::player = nullptr;
+Audio *BasicAI::audio = nullptr;
+Scene *BasicAI::scene = nullptr;
+bool BasicAI::viewHUD = false;
+Image *BasicAI::stalker = nullptr;
+Image *BasicAI::shooter = nullptr;
+Image *BasicAI::repeater = nullptr;
+Image *BasicAI::soldier = nullptr;
 
 // ------------------------------------------------------------------------------
 
-void BasicAI::Init() 
+void BasicAI::Init()
 {
-    // cria sistema de áudio
+    // cria sistema de ï¿½udio
     audio = new Audio();
     audio->Add(START, "Resources/Start.wav");
     audio->Add(THEME, "Resources/Theme.wav");
     audio->Add(FIRE, "Resources/Fire.wav", 2);
     audio->Add(HITWALL, "Resources/Hitwall.wav", 5);
     audio->Add(EXPLODE, "Resources/Explode.wav", 3);
-    audio->Add(ORANGE, "Resources/Orange.wav", 1);
-    audio->Add(MAGENTA, "Resources/Magenta.wav", 2);
-    audio->Add(BLUE, "Resources/Blue.wav", 2);
-    audio->Add(GREEN, "Resources/Green.wav", 2);
+    audio->Add(SOLDIER, "Resources/Soldier.wav", 1);
+    audio->Add(REPEATER, "Resources/Repeater.wav", 2);
+    audio->Add(STALKER, "Resources/Stalker.wav", 2);
+    audio->Add(SHOOTER, "Resources/Shooter.wav", 2);
 
     // ajusta volumes
     audio->Volume(START, 0.30f);
     audio->Volume(THEME, 0.60f);
     audio->Volume(FIRE, 0.10f);
     audio->Volume(EXPLODE, 0.15f);
-    audio->Volume(ORANGE, 0.90f);
-    audio->Volume(MAGENTA, 0.40f);
-    audio->Volume(BLUE, 0.20f);
-    audio->Volume(GREEN, 0.75f);
+    audio->Volume(SOLDIER, 0.90f);
+    audio->Volume(REPEATER, 0.40f);
+    audio->Volume(STALKER, 0.20f);
+    audio->Volume(SHOOTER, 0.75f);
 
     // carrega imagens das geometrias
-    blue    = new Image("Resources/Naves/Enemy_4.png");
-    green   = new Image("Resources/Naves/Enemy_3.png");
-    magenta = new Image("Resources/Naves/Enemy_2.png");
-    orange  = new Image("Resources/Naves/Enemy_1.png");
+    stalker = new Image("Resources/Naves/Stalker.png");
+    shooter = new Image("Resources/Naves/Shooter.png");
+    repeater = new Image("Resources/Naves/Repeater.png");
+    soldier = new Image("Resources/Naves/Soldier.png");
 
     // carrega/incializa objetos
-    backg   = new Background("Resources/Space.jpg");
-    player  = new Player();
-    scene   = new Scene();  
-    hud     = new Hud();
+    backg = new Background("Resources/Space.jpg");
+    player = new Player();
+    scene = new Scene();
+    hud = new Hud();
 
     // adiciona objetos na cena
     scene->Add(player, MOVING);
@@ -72,7 +72,7 @@ void BasicAI::Init()
     // inicializa a viewport
     // ----------------------
 
-    // calcula posição para manter viewport centralizada
+    // calcula posiï¿½ï¿½o para manter viewport centralizada
     float difx = (game->Width() - window->Width()) / 2.0f;
     float dify = (game->Height() - window->Height()) / 2.0f;
 
@@ -91,7 +91,7 @@ void BasicAI::Update()
     if (window->KeyDown(VK_ESCAPE))
         window->Close();
 
-    // atualiza cena e calcula colisões
+    // atualiza cena e calcula colisï¿½es
     scene->Update();
     scene->CollisionDetection();
 
@@ -99,25 +99,25 @@ void BasicAI::Update()
     // atualiza a viewport
     // ---------------------------------------------------
 
-    viewport.left   = player->X() - window->CenterX();
-    viewport.right  = player->X() + window->CenterX();
-    viewport.top    = player->Y() - window->CenterY();
+    viewport.left = player->X() - window->CenterX();
+    viewport.right = player->X() + window->CenterX();
+    viewport.top = player->Y() - window->CenterY();
     viewport.bottom = player->Y() + window->CenterY();
-            
+
     if (viewport.left < 0)
     {
-        viewport.left  = 0;
+        viewport.left = 0;
         viewport.right = window->Width();
     }
     else if (viewport.right > game->Width())
-    {  
-        viewport.left  = game->Width() - window->Width();
-         viewport.right = game->Width();
+    {
+        viewport.left = game->Width() - window->Width();
+        viewport.right = game->Width();
     }
-                  
+
     if (viewport.top < 0)
     {
-        viewport.top  = 0;
+        viewport.top = 0;
         viewport.bottom = window->Height();
     }
     else if (viewport.bottom > game->Height())
@@ -128,7 +128,7 @@ void BasicAI::Update()
 
     // ---------------------------------------------------
 
-    // atualiza o painel de informações
+    // atualiza o painel de informaï¿½ï¿½es
     hud->Update();
 
     // ativa ou desativa a bounding box
@@ -138,7 +138,7 @@ void BasicAI::Update()
     // ativa ou desativa o heads up display
     if (window->KeyPress('H'))
         viewHUD = !viewHUD;
-} 
+}
 
 // ------------------------------------------------------------------------------
 
@@ -150,7 +150,7 @@ void BasicAI::Draw()
     // desenha a cena
     scene->Draw();
 
-    // desenha o painel de informações
+    // desenha o painel de informaï¿½ï¿½es
     if (viewHUD)
         hud->Draw();
 
@@ -168,22 +168,21 @@ void BasicAI::Finalize()
     delete scene;
     delete backg;
 
-    delete blue;
-    delete green;
-    delete magenta;
-    delete orange;
+    delete stalker;
+    delete shooter;
+    delete repeater;
+    delete soldier;
 }
 
-
 // ------------------------------------------------------------------------------
-//                                  WinMain                                      
+//                                  WinMain
 // ------------------------------------------------------------------------------
 
-int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
+int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
                      _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
     // cria motor do jogo
-    Engine * engine = new Engine();
+    Engine *engine = new Engine();
 
     // configura janela
     //engine->window->Mode(WINDOWED);
@@ -197,15 +196,15 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     //engine->graphics->VSync(true);
 
     // cria o jogo
-    Game * game = new BasicAI();
+    Game *game = new BasicAI();
 
     // configura o jogo
     game->Size(3840, 2160);
-    
-    // inicia execução
+
+    // inicia execuï¿½ï¿½o
     int status = engine->Start(game);
 
-    // destrói motor 
+    // destrï¿½i motor
     delete engine;
 
     // encerra

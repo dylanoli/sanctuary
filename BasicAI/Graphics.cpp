@@ -1,40 +1,40 @@
 /**********************************************************************************
-// Graphics (Código Fonte)
+// Graphics (Cï¿½digo Fonte)
 // 
-// Criação:     06 Abr 2011
-// Atualização: 27 Ago 2021
+// Criaï¿½ï¿½o:     06 Abr 2011
+// Atualizaï¿½ï¿½o: 27 Ago 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Graphics é uma classe que faz uso das funções do Direct3D para 
-//              acessar o hardware de aceleração gráfica da placa de vídeo.
+// Descriï¿½ï¿½o:   Graphics ï¿½ uma classe que faz uso das funï¿½ï¿½es do Direct3D para 
+//              acessar o hardware de aceleraï¿½ï¿½o grï¿½fica da placa de vï¿½deo.
 //
 **********************************************************************************/
 
 #include "Graphics.h"
 
 // -------------------------------------------------------------------------------
-// Inicialização de membros estáticos da classe
+// Inicializaï¿½ï¿½o de membros estï¿½ticos da classe
 
-ID3D11Device * Graphics::device = nullptr;            // dispositivo gráfico
-ID3D11DeviceContext * Graphics::context = nullptr;    // contexto do dispositivo gráfico 
-D3D11_VIEWPORT Graphics::viewport = {};               // viewport
+ID3D11Device *Graphics::device = nullptr;         // dispositivo grï¿½fico
+ID3D11DeviceContext *Graphics::context = nullptr; // contexto do dispositivo grï¿½fico
+D3D11_VIEWPORT Graphics::viewport = {};           // viewport
 
 // ------------------------------------------------------------------------------
 
-Graphics::Graphics() 
+Graphics::Graphics()
 {
-    // inicializa variáveis membro
-    swapChain           = nullptr;                    // ponteiro para swap chain 
-    renderTargetView    = nullptr;                    // render target view
-    blendState          = nullptr;                    // mistura de cores
-    featureLevel        = D3D_FEATURE_LEVEL_11_0;     // versão do Direct3D
-    
-    bgColor[0]          = 0.0f;                       // Red
-    bgColor[1]          = 0.0f;                       // Green
-    bgColor[2]          = 0.0f;                       // Blue
-    bgColor[3]          = 0.0f;                       // Alpha (0 = transparente)
+    // inicializa variï¿½veis membro
+    swapChain = nullptr;                   // ponteiro para swap chain
+    renderTargetView = nullptr;            // render target view
+    blendState = nullptr;                  // mistura de cores
+    featureLevel = D3D_FEATURE_LEVEL_11_0; // versï¿½o do Direct3D
 
-    vSync               = false;                      // vertical sync desligado
+    bgColor[0] = 0.0f; // Red
+    bgColor[1] = 0.0f; // Shooter
+    bgColor[2] = 0.0f; // Stalker
+    bgColor[3] = 0.0f; // Alpha (0 = transparente)
+
+    vSync = false; // vertical sync desligado
 }
 
 // ------------------------------------------------------------------------------
@@ -58,13 +58,13 @@ Graphics::~Graphics()
     // libera swap chain
     if (swapChain)
     {
-        // Direct3D é incapaz de fechar quando em tela cheia
+        // Direct3D ï¿½ incapaz de fechar quando em tela cheia
         swapChain->SetFullscreenState(false, NULL);
         swapChain->Release();
         swapChain = nullptr;
     }
 
-    // libera contexto do dispositivo gráfico
+    // libera contexto do dispositivo grï¿½fico
     if (context)
     {
         // restaura ao estado original
@@ -73,7 +73,7 @@ Graphics::~Graphics()
         context = nullptr;
     }
 
-    // libera dispositivo gráfico
+    // libera dispositivo grï¿½fico
     if (device)
     {
         device->Release();
@@ -83,7 +83,7 @@ Graphics::~Graphics()
 
 // -----------------------------------------------------------------------------
 
-bool Graphics::Initialize(Window * window)
+bool Graphics::Initialize(Window *window)
 {
     // -------------------------------
     // Dispositivo Direct3D
@@ -92,101 +92,101 @@ bool Graphics::Initialize(Window * window)
     uint createDeviceFlags = 0;
 
 #ifdef _DEBUG
-    // exibe mensagens de erro do Direct3D em modo de depuração
+    // exibe mensagens de erro do Direct3D em modo de depuraï¿½ï¿½o
     createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
 
     // cria objeto para acessar dispositivo Direct3D
-    if FAILED(
+    if FAILED (
         D3D11CreateDevice(
-            NULL,                           // adaptador de vídeo (NULL = adaptador padrão)
-            D3D_DRIVER_TYPE_HARDWARE,       // tipo de driver D3D (Hardware, Reference ou Software)
-            NULL,                           // ponteiro para rasterizador em software
-            createDeviceFlags,              // modo de depuração ou modo normal
-            NULL,                           // featureLevels do Direct3D (NULL = maior suportada)
-            0,                              // tamanho do vetor featureLevels
-            D3D11_SDK_VERSION,              // versão do SDK do Direct3D
-            &device,                        // guarda o dispositivo D3D criado
-            &featureLevel,                  // versão do Direct3D utilizada
-            &context))                      // contexto do dispositivo D3D
+            NULL,                     // adaptador de vï¿½deo (NULL = adaptador padrï¿½o)
+            D3D_DRIVER_TYPE_HARDWARE, // tipo de driver D3D (Hardware, Reference ou Software)
+            NULL,                     // ponteiro para rasterizador em software
+            createDeviceFlags,        // modo de depuraï¿½ï¿½o ou modo normal
+            NULL,                     // featureLevels do Direct3D (NULL = maior suportada)
+            0,                        // tamanho do vetor featureLevels
+            D3D11_SDK_VERSION,        // versï¿½o do SDK do Direct3D
+            &device,                  // guarda o dispositivo D3D criado
+            &featureLevel,            // versï¿½o do Direct3D utilizada
+            &context))                // contexto do dispositivo D3D
         return false;
 
     // -------------------------------
     // Cor de Fundo do Direct3D
     // -------------------------------
-    
+
     // ajusta a cor de fundo do backbuffer
     // para a mesma cor de fundo da janela
     COLORREF color = window->Color();
 
-    bgColor[0] = GetRValue(color)/255.0f;     // Red
-    bgColor[1] = GetGValue(color)/255.0f;     // Green
-    bgColor[2] = GetBValue(color)/255.0f;     // Blue
-    bgColor[3] = 1.0f;                        // Alpha (1 = cor sólida)
+    bgColor[0] = GetRValue(color) / 255.0f; // Red
+    bgColor[1] = GetGValue(color) / 255.0f; // Shooter
+    bgColor[2] = GetBValue(color) / 255.0f; // Stalker
+    bgColor[3] = 1.0f;                      // Alpha (1 = cor sï¿½lida)
 
     // -------------------------------
     // Interfaces DXGI
     // -------------------------------
 
-    // cria objeto para a infraestrutura gráfica
-    IDXGIDevice * dxgiDevice = nullptr;
-    if FAILED(device->QueryInterface(__uuidof(IDXGIDevice), (void**) &dxgiDevice))
+    // cria objeto para a infraestrutura grï¿½fica
+    IDXGIDevice *dxgiDevice = nullptr;
+    if FAILED (device->QueryInterface(__uuidof(IDXGIDevice), (void **)&dxgiDevice))
         return false;
 
-    // cria objeto para adaptador de vídeo (placa gráfica)
-    IDXGIAdapter * dxgiAdapter = nullptr;
-    if FAILED(dxgiDevice->GetParent(__uuidof(IDXGIAdapter), (void**) &dxgiAdapter))
+    // cria objeto para adaptador de vï¿½deo (placa grï¿½fica)
+    IDXGIAdapter *dxgiAdapter = nullptr;
+    if FAILED (dxgiDevice->GetParent(__uuidof(IDXGIAdapter), (void **)&dxgiAdapter))
         return false;
 
-    // cria objeto para a fábrica DXGI
-    IDXGIFactory * dxgiFactory = nullptr;
-    if FAILED(dxgiAdapter->GetParent(__uuidof(IDXGIFactory), (void**) &dxgiFactory))
+    // cria objeto para a fï¿½brica DXGI
+    IDXGIFactory *dxgiFactory = nullptr;
+    if FAILED (dxgiAdapter->GetParent(__uuidof(IDXGIFactory), (void **)&dxgiFactory))
         return false;
 
     // -------------------------------
-    // Swap Chain 
+    // Swap Chain
     // -------------------------------
 
-    // descrição de uma swap chain
+    // descriï¿½ï¿½o de uma swap chain
     DXGI_SWAP_CHAIN_DESC swapDesc = {0};
-    swapDesc.BufferDesc.Width = uint(window->Width());          // largura do backbuffer
-    swapDesc.BufferDesc.Height = uint(window->Height());        // altura do backbuffer
-    swapDesc.BufferDesc.RefreshRate.Numerator = 60;             // taxa de atualização em hertz 
-    swapDesc.BufferDesc.RefreshRate.Denominator = 1;            // numerador é um inteiro e não um racional
-    swapDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;    // formato de cores RGBA 8 bits
-    swapDesc.SampleDesc.Count = 1;                              // amostras por pixel (antialiasing)
-    swapDesc.SampleDesc.Quality = 0;                            // nível de qualidade da imagem
-    swapDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;     // utilize superfície como RENDER-TARGET
-    swapDesc.BufferCount = 2;                                   // número de buffers (front + back)
-    swapDesc.OutputWindow = window->Id();                       // identificador da janela
-    swapDesc.Windowed = (window->Mode() != FULLSCREEN);         // modo janela ou tela cheia
-    swapDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;        // descarta superfície após apresentação
-    swapDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;    // muda a resolução do monitor em tela cheia
+    swapDesc.BufferDesc.Width = uint(window->Width());       // largura do backbuffer
+    swapDesc.BufferDesc.Height = uint(window->Height());     // altura do backbuffer
+    swapDesc.BufferDesc.RefreshRate.Numerator = 60;          // taxa de atualizaï¿½ï¿½o em hertz
+    swapDesc.BufferDesc.RefreshRate.Denominator = 1;         // numerador ï¿½ um inteiro e nï¿½o um racional
+    swapDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; // formato de cores RGBA 8 bits
+    swapDesc.SampleDesc.Count = 1;                           // amostras por pixel (antialiasing)
+    swapDesc.SampleDesc.Quality = 0;                         // nï¿½vel de qualidade da imagem
+    swapDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;  // utilize superfï¿½cie como RENDER-TARGET
+    swapDesc.BufferCount = 2;                                // nï¿½mero de buffers (front + back)
+    swapDesc.OutputWindow = window->Id();                    // identificador da janela
+    swapDesc.Windowed = (window->Mode() != FULLSCREEN);      // modo janela ou tela cheia
+    swapDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;     // descarta superfï¿½cie apï¿½s apresentaï¿½ï¿½o
+    swapDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH; // muda a resoluï¿½ï¿½o do monitor em tela cheia
 
     // cria uma swap chain
-    if FAILED(dxgiFactory->CreateSwapChain(device, &swapDesc, &swapChain))
+    if FAILED (dxgiFactory->CreateSwapChain(device, &swapDesc, &swapChain))
         return false;
 
     // impede a DXGI de monitorar ALT-ENTER e alternar entre windowed/fullscreen
-    if FAILED(dxgiFactory->MakeWindowAssociation(window->Id(), DXGI_MWA_NO_ALT_ENTER))
+    if FAILED (dxgiFactory->MakeWindowAssociation(window->Id(), DXGI_MWA_NO_ALT_ENTER))
         return false;
 
     // -------------------------------
     // Render Target
     // -------------------------------
 
-    // pega a superfície backbuffer de uma swapchain
-    ID3D11Texture2D * backBuffer = nullptr;
-    if FAILED(swapChain->GetBuffer(0, __uuidof(backBuffer), (void**)(&backBuffer)))
+    // pega a superfï¿½cie backbuffer de uma swapchain
+    ID3D11Texture2D *backBuffer = nullptr;
+    if FAILED (swapChain->GetBuffer(0, __uuidof(backBuffer), (void **)(&backBuffer)))
         return false;
 
     // cria uma render-target view do backbuffer
-    if FAILED(device->CreateRenderTargetView(backBuffer, NULL, &renderTargetView))
+    if FAILED (device->CreateRenderTargetView(backBuffer, NULL, &renderTargetView))
         return false;
 
-    // liga uma render-target ao estágio output-merger
+    // liga uma render-target ao estï¿½gio output-merger
     context->OMSetRenderTargets(1, &renderTargetView, nullptr);
-    
+
     // -------------------------------
     // Viewport / Rasterizer
     // -------------------------------
@@ -194,41 +194,41 @@ bool Graphics::Initialize(Window * window)
     // configura uma viewport
     viewport.TopLeftX = 0;
     viewport.TopLeftY = 0;
-    viewport.Width    = float(window->Width());
-    viewport.Height   = float(window->Height());
+    viewport.Width = float(window->Width());
+    viewport.Height = float(window->Height());
     viewport.MinDepth = 0.0f;
     viewport.MaxDepth = 1.0f;
 
-    // liga a viewport ao estágio de rasterização
-    context->RSSetViewports(1, &viewport); 
+    // liga a viewport ao estï¿½gio de rasterizaï¿½ï¿½o
+    context->RSSetViewports(1, &viewport);
 
     // ---------------------------------------------
     // Blend State
     // ---------------------------------------------
 
-    // Equação de mistura de cores (blending):
+    // Equaï¿½ï¿½o de mistura de cores (blending):
     // finalColor = SrcColor * SrcBlend <OP> DestColor * DestBlend
 
-    // Combinando superfícies transparentes (Alpha Blending)
+    // Combinando superfï¿½cies transparentes (Alpha Blending)
     // finalColor = SrcColor * ScrAlpha + DestColor * (1-SrcAlpha)
 
-    D3D11_BLEND_DESC blendDesc = { };
-    blendDesc.AlphaToCoverageEnable = false;                                // destaca a silhueta dos sprites
-    blendDesc.IndependentBlendEnable = false;                               // usa mesma mistura para todos os render targets
-    blendDesc.RenderTarget[0].BlendEnable = true;                           // habilita o blending
-    blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;             // fator de mistura da fonte 
-    blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;        // destino da mistura RGB é o alpha invertido 
-    blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;                 // operação de adição na mistura de cores
-    blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA;        // fonte da mistura Alpha é o alpha do pixel shader
-    blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;   // destino da mistura Alpha é o alpha invertido
-    blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;            // operação de adição na mistura de cores
-    blendDesc.RenderTarget[0].RenderTargetWriteMask = 0x0F;                 // componentes de cada pixel que podem ser sobrescritos
+    D3D11_BLEND_DESC blendDesc = {};
+    blendDesc.AlphaToCoverageEnable = false;                              // destaca a silhueta dos sprites
+    blendDesc.IndependentBlendEnable = false;                             // usa mesma mistura para todos os render targets
+    blendDesc.RenderTarget[0].BlendEnable = true;                         // habilita o blending
+    blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;           // fator de mistura da fonte
+    blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;      // destino da mistura RGB ï¿½ o alpha invertido
+    blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;               // operaï¿½ï¿½o de adiï¿½ï¿½o na mistura de cores
+    blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA;      // fonte da mistura Alpha ï¿½ o alpha do pixel shader
+    blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA; // destino da mistura Alpha ï¿½ o alpha invertido
+    blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;          // operaï¿½ï¿½o de adiï¿½ï¿½o na mistura de cores
+    blendDesc.RenderTarget[0].RenderTargetWriteMask = 0x0F;               // componentes de cada pixel que podem ser sobrescritos
 
     // cria a blend state
-    if FAILED(device->CreateBlendState(&blendDesc, &blendState))
+    if FAILED (device->CreateBlendState(&blendDesc, &blendState))
         return false;
 
-    // liga a blend state ao estágio Output-Merger
+    // liga a blend state ao estï¿½gio Output-Merger
     context->OMSetBlendState(blendState, nullptr, 0xffffffff);
 
     // -------------------------------
@@ -240,7 +240,7 @@ bool Graphics::Initialize(Window * window)
     dxgiFactory->Release();
     backBuffer->Release();
 
-    // inicialização bem sucedida
+    // inicializaï¿½ï¿½o bem sucedida
     return true;
 }
 

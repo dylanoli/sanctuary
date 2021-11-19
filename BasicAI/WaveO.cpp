@@ -1,32 +1,32 @@
 /**********************************************************************************
-// WaveO (Código Fonte)
+// WaveO (Cï¿½digo Fonte)
 //
-// Criação:     06 Ago 2019
-// Atualização: 11 Nov 2021
+// Criaï¿½ï¿½o:     06 Ago 2019
+// Atualizaï¿½ï¿½o: 11 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Cria uma onda de inimigos Orange
+// Descriï¿½ï¿½o:   Cria uma onda de inimigos Soldier
 //
 **********************************************************************************/
 
 #include "WaveO.h"
 #include "BasicAI.h"
-#include "Orange.h"
+#include "Soldier.h"
 #include "Hud.h"
 
 // ------------------------------------------------------------------------------
 
-WaveO::WaveO() : position(0,3), delay (1.0f, 5.0f)
+WaveO::WaveO() : position(0, 3), delay(1.0f, 5.0f)
 {
-    // número de inimigos na horizontal (X) e na vertical (Y)
+    // nï¿½mero de inimigos na horizontal (X) e na vertical (Y)
     numX = 8;
     numY = 8;
-    
-    // posição dos inimigos
+
+    // posiï¿½ï¿½o dos inimigos
     posX = 0;
     posY = 0;
 
-    // não enviar nova onda agora
+    // nï¿½o enviar nova onda agora
     newWave = false;
     waveDelay = delay.Rand();
 }
@@ -35,7 +35,6 @@ WaveO::WaveO() : position(0,3), delay (1.0f, 5.0f)
 
 WaveO::~WaveO()
 {
-
 }
 
 // -------------------------------------------------------------------------------
@@ -45,13 +44,13 @@ void WaveO::Update()
     // nova onda foi solicitada
     if (newWave)
     {
-        // se passou o tempo de atraso da solicitação
+        // se passou o tempo de atraso da solicitaï¿½ï¿½o
         if (timer.Elapsed(waveDelay))
         {
             // toca som de nova onda
-            BasicAI::audio->Play(ORANGE);
+            BasicAI::audio->Play(SOLDIER);
 
-            // origem da onda é aleatória
+            // origem da onda ï¿½ aleatï¿½ria
             switch (position.Rand())
             {
             case 0:
@@ -59,8 +58,8 @@ void WaveO::Update()
                 posY = 100;
                 for (int i = 0; i < numY; ++i)
                 {
-                    BasicAI::scene->Add(new Orange(50, posY, 0), MOVING);
-                    posY += 50;
+                    BasicAI::scene->Add(new Soldier(50, posY, 0), MOVING);
+                    posY += 100;
                 }
                 break;
             case 1:
@@ -68,8 +67,8 @@ void WaveO::Update()
                 posX = 100;
                 for (int i = 0; i < numX; ++i)
                 {
-                    BasicAI::scene->Add(new Orange(posX, 50, 270), MOVING);
-                    posX += 50;
+                    BasicAI::scene->Add(new Soldier(posX, 50, 270), MOVING);
+                    posX += 100;
                 }
                 break;
             case 2:
@@ -77,8 +76,8 @@ void WaveO::Update()
                 posY = game->Height() - 100;
                 for (int i = 0; i < numY; ++i)
                 {
-                    BasicAI::scene->Add(new Orange(game->Width() - 50, posY, 180), MOVING);
-                    posY -= 50;
+                    BasicAI::scene->Add(new Soldier(game->Width() - 50, posY, 180), MOVING);
+                    posY -= 100;
                 }
                 break;
             case 3:
@@ -86,8 +85,8 @@ void WaveO::Update()
                 posX = game->Width() - 100;
                 for (int i = 0; i < numX; ++i)
                 {
-                    BasicAI::scene->Add(new Orange(posX, game->Height() - 50, 90), MOVING);
-                    posX -= 50;
+                    BasicAI::scene->Add(new Soldier(posX, game->Height() - 50, 90), MOVING);
+                    posX -= 100;
                 }
                 break;
             }
@@ -99,7 +98,7 @@ void WaveO::Update()
     else
     {
         // solicita nova onda se existirem poucos inimigos
-        if (Hud::oranges < 10)
+        if (Hud::soldiers < 10)
         {
             waveDelay = delay.Rand();
             timer.Start();
@@ -112,7 +111,6 @@ void WaveO::Update()
 
 void WaveO::Draw()
 {
-    
 }
 
 // -------------------------------------------------------------------------------

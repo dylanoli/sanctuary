@@ -1,11 +1,11 @@
 /**********************************************************************************
-// WaveG (Arquivo de Cabeçalho)
+// WaveG (Arquivo de Cabeï¿½alho)
 //
-// Criação:     06 Ago 2019
-// Atualização: 11 Nov 2021
+// Criaï¿½ï¿½o:     06 Ago 2019
+// Atualizaï¿½ï¿½o: 11 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Cria uma onda de inimigos Green
+// Descriï¿½ï¿½o:   Cria uma onda de inimiShooterreen
 //
 **********************************************************************************/
 
@@ -22,17 +22,17 @@
 
 class WaveG : public Object
 {
-private: 
-    RandF secs;             // valor aleatório de segundos
-    Timer timer;            // medidor de tempo
-    float delay;            // atraso para a próxima onda
+private:
+    RandF secs;  // valor aleatï¿½rio de segundos
+    Timer timer; // medidor de tempo
+    float delay; // atraso para a prï¿½xima onda
 
 public:
-    WaveG();                // construtor
-    ~WaveG();               // destrutor
+    WaveG();  // construtor
+    ~WaveG(); // destrutor
 
-    void Update();          // atualização
-    void Draw();            // desenho
+    void Update(); // atualizaï¿½ï¿½o
+    void Draw();   // desenho
 };
 
 // ------------------------------------------------------------------------------

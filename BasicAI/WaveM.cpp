@@ -1,28 +1,28 @@
 /**********************************************************************************
-// WaveM (Código Fonte)
+// WaveM (Cï¿½digo Fonte)
 //
-// Criação:     06 Ago 2019
-// Atualização: 11 Nov 2021
+// Criaï¿½ï¿½o:     06 Ago 2019
+// Atualizaï¿½ï¿½o: 11 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Cria uma onda de inimigos Magenta
+// Descriï¿½ï¿½o:   Cria uma onda de inimigos Repeater
 //
 **********************************************************************************/
 
 #include "WaveM.h"
 #include "BasicAI.h"
-#include "Magenta.h"
+#include "Repeater.h"
 #include "Hud.h"
 
 // ------------------------------------------------------------------------------
 
-WaveM::WaveM() : posX(50, window->Width()-50), posY(50, game->Height()-50), secs(2.0f, 4.0f)
+WaveM::WaveM() : posX(50, window->Width() - 50), posY(50, game->Height() - 50), secs(2.0f, 4.0f)
 {
-    // posição dos inimigos
+    // posiï¿½ï¿½o dos inimigos
     pX = posX.Rand();
     pY = posY.Rand();
 
-    // atraso para a próxima onda 
+    // atraso para a prï¿½xima onda
     delay = secs.Rand();
 }
 
@@ -30,7 +30,6 @@ WaveM::WaveM() : posX(50, window->Width()-50), posY(50, game->Height()-50), secs
 
 WaveM::~WaveM()
 {
-
 }
 
 // -------------------------------------------------------------------------------
@@ -38,15 +37,15 @@ WaveM::~WaveM()
 void WaveM::Update()
 {
     // se passou o tempo de atraso
-    if (timer.Elapsed(delay) && Hud::magentas < 5)
+    if (timer.Elapsed(delay) && Hud::repeaters < 5)
     {
         // toca som de nova onda
-        BasicAI::audio->Play(MAGENTA);
+        BasicAI::audio->Play(REPEATER);
 
         // adiciona novo inimigo
-        BasicAI::scene->Add(new Magenta(pX, pY, BasicAI::player), MOVING);
+        BasicAI::scene->Add(new Repeater(pX, pY, BasicAI::player), MOVING);
 
-        // nova posição do inimigo
+        // nova posiï¿½ï¿½o do inimigo
         pX = posX.Rand();
         pY = posY.Rand();
 
@@ -59,7 +58,6 @@ void WaveM::Update()
 
 void WaveM::Draw()
 {
-    
 }
 
 // -------------------------------------------------------------------------------

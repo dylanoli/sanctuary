@@ -1,11 +1,11 @@
 /**********************************************************************************
-// WaveB (Arquivo de Cabeçalho)
+// WaveB (Arquivo de Cabeï¿½alho)
 //
-// Criação:     06 Ago 2019
-// Atualização: 11 Nov 2021
+// Criaï¿½ï¿½o:     06 Ago 2019
+// Atualizaï¿½ï¿½o: 11 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Cria uma onda de inimigos Blue
+// Descriï¿½ï¿½o:   Cria uma onda de inimigos Stalker
 //
 **********************************************************************************/
 
@@ -23,19 +23,19 @@
 class WaveB : public Object
 {
 private:
-    float pX, pY;           // posição dos inimigos 
-    RandF posX;             // valor aleatório para posição X
-    RandF posY;             // valor aleatório para posição Y
-    RandF secs;             // valor aleatório de segundos
-    Timer timer;            // medidor de tempo
-    float delay;            // atraso para a próxima onda
+    float pX, pY; // posiï¿½ï¿½o dos inimigos
+    RandF posX;   // valor aleatï¿½rio para posiï¿½ï¿½o X
+    RandF posY;   // valor aleatï¿½rio para posiï¿½ï¿½o Y
+    RandF secs;   // valor aleatï¿½rio de segundos
+    Timer timer;  // medidor de tempo
+    float delay;  // atraso para a prï¿½xima onda
 
 public:
-    WaveB();                // construtor
-    ~WaveB();               // destrutor
+    WaveB();  // construtor
+    ~WaveB(); // destrutor
 
-    void Update();          // atualização
-    void Draw();            // desenho
+    void Update(); // atualizaï¿½ï¿½o
+    void Draw();   // desenho
 };
 
 // ------------------------------------------------------------------------------

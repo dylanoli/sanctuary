@@ -1,11 +1,11 @@
 /**********************************************************************************
-// BasicAI (Arquivo de Cabeçalho)
+// BasicAI (Arquivo de Cabeï¿½alho)
 // 
-// Criação:     23 Out 2012
-// Atualização: 11 Nov 2021
+// Criaï¿½ï¿½o:     23 Out 2012
+// Atualizaï¿½ï¿½o: 11 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Demonstração de todas as IAs
+// Descriï¿½ï¿½o:   Demonstraï¿½ï¿½o de todas as IAs
 //
 **********************************************************************************/
 
@@ -23,10 +23,21 @@
 
 // ------------------------------------------------------------------------------
 
-enum Ids 
-{ 
-    PLAYER, MISSILE, WALLHIT, BLUE, GREEN, MAGENTA, ORANGE, 
-    THEME, START, FIRE, EXPLODE, HITWALL, EXPLOSION 
+enum Ids
+{
+    PLAYER,
+    MISSILE,
+    WALLHIT,
+    STALKER,
+    SHOOTER,
+    REPEATER,
+    SOLDIER,
+    THEME,
+    START,
+    FIRE,
+    EXPLODE,
+    HITWALL,
+    EXPLOSION
 };
 
 // ------------------------------------------------------------------------------
@@ -34,26 +45,26 @@ enum Ids
 class BasicAI : public Game
 {
 private:
-    Background * backg = nullptr;   // pano de fundo
-    Hud * hud = nullptr;            // heads up display
-    bool viewBBox = false;          // visualização das bouding boxes
+    Background *backg = nullptr; // pano de fundo
+    Hud *hud = nullptr;          // heads up display
+    bool viewBBox = false;       // visualizaï¿½ï¿½o das bouding boxes
 
 public:
-    static Player * player;         // ponteiro para o jogador
-    static Audio * audio;           // sitema de áudio
-    static Scene * scene;           // cena do jogo
+    static Player *player; // ponteiro para o jogador
+    static Audio *audio;   // sitema de ï¿½udio
+    static Scene *scene;   // cena do jogo
 
-    static Image * blue;            // imagem do inimigo azul
-    static Image * green;           // imagem do inimigo green
-    static Image * magenta;         // imagem do inimigo magenta
-    static Image * orange;          // imagem do inimigo orange
-    
-    static bool viewHUD;            // hud visível
+    static Image *stalker;  // imagem do inimigo azul
+    static Image *shooter;  // imagem do inimigo shooter
+    static Image *repeater; // imagem do inimigo repeater
+    static Image *soldier;  // imagem do inimigo soldier
 
-    void Init();                    // inicialização
-    void Update();                  // atualização
-    void Draw();                    // desenho
-    void Finalize();                // finalização
+    static bool viewHUD; // hud visï¿½vel
+
+    void Init();     // inicializaï¿½ï¿½o
+    void Update();   // atualizaï¿½ï¿½o
+    void Draw();     // desenho
+    void Finalize(); // finalizaï¿½ï¿½o
 };
 
 // ---------------------------------------------------------------------------------
