@@ -28,10 +28,10 @@ uint Hud::particles = 0;
 Hud::Hud()
 {
     // cria fonte para exibi��o de texto
-    font = new Font("Resources/Tahoma14.png");
-    font->Spacing("Resources/Tahoma14.dat");
-    bold = new Font("Resources/Tahoma14b.png");
-    bold->Spacing("Resources/Tahoma14b.dat");
+    font = new Font("Resources/Charge.png");
+    font->Spacing("Resources/Charge.dat");
+    bold = new Font("Resources/Robot.png");
+    bold->Spacing("Resources/Robot.dat");
 
     // carrega sprites
     infoBox = new Sprite("Resources/InfoBox.png");
@@ -75,27 +75,23 @@ void Hud::Update()
 void Hud::Draw()
 {
     // desenha elementos da interface
-    infoBox->Draw(game->viewport.left + 140, game->viewport.top + 100, Layer::FRONT);
+    infoBox->Draw(game->viewport.right - 220 , game->viewport.top + 100, Layer::FRONT);
 
     // define cor do texto
     Color textColor{0.7f, 0.7f, 0.7f, 1.0f};
 
     // desenha texto
     text.str("");
-    text << "Geometry Wars";
-    bold->Draw(40, 62, text.str(), textColor);
+    text << "Rocket Wars";
+    bold->Draw(1600, 62, text.str(), textColor);
 
     text.str("");
-    text << "FPS: " << fps;
-    font->Draw(40, 92, text.str(), textColor);
+    text << "Life:   " << Player::life;
+    font->Draw(1600, 92, text.str(), textColor);
 
     text.str("");
-    text << "Vida: " << Player::life;
-    font->Draw(40, 112, text.str(), textColor);
-
-    text.str("");
-    text << "Pontuacao: " << Player::score;
-    font->Draw(40, 132, text.str(), textColor);
+    text << "Score:   " << Player::score;
+    font->Draw(1600, 122, text.str(), textColor);
 }
 
 // -------------------------------------------------------------------------------
