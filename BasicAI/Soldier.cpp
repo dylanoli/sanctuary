@@ -67,10 +67,13 @@ Soldier::~Soldier()
 
 void Soldier::OnCollision(Object *obj)
 {
-    if (obj->Type() == MISSILE)
+    if (obj->Type() == MISSILE || obj->Type() == PLAYER)
     {
-        Player::score += 5;
-        BasicAI::scene->Delete(obj, STATIC);
+        if (obj->Type() == MISSILE)
+        {
+            Player::score += 5;
+            BasicAI::scene->Delete(obj, STATIC);
+        }
         BasicAI::scene->Delete(this, MOVING);
         BasicAI::scene->Add(new Explosion(x, y), STATIC);
         BasicAI::audio->Play(EXPLODE);

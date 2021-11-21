@@ -306,9 +306,13 @@ void Player::Draw()
 
 void Player::OnCollision(Object *obj)
 {
-    if (obj->Type() == STALKER || obj->Type() == SHOOTER || obj->Type() == REPEATER || obj->Type() == SOLDIER)
+    if (obj->Type() == STALKER || obj->Type() == SHOOTER)
     {
-        life -= 2;
+        life -= 10;
+    }
+    else if (obj->Type() == REPEATER || obj->Type() == SOLDIER)
+    {
+        life -= 20;
     }
 }
 
