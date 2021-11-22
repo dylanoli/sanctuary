@@ -25,6 +25,7 @@ Image *BasicAI::stalker = nullptr;
 Image *BasicAI::shooter = nullptr;
 Image *BasicAI::repeater = nullptr;
 Image *BasicAI::soldier = nullptr;
+Image* BasicAI::aleatorio = nullptr;
 
 // ------------------------------------------------------------------------------
 
@@ -41,6 +42,7 @@ void BasicAI::Init()
     audio->Add(REPEATER, "Resources/Repeater.wav", 2);
     audio->Add(STALKER, "Resources/Stalker.wav", 2);
     audio->Add(SHOOTER, "Resources/Shooter.wav", 2);
+    audio->Add(ALEATORIO, "Resources/Random.wav", 3);
 
     // ajusta volumes
     audio->Volume(START, 0.30f);
@@ -51,12 +53,14 @@ void BasicAI::Init()
     audio->Volume(REPEATER, 0.40f);
     audio->Volume(STALKER, 0.20f);
     audio->Volume(SHOOTER, 0.75f);
+    audio->Volume(ALEATORIO, 0.30f);
 
     // carrega imagens das geometrias
     stalker = new Image("Resources/Naves/Stalker.png");
     shooter = new Image("Resources/Naves/Shooter.png");
     repeater = new Image("Resources/Naves/Repeater.png");
     soldier = new Image("Resources/Naves/Soldier.png");
+    aleatorio = new Image("Resources/Naves/Random.png");
 
     // carrega/incializa objetos
     backg = new Background("Resources/Space.jpg");
@@ -172,6 +176,7 @@ void BasicAI::Finalize()
     delete shooter;
     delete repeater;
     delete soldier;
+    delete aleatorio;
 }
 
 // ------------------------------------------------------------------------------
@@ -189,7 +194,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     //engine->window->Size(1152, 648);
     engine->window->Mode(BORDERLESS);
     engine->window->Color(0, 0, 0);
-    engine->window->Title("BasicAI");
+    engine->window->Title("Rocket Wars");
     engine->window->Icon(IDI_ICON);
     engine->window->Cursor(IDC_CURSOR);
     engine->window->HideCursor(true);

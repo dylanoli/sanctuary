@@ -37,7 +37,8 @@ enum Ids
     FIRE,
     EXPLODE,
     HITWALL,
-    EXPLOSION
+    EXPLOSION,
+    ALEATORIO
 };
 
 // ------------------------------------------------------------------------------
@@ -58,6 +59,7 @@ public:
     static Image *shooter;  // imagem do inimigo shooter
     static Image *repeater; // imagem do inimigo repeater
     static Image *soldier;  // imagem do inimigo soldier
+    static Image* aleatorio;  // imagem do inimigo soldier
 
     static bool viewHUD; // hud vis�vel
 

@@ -22,6 +22,7 @@ uint Hud::repeaters = 0;
 uint Hud::stalker = 0;
 uint Hud::shooters = 0;
 uint Hud::particles = 0;
+uint Hud::aleatorios = 0;
 
 // ------------------------------------------------------------------------------
 

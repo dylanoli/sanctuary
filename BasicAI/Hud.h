@@ -41,6 +41,7 @@ public:
     static uint stalker;   // n�mero de inimigos azul
     static uint shooters;  // n�mero de inimigos verde
     static uint particles; // n�mero de part�culas ativas
+    static uint aleatorios;
 
     Hud();  // construtor
     ~Hud(); // destrutor

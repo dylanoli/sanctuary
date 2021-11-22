@@ -15,6 +15,7 @@
 #include "WaveM.h"
 #include "WaveB.h"
 #include "WaveG.h"
+#include "WaveR.h"
 #include "Hud.h"
 
 // ------------------------------------------------------------------------------
@@ -74,8 +75,10 @@ void Delay::Update()
     {
         BasicAI::scene->Add(new WaveG(), STATIC);
         BasicAI::scene->Delete();
+        BasicAI::scene->Add(new WaveR(), STATIC);
         fase4 = true;
     }
+
 }
 
 // -------------------------------------------------------------------------------

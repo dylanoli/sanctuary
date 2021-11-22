@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Aleatorio.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Background.cpp" />
@@ -191,9 +192,11 @@
     <ClCompile Include="WaveG.cpp" />
     <ClCompile Include="WaveM.cpp" />
     <ClCompile Include="WaveO.cpp" />
+    <ClCompile Include="WaveR.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Aleatorio.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Background.h" />
@@ -232,6 +235,7 @@
     <ClInclude Include="WaveG.h" />
     <ClInclude Include="WaveM.h" />
     <ClInclude Include="WaveO.h" />
+    <ClInclude Include="WaveR.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
