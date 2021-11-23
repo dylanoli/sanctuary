@@ -76,12 +76,12 @@ void Hud::Update()
 void Hud::Draw()
 {
     // desenha elementos da interface
-    infoBox->Draw(game->viewport.right - 220, game->viewport.top + 100, Layer::FRONT);
+    infoBox->Draw(game->viewport.left + 220, game->viewport.top + 100, Layer::FRONT);
 
     // define cor do texto
     Color textColor{ 1.0f, 1.0f, 1.0f, 1.0f };
 
-    float difx = ((game->Width() - window->Width()) / 2.0) + 640;
+    float difx = 120;
     float dify = (game->Height() - window->Height()) / 2.0f;
 
     // desenha texto
@@ -91,11 +91,11 @@ void Hud::Draw()
 
     text.str("");
     text << "Life:   " << Player::life;
-    font->Draw(1600, 92, text.str(), textColor);
+    font->Draw(difx, 92, text.str(), textColor);
 
     text.str("");
     text << "Score:   " << Player::score;
-    font->Draw(1600, 122, text.str(), textColor);
+    font->Draw(difx, 122, text.str(), textColor);
 }
 
 // -------------------------------------------------------------------------------
