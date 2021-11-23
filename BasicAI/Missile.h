@@ -29,7 +29,7 @@ private:
     Vector speed;                       // velocidade do míssil    
     
 public:
-    Missile(float angle);               // construtor
+    Missile(float angle, bool byPlayer, Object* from);               // construtor
     ~Missile();                         // destrutor
 
     Vector& Speed();                    // retona vetor velocidade

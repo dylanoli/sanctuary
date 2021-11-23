@@ -14,6 +14,7 @@
 #include "Random.h"
 #include "Explosion.h"
 #include "Player.h"
+#include "Missile.h"
 
 // ---------------------------------------------------------------------------------
 
@@ -29,6 +30,8 @@ Shooter::Shooter(float pX, float pY, Player *p)
     // mant�m certa dist�ncia do jogador
     RandI dist{100, 400};
     distance = dist.Rand();
+    start = 0;
+    timer.Start();
 
     // incrementa contador
     ++Hud::shooters;
@@ -122,6 +125,14 @@ void Shooter::Update()
         MoveTo(game->Width() - 50, y);
     if (y > game->Height() - 50)
         MoveTo(x, game->Height() - 50);
+
+    // dispara m�ssil
+    if (timer.Elapsed(2.0f))
+    {
+        BasicAI::audio->Play(FIRE);
+        BasicAI::scene->Add(new Missile(speed.Angle(), false, this), STATIC);
+        timer.Start();
+    }
 }
 
 // -------------------------------------------------------------------------------

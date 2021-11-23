@@ -33,7 +33,7 @@ WaveG::~WaveG()
 void WaveG::Update()
 {
     // contador de inimigos
-    static uint counter = 8;
+    static uint counter = 1;
 
     // se passou o tempo de atraso
     if (timer.Elapsed(delay) && Hud::shooters < 16)
@@ -49,14 +49,14 @@ void WaveG::Update()
             BasicAI::scene->Add(new Shooter(game->Width() - 50, game->Height() - 50, BasicAI::player), MOVING);
             BasicAI::scene->Add(new Shooter(50, game->Height() - 50, BasicAI::player), MOVING);
 
-            delay = 0.450f;
+            delay = 1.0f;
             timer.Start();
             --counter;
         }
         else
         {
             // nova onda
-            counter = 8;
+            counter = 1;
             delay = secs.Rand();
             timer.Start();
         }
