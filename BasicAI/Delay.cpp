@@ -74,8 +74,8 @@ void Delay::Update()
     if (!fase4 && timer.Elapsed(15.0f))
     {
         BasicAI::scene->Add(new WaveG(), STATIC);
-        BasicAI::scene->Delete();
         BasicAI::scene->Add(new WaveR(), STATIC);
+        BasicAI::scene->Delete();
         fase4 = true;
     }
 

@@ -20,6 +20,9 @@
 #include "Background.h"
 #include "Player.h"
 #include "Hud.h"
+#include "TileSet.h"
+#include "Sprite.h"
+#include "Animation.h"
 
 // ------------------------------------------------------------------------------
 
@@ -38,7 +41,17 @@ enum Ids
     EXPLODE,
     HITWALL,
     EXPLOSION,
-    ALEATORIO
+    ALEATORIO,
+    MENU,
+    GAMEOVER,
+};
+
+enum GameState 
+{
+    START_MENU,
+    START_RUNNING,
+    PLAYING,
+    STOP
 };
 
 // ------------------------------------------------------------------------------
@@ -49,6 +62,7 @@ private:
     Background *backg = nullptr; // pano de fundo
     Hud *hud = nullptr;          // heads up display
     bool viewBBox = false;       // visualiza��o das bouding boxes
+    uint state = GameState::START_MENU;
 
 public:
     static Player *player; // ponteiro para o jogador
@@ -62,6 +76,14 @@ public:
     static Image* aleatorio;  // imagem do inimigo soldier
 
     static bool viewHUD; // hud vis�vel
+
+    Sprite* logo;
+    Sprite* gameOverLogo;
+    TileSet* tileset;
+    Animation* animation;
+    bool isPlaying = false;
+    bool isGameOver = false;
+    Font* bold = nullptr;      // fonte para exibi��o negrito
 
     void Init();     // inicializa��o
     void Update();   // atualiza��o

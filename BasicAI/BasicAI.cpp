@@ -15,6 +15,10 @@
 #include "Engine.h"
 #include "Delay.h"
 
+#include <sstream>
+
+using std::stringstream;
+
 // ------------------------------------------------------------------------------
 
 Player *BasicAI::player = nullptr;
@@ -43,6 +47,8 @@ void BasicAI::Init()
     audio->Add(STALKER, "Resources/Stalker.wav", 2);
     audio->Add(SHOOTER, "Resources/Shooter.wav", 2);
     audio->Add(ALEATORIO, "Resources/Random.wav", 3);
+    audio->Add(MENU, "Resources/Home.wav");
+    audio->Add(GAMEOVER, "Resources/GameOver.wav");
 
     // ajusta volumes
     audio->Volume(START, 0.30f);
@@ -68,9 +74,10 @@ void BasicAI::Init()
     scene = new Scene();
     hud = new Hud();
 
-    // adiciona objetos na cena
-    scene->Add(player, MOVING);
-    scene->Add(new Delay(), STATIC);
+    logo = new Sprite("Resources/Logo.png");
+    gameOverLogo = new Sprite("Resources/GameOver.png");
+    tileset = new TileSet("Resources/StartMessage.png", 4, 1);
+    animation = new Animation(tileset, 0.05f, true);
 
     // ----------------------
     // inicializa a viewport
@@ -85,6 +92,8 @@ void BasicAI::Init()
     viewport.right = viewport.left + window->Width();
     viewport.top = 0.0f + dify;
     viewport.bottom = viewport.top + window->Height();
+
+    BasicAI::audio->Play(MENU, true);
 }
 
 // ------------------------------------------------------------------------------
@@ -99,49 +108,109 @@ void BasicAI::Update()
     scene->Update();
     scene->CollisionDetection();
 
-    // ---------------------------------------------------
-    // atualiza a viewport
-    // ---------------------------------------------------
+    if (state == GameState::START_MENU) {
+        animation->NextFrame();
+        
+        if (window->KeyPress(VK_RETURN))
+        {
+            isGameOver = false;
+            BasicAI::audio->Stop(MENU);
+            state = GameState::START_RUNNING;
+        }    
+    } else if (state == GameState::START_RUNNING) {
+        // adiciona objetos na cena
+        if (!isPlaying) {
+            player = new Player();
+            scene = new Scene();
+            
+            scene->Add(player, MOVING);
+            scene->Add(new Delay(), STATIC);
+            isPlaying = true;
+        }
 
-    viewport.left = player->X() - window->CenterX();
-    viewport.right = player->X() + window->CenterX();
-    viewport.top = player->Y() - window->CenterY();
-    viewport.bottom = player->Y() + window->CenterY();
+        // ----------------------
+        // inicializa a viewport
+        // ----------------------
 
-    if (viewport.left < 0)
-    {
-        viewport.left = 0;
-        viewport.right = window->Width();
+        // calcula posi��o para manter viewport centralizada
+        float difx = (game->Width() - window->Width()) / 2.0f;
+        float dify = (game->Height() - window->Height()) / 2.0f;
+
+        // inicializa viewport para o centro do mundo
+        viewport.left = 0.0f + difx;
+        viewport.right = viewport.left + window->Width();
+        viewport.top = 0.0f + dify;
+        viewport.bottom = viewport.top + window->Height();
+        
+        state = GameState::PLAYING;
     }
-    else if (viewport.right > game->Width())
-    {
-        viewport.left = game->Width() - window->Width();
-        viewport.right = game->Width();
+    else if (state == GameState::PLAYING) {
+        // ---------------------------------------------------
+        // atualiza a viewport
+        // ---------------------------------------------------
+
+        viewport.left = player->X() - window->CenterX();
+        viewport.right = player->X() + window->CenterX();
+        viewport.top = player->Y() - window->CenterY();
+        viewport.bottom = player->Y() + window->CenterY();
+
+        if (viewport.left < 0)
+        {
+            viewport.left = 0;
+            viewport.right = window->Width();
+        }
+        else if (viewport.right > game->Width())
+        {
+            viewport.left = game->Width() - window->Width();
+            viewport.right = game->Width();
+        }
+
+        if (viewport.top < 0)
+        {
+            viewport.top = 0;
+            viewport.bottom = window->Height();
+        }
+        else if (viewport.bottom > game->Height())
+        {
+            viewport.top = game->Height() - window->Height();
+            viewport.bottom = game->Height();
+        }
+
+        // ---------------------------------------------------
+
+        // atualiza o painel de informa��es
+        hud->Update();
+
+        // ativa ou desativa a bounding box
+        if (window->KeyPress('B'))
+            viewBBox = !viewBBox;
+
+        // ativa ou desativa o heads up display
+        if (window->KeyPress('H'))
+            viewHUD = !viewHUD;
+
+        if (player->life <= 0) {
+            state = STOP;
+        }
     }
+    else if (state == GameState::STOP) {
 
-    if (viewport.top < 0)
-    {
-        viewport.top = 0;
-        viewport.bottom = window->Height();
+        if (!isGameOver) {
+            BasicAI::audio->Stop(THEME);
+            BasicAI::audio->Play(GAMEOVER);
+            isGameOver = true;
+            delete scene;
+            scene = new Scene();
+        }
+
+        if (window->KeyPress(VK_RETURN))
+        {
+            isPlaying = false;
+            BasicAI::audio->Stop(GAMEOVER);
+            state = GameState::START_MENU;
+            hud->ClearCounters();
+        }
     }
-    else if (viewport.bottom > game->Height())
-    {
-        viewport.top = game->Height() - window->Height();
-        viewport.bottom = game->Height();
-    }
-
-    // ---------------------------------------------------
-
-    // atualiza o painel de informa��es
-    hud->Update();
-
-    // ativa ou desativa a bounding box
-    if (window->KeyPress('B'))
-        viewBBox = !viewBBox;
-
-    // ativa ou desativa o heads up display
-    if (window->KeyPress('H'))
-        viewHUD = !viewHUD;
 }
 
 // ------------------------------------------------------------------------------
@@ -151,16 +220,25 @@ void BasicAI::Draw()
     // desenha pano de fundo
     backg->Draw(viewport);
 
-    // desenha a cena
-    scene->Draw();
+    if (state == GameState::START_MENU) {
+        logo->Draw(game->viewport.left + window->CenterX(), game->viewport.top + window->CenterY(), Layer::FRONT);
+        animation->Draw(game->viewport.left + window->CenterX(), game->viewport.top + window->CenterY() + 130);
+    }
+    else if(state == GameState::STOP) {
+        gameOverLogo->Draw(game->viewport.left + window->CenterX(), game->viewport.top + window->CenterY(), Layer::FRONT);
+    }
+    else {
+        // desenha a cena
+        scene->Draw();
 
-    // desenha o painel de informa��es
-    if (viewHUD)
-        hud->Draw();
+        // desenha o painel de informa��es
+        if (viewHUD)
+            hud->Draw();
 
-    // desenha bounding box
-    if (viewBBox)
-        scene->DrawBBox();
+        // desenha bounding box
+        if (viewBBox)
+            scene->DrawBBox();
+    }
 }
 
 // ------------------------------------------------------------------------------
@@ -171,6 +249,12 @@ void BasicAI::Finalize()
     delete hud;
     delete scene;
     delete backg;
+
+    delete logo;
+    delete gameOverLogo;
+    delete tileset;
+    delete animation;
+    delete bold;
 
     delete stalker;
     delete shooter;

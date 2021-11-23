@@ -48,6 +48,7 @@ public:
 
     void Update(); // atualiza��o
     void Draw();   // desenho
+    void ClearCounters();
 };
 
 // ------------------------------------------------------------------------------

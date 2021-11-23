@@ -96,3 +96,14 @@ void Hud::Draw()
 }
 
 // -------------------------------------------------------------------------------
+
+void Hud::ClearCounters() 
+{
+    missiles = 0;
+    soldiers = 0;
+    repeaters = 0;
+    stalker = 0;
+    shooters = 0;
+    particles = 0;
+    aleatorios = 0;
+}
