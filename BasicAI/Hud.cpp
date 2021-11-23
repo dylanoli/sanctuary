@@ -76,15 +76,18 @@ void Hud::Update()
 void Hud::Draw()
 {
     // desenha elementos da interface
-    infoBox->Draw(game->viewport.right - 220 , game->viewport.top + 100, Layer::FRONT);
+    infoBox->Draw(game->viewport.right - 220, game->viewport.top + 100, Layer::FRONT);
 
     // define cor do texto
-    Color textColor{0.7f, 0.7f, 0.7f, 1.0f};
+    Color textColor{ 1.0f, 1.0f, 1.0f, 1.0f };
+
+    float difx = ((game->Width() - window->Width()) / 2.0) + 640;
+    float dify = (game->Height() - window->Height()) / 2.0f;
 
     // desenha texto
     text.str("");
     text << "Rocket Wars";
-    bold->Draw(1600, 62, text.str(), textColor);
+    bold->Draw(difx, 62, text.str(), textColor);
 
     text.str("");
     text << "Life:   " << Player::life;

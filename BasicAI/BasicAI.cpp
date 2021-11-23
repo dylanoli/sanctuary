@@ -94,6 +94,9 @@ void BasicAI::Init()
     viewport.bottom = viewport.top + window->Height();
 
     BasicAI::audio->Play(MENU, true);
+
+    bold = new Font("Resources/Robot.png");
+    bold->Spacing("Resources/Robot.dat");
 }
 
 // ------------------------------------------------------------------------------
@@ -226,6 +229,14 @@ void BasicAI::Draw()
     }
     else if(state == GameState::STOP) {
         gameOverLogo->Draw(game->viewport.left + window->CenterX(), game->viewport.top + window->CenterY(), Layer::FRONT);
+
+        Color textColor{ 1.0f, 1.0f,1.0f, 1.0f };
+        
+        stringstream text;
+        // desenha texto
+        text.str("");
+        text << "Voce fez " << player->score << " pontos";
+        bold->Draw(game->viewport.left - 100, game->viewport.top + 50, text.str(), textColor);
     }
     else {
         // desenha a cena
