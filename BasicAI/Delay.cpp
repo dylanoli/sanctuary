@@ -30,6 +30,7 @@ Delay::Delay()
     fase2 = false;
     fase3 = false;
     fase4 = false;
+    fase5 = false;
 }
 
 // ------------------------------------------------------------------------------
@@ -74,11 +75,15 @@ void Delay::Update()
     if (!fase4 && timer.Elapsed(15.0f))
     {
         BasicAI::scene->Add(new WaveG(), STATIC);
-        BasicAI::scene->Add(new WaveR(), STATIC);
-        BasicAI::scene->Delete();
         fase4 = true;
     }
 
+    if (!fase5 && timer.Elapsed(18.0f))
+    {
+        BasicAI::scene->Add(new WaveR(), STATIC);
+        BasicAI::scene->Delete();
+        fase5 = true;
+    }
 }
 
 // -------------------------------------------------------------------------------

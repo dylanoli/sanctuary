@@ -95,8 +95,8 @@ void BasicAI::Init()
 
     BasicAI::audio->Play(MENU, true);
 
-    bold = new Font("Resources/Robot.png");
-    bold->Spacing("Resources/Robot.dat");
+    bold = new Font("Resources/Charge.png");
+    bold->Spacing("Resources/Charge.dat");
 }
 
 // ------------------------------------------------------------------------------
@@ -235,7 +235,7 @@ void BasicAI::Draw()
         
         text.str("");
         text << "Voce fez " << player->score << " pontos";
-        bold->Draw(100, 100, text.str(), textColor);
+        bold->Draw(window->CenterX() - 100, window->CenterY() + 50, text.str(), textColor);
     }
     else {
         // desenha a cena

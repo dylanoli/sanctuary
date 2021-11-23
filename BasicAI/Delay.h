@@ -31,6 +31,7 @@ private:
     bool fase2;             // fase 2 completada
     bool fase3;             // fase 3 completada
     bool fase4;             // fase 4 completada
+    bool fase5;
 
 public:
     Delay();                // construtor

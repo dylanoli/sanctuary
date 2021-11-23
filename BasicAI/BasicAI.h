@@ -63,7 +63,7 @@ private:
     Background *backg = nullptr; // pano de fundo
     Hud *hud = nullptr;          // heads up display
     bool viewBBox = false;       // visualiza��o das bouding boxes
-    uint state = GameState::STOP;
+    uint state = GameState::START_MENU;
 
 public:
     static Player *player; // ponteiro para o jogador
