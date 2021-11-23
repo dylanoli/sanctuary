@@ -15,13 +15,11 @@
 #include "Hud.h"
 
 // ------------------------------------------------------------------------------
+Object* from;
 
-Player* & Missile::player = BasicAI::player;        // referência para o player
-
-// ------------------------------------------------------------------------------
-
-Missile::Missile(float angle)
+Missile::Missile(float angle, bool byPlayer, Object * _from)
 {
+    from = _from;
     // inicializa sprite
     sprite = new Sprite(Player::missile);
 
@@ -33,11 +31,13 @@ Missile::Missile(float angle)
     speed.ScaleTo(15.0f);
     
     // move para posição
-    MoveTo(player->X() + 40 * cos(speed.Radians()), player->Y() - 40 * sin(speed.Radians()));
+    MoveTo(from->X() + 40 * cos(speed.Radians()), from->Y() - 40 * sin(speed.Radians()));
     RotateTo(-speed.Angle() + 90.0f);
 
     // define tipo
-    type = MISSILE;
+    byPlayer
+        ? type = MISSILE
+        : type = MISSILE_ENEMY;
 
     // incrementa contagem
     ++Hud::missiles;
@@ -66,7 +66,7 @@ void Missile::Update()
         // volume do som de destruição depende da distância para o jogador
         const float MaxDistance = 4406;
         const float BaseVolume = 0.8f;
-        float distance = Point::Distance(Point(x, y), Point(player->X(), player->Y()));
+        float distance = Point::Distance(Point(x, y), Point(from->X(), from->Y()));
         float level = (MaxDistance - distance) / MaxDistance;
         BasicAI::audio->Volume(HITWALL, level * BaseVolume);
         BasicAI::audio->Play(HITWALL);

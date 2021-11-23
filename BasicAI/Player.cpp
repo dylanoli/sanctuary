@@ -184,7 +184,7 @@ void Player::Update()
         {
             float ang = Line::Angle(Point(0, 0), Point(float(gamepad->Axis(AxisRX)), float(gamepad->Axis(AxisRY))));
             BasicAI::audio->Play(FIRE);
-            BasicAI::scene->Add(new Missile(ang), STATIC);
+            BasicAI::scene->Add(new Missile(ang, true, this), STATIC);
         }
     }
 
@@ -269,7 +269,7 @@ void Player::Update()
         if (KeysTimed(keysPressed, 0.150f))
         {
             BasicAI::audio->Play(FIRE);
-            BasicAI::scene->Add(new Missile(firingAngle), STATIC);
+            BasicAI::scene->Add(new Missile(firingAngle, true, this), STATIC);
         }
     }
 
@@ -313,6 +313,12 @@ void Player::OnCollision(Object *obj)
     else if (obj->Type() == REPEATER || obj->Type() == SOLDIER)
     {
         life -= 20;
+    }
+    else if (obj->Type() == MISSILE_ENEMY)
+    {
+        life -= 2;
+        BasicAI::scene->Delete(obj, STATIC);
+        BasicAI::audio->Play(EXPLODE);
     }
 }
 

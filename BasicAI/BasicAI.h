@@ -27,6 +27,7 @@ enum Ids
 {
     PLAYER,
     MISSILE,
+    MISSILE_ENEMY,
     WALLHIT,
     STALKER,
     SHOOTER,

@@ -19,6 +19,7 @@
 #include "Sprite.h"
 #include "Vector.h"
 #include "Player.h"
+#include "Timer.h"                      // controle do tempo
 
 // ---------------------------------------------------------------------------------
 
@@ -30,6 +31,8 @@ private:
     Vector speed;   // velocidade e dire��o
     int distance;   // dist�ncia do jogador
 
+    Timer timer;                        // controla tempo dos disparos
+    llong start;                        // marca��o de in�cio do disparo
 public:
     Shooter(float pX, float pY, Player *p); // construtor
     ~Shooter();                             // destrutor
